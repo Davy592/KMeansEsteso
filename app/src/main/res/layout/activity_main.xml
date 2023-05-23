@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Switch
+                android:id="@+id/swYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:minHeight="48dp"
+                android:text="Anno formazione: 2022"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lbDim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Dimensioni impresa"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radDim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radPicc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Piccola Impresa (meno di 50 dipendenti e un fatturato annuo inferiore a 10 milioni di euro)"
+                    tools:layout_editor_absoluteX="37dp"
+                    tools:layout_editor_absoluteY="239dp" />
+
+                <RadioButton
+                    android:id="@+id/radMed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Media Impresa (meno di 250 dipendenti e un fatturato annuo inferiore a 50 milioni di euro)"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="145dp" />
+
+                <RadioButton
+                    android:id="@+id/radGran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Grande Impresa (più di 250 dipendenti e un fatturato annuo superiore a 50 milioni di euro)"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="397dp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lbCostCors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Costo corso"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radCors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radCors1500"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1500€"
+                    tools:layout_editor_absoluteX="37dp"
+                    tools:layout_editor_absoluteY="239dp" />
+
+                <RadioButton
+                    android:id="@+id/radCors2500"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2500€"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="145dp" />
+
+                <RadioButton
+                    android:id="@+id/radCors3500"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3500€"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="397dp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lbDip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:labelFor="@id/tbDip"
+                android:text="Dipendenti destinati alla formazione"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/tbDip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/lbOre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Ore formazione"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radOre"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radOre100"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="100 ore"
+                    tools:layout_editor_absoluteX="37dp"
+                    tools:layout_editor_absoluteY="239dp" />
+
+                <RadioButton
+                    android:id="@+id/radOre200"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="200 ore"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="145dp" />
+
+                <RadioButton
+                    android:id="@+id/radOre300"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="300 ore"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="397dp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lbForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:labelFor="@id/tbForm"
+                android:text="Costo personale (€ ora/persona)"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/tbForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <Switch
+                android:id="@+id/swSoft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:minHeight="48dp"
+                android:text="Software"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/tbSoft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="Costo software"
+                android:inputType="numberDecimal" />
+
+            <Switch
+                android:id="@+id/swRev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:minHeight="48dp"
+                android:text="Revisore interno"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lbCons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Costo consulenza"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radCons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radCons15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15%"
+                    tools:layout_editor_absoluteX="37dp"
+                    tools:layout_editor_absoluteY="239dp" />
+
+                <RadioButton
+                    android:id="@+id/radCons20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20%"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="145dp" />
+
+                <RadioButton
+                    android:id="@+id/radCons25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="25%" />
+
+                <RadioButton
+                    android:id="@+id/radCons30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="30%" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btCalc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Calcola" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
