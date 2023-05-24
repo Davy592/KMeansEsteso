@@ -12,17 +12,19 @@ public class MainTest {
      */
     public static void mainVecchio(String[] args) {
         Keyboard.setPrintErrors(false);
-        int k, numIter;
+        int k, port, numIter;
         String server, db, tab, user, psw;
         Data data;
         KMeansMiner kmeans;
         do {
             try {
                 if (option("Vuoi usare i valori di default? (y/n) ")) {
-                    data = new Data("localhost", "MapDB", "playtennis", "MapUser", "map");
+                    data = new Data("localhost", 3306, "MapDB", "playtennis", "MapUser", "map");
                 } else {
                     System.out.print("Inserisci il nome del server (ad esempio localhost): ");
                     server = Keyboard.readString();
+                    System.out.print("Inserisci la porta del server (ad esempio 3306): ");
+                    port = Keyboard.readInt();
                     System.out.print("Inserisci il nome del database (ad esempio MapDB): ");
                     db = Keyboard.readString();
                     System.out.print("Inserisci il nome della tabella (ad esempio playtennis): ");
@@ -31,7 +33,7 @@ public class MainTest {
                     user = Keyboard.readString();
                     System.out.print("Inserisci la password dell'utente (ad esempio map): ");
                     psw = Keyboard.readString();
-                    data = new Data(server, db, tab, user, psw);
+                    data = new Data(server, port, db, tab, user, psw);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());

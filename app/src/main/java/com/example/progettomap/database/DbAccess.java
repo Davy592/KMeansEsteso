@@ -10,7 +10,7 @@ public class DbAccess {
     private final String DBMS = "jdbc:mysql";
     private String server = "localhost";
     private String database = "MapDB";
-    private final int PORT = 3306;
+    private int port = 3306;
     private String user_id = "MapUser";
     private String password = "map";
 
@@ -20,8 +20,9 @@ public class DbAccess {
 
     }
 
-    public DbAccess(String server, String database, String userId, String password) {
+    public DbAccess(String server, int port, String database, String userId, String password) {
         this.server = server;
+        this.port = port;
         this.database = database;
         this.user_id = userId;
         this.password = password;
@@ -37,17 +38,12 @@ public class DbAccess {
         } catch (IllegalAccessException e) {
             throw new DatabaseConnectionException("[!] Impossibile accedere al driver: " + e.getMessage());
         }
-        String connectionString = DBMS + "://" + server + ":" + PORT + "/" + database
-                + "?user=" + user_id + "&password=" + password + "&serverTimezone=UTC";
+        String connectionString = DBMS + "://" + server + ":" + port + "/" + database + "?user=" + user_id + "&password=" + password + "&serverTimezone=UTC";
         System.out.println("Connection's String: " + connectionString);
         try {
             conn = DriverManager.getConnection(connectionString);
         } catch (SQLException e) {
-            throw new DatabaseConnectionException(
-                    "[!] SQLException: " + e.getMessage() + "\n"
-                            + "[!] SQLState: " + e.getSQLState() + "\n"
-                            + "[!] VendorError: " + e.getErrorCode()
-            );
+            throw new DatabaseConnectionException("[!] SQLException: " + e.getMessage() + "\n" + "[!] SQLState: " + e.getSQLState() + "\n" + "[!] VendorError: " + e.getErrorCode());
         }
     }
 

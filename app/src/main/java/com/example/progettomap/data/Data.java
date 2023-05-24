@@ -24,8 +24,8 @@ public class Data {
     private final int numberOfExamples; // cardinalità dell’insieme di transazioni (numero di righe in data)
     private final List<Attribute> attributeSet; // un vettore degli attributi in ciascuna tupla (schema della tabella di dati)
 
-    public Data(String server, String database, String table, String userId, String password) throws DatabaseConnectionException, SQLException, NoValueException, EmptySetException {
-        DbAccess db = new DbAccess(server, database, userId, password);
+    public Data(String server, int port, String database, String table, String userId, String password) throws DatabaseConnectionException, SQLException, NoValueException, EmptySetException {
+        DbAccess db = new DbAccess(server, port, database, userId, password);
         db.initConnection();
         TableData td = new TableData(db);
         TableSchema ts = new TableSchema(db, table);
