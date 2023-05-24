@@ -1,10 +1,11 @@
 package com.example.progettomap;
 
-import static java.lang.Thread.sleep;
-
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("tbPassword: " + tbPassword.getText());*/
                 try {
                     if (tbServer.getText().toString().equals("") || tbPort.getText().toString().equals("") || tbDatabase.getText().toString().equals("") || tbTable.getText().toString().equals("") || tbUser.getText().toString().equals("") || tbPassword.getText().toString().equals("")) {
-                        //TODO: stampare errore in alertDialog
+                        openDialog("ERRORE", "Inserire tutti i campi!");
                     } else {
                         llK.setVisibility(View.INVISIBLE);
                         btCalc.setVisibility(View.INVISIBLE);
@@ -96,12 +97,11 @@ public class MainActivity extends AppCompatActivity {
                         llK.setVisibility(View.VISIBLE);
                         btCalc.setVisibility(View.VISIBLE);
                         System.out.println("fatto");
-                        //TODO: stampare data in alertDialog
+                        openDialog("DATI CARICATI", data.toString());
                     }
-                } catch (DatabaseConnectionException | SQLException | NoValueException |
-                         EmptySetException e) {
+                } catch (DatabaseConnectionException | SQLException | NoValueException | EmptySetException e) {
                     System.out.println("Ho preso " + e.getMessage());
-                    //TODO: stampare e.getMessage() in alertDialog
+                    openDialog("ERRORE", e.getMessage());
                 }
             }
         });
@@ -111,17 +111,25 @@ public class MainActivity extends AppCompatActivity {
                 int numIter;
                 try {
                     if (tbK.toString().equals("")) {
-                        //TODO: stampare errore in alertDialog
+                        openDialog("ERRORE", "Inserire il numero di cluster!");
                     } else {
                         kmeans = new KMeansMiner(Integer.parseInt(tbK.toString()));
                         numIter = kmeans.kmeans(data);
-                        //TODO: stampare risultato in alertDialog
+                        openDialog("K-MEANS", "Numero di iterazioni: " + numIter + "\n" + kmeans.getC().toString(data));
                     }
                 } catch (OutOfRangeSampleSize e) {
-                    //TODO: stampare e.getMessage() in alertDialog
+                    openDialog("ERRORE", e.getMessage());
                 }
             }
         });
+    }
+
+    void openDialog(String titolo, String messaggio) {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle(titolo);
+        alertDialog.setMessage(messaggio);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", (dialog, which) -> dialog.dismiss());
+        alertDialog.show();
     }
 
 }

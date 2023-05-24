@@ -40,8 +40,9 @@
             <EditText
                 android:id="@+id/tbServer"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="48sp"
                 android:ems="10"
+                android:inputType="text"
                 android:hint="localhost"
                 android:text="localhost"
                 android:enabled="false" />
@@ -66,7 +67,7 @@
             <EditText
                 android:id="@+id/tbPort"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="48sp"
                 android:ems="10"
                 android:inputType="number"
                 android:hint="3306"
@@ -93,8 +94,9 @@
             <EditText
                 android:id="@+id/tbDatabase"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="48sp"
                 android:ems="10"
+                android:inputType="text"
                 android:hint="MapDB"
                 android:text="MapDB"
                 android:enabled="false" />
@@ -119,8 +121,9 @@
             <EditText
                 android:id="@+id/tbTable"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="48sp"
                 android:ems="10"
+                android:inputType="text"
                 android:hint="playtennis"
                 android:text="playtennis"
                 android:enabled="false" />
@@ -145,8 +148,9 @@
             <EditText
                 android:id="@+id/tbUser"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="48sp"
                 android:ems="10"
+                android:inputType="text"
                 android:hint="MapUser"
                 android:text="MapUser"
                 android:enabled="false" />
@@ -171,8 +175,9 @@
             <EditText
                 android:id="@+id/tbPassword"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="48sp"
                 android:ems="10"
+                android:inputType="textPassword"
                 android:hint="map"
                 android:text="map"
                 android:enabled="false" />
