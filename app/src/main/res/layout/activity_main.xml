@@ -10,18 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/chDef"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:minHeight="48dp"
-            android:text="Impostazioni di default"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -184,10 +172,25 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btConnect"
+        <CheckBox
+            android:id="@+id/chDef"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layoutDirection="rtl"
+            android:checked="true"
+            android:minHeight="48dp"
+            android:text="Impostazioni di default"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btConnect"
+            android:layout_width="320sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="Connetti al database" />
 
