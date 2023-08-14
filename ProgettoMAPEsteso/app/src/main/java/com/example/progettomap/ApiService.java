@@ -1,5 +1,7 @@
 package com.example.progettomap;
 
+import android.os.Parcelable;
+
 import java.util.List;
 
 import retrofit2.Call;

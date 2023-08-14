@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/llConnect"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-black"
+            android:text="CONNESSIONE AL SERVER"
+            android:textSize="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Server: "
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/tbServerIP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:hint="localhost" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="PORT: "
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/tbServerPORT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:hint="8080"
+                android:inputType="number" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btConnectToServer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="Connetti"
+            android:textSize="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Realizzato da\nCirilli Davide, Curri Mattia, Fontana Emanuele"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <TextView
+            android:id="@+id/tvKMeans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-black"
+            android:text="KMeans"
+            android:textSize="50dp" />
+
+        <Button
+            android:id="@+id/btNewKMeans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp"
+            android:text="Nuovo ClusterSet"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/btLoadKMeans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:text="Carica ClusterSet"
+            android:textSize="30dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Cambia server"
+            android:onClick="changeServer"
+            android:id="@+id/btChangeServer1"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llOpt1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbServer"
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:text="Server: "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/tbServer"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="localhost"
+                android:inputType="text"
+                android:text="localhost" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbPort"
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:text="Porta: "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/tbPort"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="3306"
+                android:inputType="number"
+                android:text="3306" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbDatabase"
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:text="Database: "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/tbDatabase"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="MapDB"
+                android:inputType="text"
+                android:text="MapDB" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbTable"
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:text="Tabella: "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/tbTable"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="playtennis"
+                android:inputType="text"
+                android:text="playtennis" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbUser"
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:text="Utente: "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/tbUser"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="MapUser"
+                android:inputType="text"
+                android:text="MapUser" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lbPassword"
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:text="Password: "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/tbPassword"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="map"
+                android:inputType="textPassword"
+                android:text="map" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chDef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="true"
+            android:layoutDirection="rtl"
+            android:minHeight="48dp"
+            android:text="Impostazioni di default"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btConnect"
+            android:layout_width="320sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Connetti al database" />
+
+        <LinearLayout
+            android:id="@+id/llK"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/lbK"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Numero cluster: "
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerCluster"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_alignBottom="@id/lbK"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp">
+
+            </Spinner>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btCalc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Calcola"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/llFile"
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lbFile"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="OPZIONE ALTERNATIVA"
+                android:textAlignment="center"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btFile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Impara da file" />
+
+        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Cambia server"
+            android:onClick="changeServer"
+            android:id="@+id/btChangeServer2"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llOpt2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif-black"
+            android:text="SELEZIONA UN FILE TRA QUELLI DISPONIBILI"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/tvFileNames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:drawableEnd="@android:color/background_light"
+            android:hint="SELEZIONA FILE" />
+
+        <LinearLayout
+            android:id="@+id/llChangeServer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btFileConnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Recupera file" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/lbClusterSet"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="OPZIONE ALTERNATIVA"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btClusterSet"
+            android:layout_width="320sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Crea clusterset" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Cambia server"
+            android:onClick="changeServer"
+            android:id="@+id/btChangeServer3"
+            />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

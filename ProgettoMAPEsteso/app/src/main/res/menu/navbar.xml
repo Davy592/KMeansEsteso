@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+        />
+    <item android:id="@+id/nav_add"
+        android:title="Nuovo"
+        android:icon="@drawable/ic_add"
+        />
+    <item android:id="@+id/nav_load"
+        android:title="Carica"
+        android:icon="@drawable/ic_load"
+      />
+    <item android:id="@+id/nav_change_server"
+        android:title="Cambia Server"
+        android:icon="@drawable/ic_change_server"
+     />
+</menu>

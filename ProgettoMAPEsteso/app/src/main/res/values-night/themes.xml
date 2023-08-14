@@ -2,6 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ProgettoMAP" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <item name="colorPrimary">@color/orange</item> -->
+        <item name="colorPrimary">@color/primary</item> -->
+        <item name="android:windowIsTranslucent">false</item>
+
+    </style>
+
+    <style name="SplashScreen" parent="Base.Theme.ProgettoMAP">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+        <item name="android:statusBarColor" >?attr/colorPrimary</item>
     </style>
 </resources>
