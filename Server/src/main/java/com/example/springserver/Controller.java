@@ -77,7 +77,7 @@ public class Controller {
             KMeansMiner kMeansMiner = new KMeansMiner(numC);
             int numIter=kMeansMiner.kmeans(this.data);
             kMeansMiner.salva("Salvataggi//"+database+table+numC+".dat");
-            list=kMeansMiner.getC().toListString(data);
+            list=kMeansMiner.getC().toString(data);
             ((LinkedList<String>) list).addFirst("Numero di iterazioni:"+numIter);
             data=null;
             table=null;

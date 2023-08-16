@@ -112,23 +112,6 @@ public class ClusterSet implements Serializable {
         return str;
     }
 
-    /**
-     * <h4>Restituisce la stringa che rappresenta le informazioni sull'insieme di cluster relative al dataset specificato.</h4>
-     * @param data il dataset
-     * @return La stringa che rappresenta le informazioni sull'insieme di cluster relative al dataset specificato
-     * @see Data
-     */
-    public String toString(Data data) {
-        String str = "";
-        for (int i = 0; i < C.length; i++) {
-            if (C[i] != null)
-                str += i + ":" + C[i].toString(data) + "\n";
-        }
-        return str;
-    }
-
-
-
 
     /**
      * <h4>Restituisce la lista che rappresenta le informazioni sull'insieme di cluster relative al dataset specificato.</h4>
@@ -136,7 +119,7 @@ public class ClusterSet implements Serializable {
      * @return La lista che rappresenta le informazioni sull'insieme di cluster relative al dataset specificato
      * @see Data
      */
-    public List<String> toListString(Data data) {
+    public List<String> toString(Data data) {
         List<String> centroids=new LinkedList<>();
         for (int i = 0; i < C.length; i++) {
             if (C[i] != null)
