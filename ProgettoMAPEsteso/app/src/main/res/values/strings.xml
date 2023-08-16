@@ -7,8 +7,7 @@
     <string name="desc_logo_login">Logo dell\'applicazione</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="tab_text_2">Tab 2</string>>
     <string name="home_fragment">Home</string>
     <string name="add_fragment">Add</string>
     <string name="load_fragment">Load</string>

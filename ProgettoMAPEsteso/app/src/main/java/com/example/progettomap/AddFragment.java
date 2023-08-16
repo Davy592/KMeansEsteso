@@ -1,15 +1,10 @@
 package com.example.progettomap;
 
 import android.app.Dialog;
-import android.app.MediaRouteButton;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,18 +14,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.TreeMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,11 +45,14 @@ public class AddFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container, false);
         Bundle b = this.getArguments();
-
         Button btConnect = view.findViewById(R.id.btConnect);
         EditText tbServer, tbPort, tbDatabase, tbTable, tbUser;
         TextInputEditText tbEditPassword;
-        TextInputLayout tbPassword;
+        ExpandableListView expandableListView = view.findViewById(R.id.expandableListView);
+        FloatingActionButton btBack = view.findViewById(R.id.btBack);
+        ConstraintLayout infoLayout=view.findViewById(R.id.infoLayout);
+        ConstraintLayout clusterLayout=view.findViewById(R.id.clusterLayout);
+        ConstraintLayout resultLayout=view.findViewById(R.id.resultLayout);
         tbServer = view.findViewById(R.id.tbServer);
         tbPort = view.findViewById(R.id.tbPort);
         tbDatabase = view.findViewById(R.id.tbDatabase);
@@ -63,7 +66,6 @@ public class AddFragment extends Fragment {
         tbTable = view.findViewById(R.id.tbTable);
         tbUser = view.findViewById(R.id.tbUser);
         tbEditPassword = view.findViewById(R.id.tbEditPassword);
-        tbPassword = view.findViewById(R.id.tbPassword);
         String port = "", server = "";
         try {
             port = b.getString("serverPORT");
@@ -82,6 +84,12 @@ public class AddFragment extends Fragment {
             tbUser.setText("");
             tbEditPassword.setText("");
         });
+
+        btBack.setOnClickListener(v -> {
+            infoLayout.setVisibility(View.VISIBLE);
+            resultLayout.setVisibility(View.GONE);
+        });
+
         btConnect.setOnClickListener(v -> {
             if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbEditPassword.getText().toString().equals("")) {
                 tbServer.setText("localhost");
@@ -107,6 +115,7 @@ public class AddFragment extends Fragment {
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                         if (response.isSuccessful()) {
                             List<String> responseList = response.body();
+                            clusterLayout.setVisibility(View.VISIBLE);
                             if (responseList.get(0).equals("OK")) {
                                 View dialogView = alertDialog.getWindow().getDecorView();
                                 TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
@@ -119,15 +128,7 @@ public class AddFragment extends Fragment {
                                 for (int i = 0; i < numCluster; i++) {
                                     listCluster.add(i + 1);
                                 }
-                                tbServer.setVisibility(View.GONE);
-                                tbPort.setVisibility(View.GONE);
-                                tbDatabase.setVisibility(View.GONE);
-                                tbTable.setVisibility(View.GONE);
-                                tbUser.setVisibility(View.GONE);
-                                tbEditPassword.setVisibility(View.GONE);
-                                btConnect.setVisibility(View.GONE);
-                                btDbInfoReset.setVisibility(View.GONE);
-                                tbPassword.setVisibility(View.GONE);
+                                infoLayout.setVisibility(View.GONE);
                                 TextView spinnerCluster;
                                 spinnerCluster = view.findViewById(R.id.spinnerCluster);
                                 spinnerCluster.setVisibility(View.VISIBLE);
@@ -182,26 +183,41 @@ public class AddFragment extends Fragment {
                                         @Override
                                         public void onResponse(Call<List<String>> newClusterCall, Response<List<String>> response) {
                                             if (response.isSuccessful()) {
+                                                List<String> responseList = response.body();
+                                                if(responseList.get(0).equals("ERRORE"))
+                                                {
+                                                    View dialogView = alertDialog.getWindow().getDecorView();
+                                                    TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
+                                                    messageTextView.setText("ERRORE");
+                                                    dialogView.postDelayed(() -> alertDialog.dismiss(),1500);
+                                                    return;
+
+                                                }
                                                 View dialogView = alertDialog.getWindow().getDecorView();
                                                 TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
                                                 messageTextView.setText("Risultati arrivati");
-
-                                                // Dismiss the AlertDialog after a delay
+                                                String nrIter = responseList.get(0);
+                                                responseList.remove(0);
+                                                TreeMap<String,List<String>> clusterMap = new TreeMap<>();
+                                                for(String str:responseList)
+                                                {
+                                                    String[] split = str.split("Examples:");
+                                                    List<String> list = new LinkedList<>();
+                                                    for(int i=1;i<split.length;i++)
+                                                    {
+                                                        list.add(split[i]);
+                                                    }
+                                                    clusterMap.put(split[0],list);
+                                                }
+                                                List<String> keys=new ArrayList<>();
+                                                keys.addAll(clusterMap.keySet());
+                                                CustomizedExpandableListAdapter expandableListAdapter = new CustomizedExpandableListAdapter(requireContext(),keys,clusterMap);
+                                                expandableListView.setAdapter(expandableListAdapter);
                                                 dialogView.postDelayed(() -> alertDialog.dismiss(), 100);
-                                                List<String> responseList = response.body();
-                                                openDialog("RISULTATO", responseList.get(0) + "\nPREMERE OK PER CONTINUARE");
+                                                //openDialog("RISULTATO", responseList.get(0) + "\nPREMERE OK PER CONTINUARE");
                                                 btConnect.setEnabled(true);
-                                                spinnerCluster.setVisibility(Spinner.GONE);
-                                                btCalc.setVisibility(Button.GONE);
-                                                tbServer.setVisibility(View.VISIBLE);
-                                                tbPort.setVisibility(View.VISIBLE);
-                                                tbDatabase.setVisibility(View.VISIBLE);
-                                                tbTable.setVisibility(View.VISIBLE);
-                                                tbUser.setVisibility(View.VISIBLE);
-                                                tbEditPassword.setVisibility(View.VISIBLE);
-                                                btConnect.setVisibility(View.VISIBLE);
-                                                btDbInfoReset.setVisibility(View.VISIBLE);
-                                                tbPassword.setVisibility(View.VISIBLE);
+                                                clusterLayout.setVisibility(LinearLayout.GONE);
+                                                resultLayout.setVisibility(LinearLayout.VISIBLE);
                                             } else {
                                                 View dialogView = alertDialog.getWindow().getDecorView();
                                                 TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
@@ -233,12 +249,9 @@ public class AddFragment extends Fragment {
                                 dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
                             }
                         } else {
-                            openDialog("ERRORE", "Connessione non riuscita(D).");
                             View dialogView = alertDialog.getWindow().getDecorView();
                             TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
                             messageTextView.setText("Connessione non riuscita.");
-
-                            // Dismiss the AlertDialog after a delay
                             dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
                         }
                     }

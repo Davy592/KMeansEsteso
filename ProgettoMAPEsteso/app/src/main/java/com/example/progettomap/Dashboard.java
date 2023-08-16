@@ -50,14 +50,14 @@ public class Dashboard extends AppCompatActivity implements FragmentToActivity {
         Bundle b = getIntent().getExtras();
         setContentView(R.layout.dashboard);
         bnv = findViewById(R.id.navbarview);
+        Fragment initialF = new AddFragment();
+        initialF.setArguments(b);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, initialF).commit();
         bnv.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.nav_home) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
-                return true;
-            } else if (itemId == R.id.nav_add) {
+            if (itemId == R.id.nav_add) {
                 Fragment f = new AddFragment();
                 f.setArguments(b);
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, f).commit();

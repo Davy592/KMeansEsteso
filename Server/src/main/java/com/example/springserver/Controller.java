@@ -1,7 +1,6 @@
 package com.example.springserver;
 
 import com.example.springserver.data.Data;
-import com.example.springserver.data.OutOfRangeSampleSize;
 import com.example.springserver.database.DatabaseConnectionException;
 import com.example.springserver.database.EmptySetException;
 import com.example.springserver.database.NoValueException;
@@ -16,13 +15,34 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+
+/**
+ * <h2>La classe Controller gestisce le richieste del client.</h2>
+ * <p>Il controller riceve le richieste del client e restituisce le risposte.</p>
+ */
 @RestController
 public class Controller {
 
+    /**
+     * <h4>Il dataset.</h4>
+     */
     private Data data;
+    /**
+     * <h4>Il nome della tabella.</h4>
+     */
     private String table;
+    /**
+     * <h4>Il nome del database.</h4>
+     */
     private String database;
 
+    /**
+     * <h4>Riceve dal client le informazioni per la creazione di un nuovo dataset.</h4>
+     * <p>Le informazioni sono: server, porta, nome del database, nome della tabella, nome utente e password.</p>
+     * <p>Restituisce una lista di stringhe che contiene "OK" se non ci sono stati errori, altrimenti contiene un messaggio di errore.</p>
+     * @param info la lista delle informazioni
+     * @return la lista dei database
+     */
     @PostMapping("/connectionInfo")
     public List<String> receiveInfoFromClient(@RequestBody List<String> info) {
         List<String> list = new LinkedList<>();
@@ -42,37 +62,50 @@ public class Controller {
         return list;
     }
 
+    /**
+     * <h4>Riceve dal client il numero di cluster da creare.</h4>
+     * <p>Restituisce una lista di stringhe che contiene i cluster.</p>
+     * @param numCluster il numero di cluster
+     * @return la lista dei cluster
+     */
     @PostMapping("/newClusterSet")
     public List<String> receiveNumberOfClusters(@RequestBody List<Integer> numCluster) {
         int numC=numCluster.get(0);
         List<String> list = new LinkedList<>();
-        String result;
         try
         {
             KMeansMiner kMeansMiner = new KMeansMiner(numC);
             int numIter=kMeansMiner.kmeans(this.data);
-            kMeansMiner.salva(".//Salvataggi//"+database+table+numC+".dat");
-            System.out.println("4");
-            result="Numero di iterazioni:"+numIter+"\n"+kMeansMiner.getC().toString(data);
+            kMeansMiner.salva("Salvataggi//"+database+table+numC+".dat");
+            list=kMeansMiner.getC().toListString(data);
+            ((LinkedList<String>) list).addFirst("Numero di iterazioni:"+numIter);
             data=null;
             table=null;
             database=null;
-        } catch (OutOfRangeSampleSize e) {
-            result = "IL INSERIRE UN VALORE VALIDO PER IL NUMERO DI CLUSTER";
         } catch (IOException e) {
-            result = "SI E' VERIFICATO UN ERRORE ";
+            list.clear();
+            list.add("ERRORE");
         }
-        list.add(result);
+        //print using for-each
+        for (String str : list) {
+            System.out.println(str);
+        }
         return list;
     }
 
 
+    /**
+     * <h4>Riceve dal client il nome del file da caricare.</h4>
+     * <p>Restituisce una lista di stringhe che contiene i centroidi dei cluster.</p>
+     * @param info il nome del file
+     * @return la lista dei centroidi
+     */
     @PostMapping("/fileInfo")
     public List<String> receiveInfoFile(@RequestBody List<String> info) {
         List<String> list=new LinkedList<>();
         String result;
         try {
-            String path = ".//Salvataggi/"+info.get(0);
+            String path = "Salvataggi/"+info.get(0);
             System.out.println(path);
             KMeansMiner kMeansMiner = new KMeansMiner(path);
             result = kMeansMiner.getC().toString();
@@ -85,10 +118,15 @@ public class Controller {
         return list;
     }
 
+    /**
+     * <h4>Restituisce la lista dei file salvati.</h4>
+     * <p>Restituisce una lista di stringhe che contiene i nomi dei file salvati.</p>
+     * @return la lista dei file
+     */
     @PostMapping("/fileNames")
     public List<String> sendFilesName()
     {
-        File folder = new File(".//Salvataggi//");
+        File folder = new File("Salvataggi//");
         File[] listOfFiles = folder.listFiles();
         List<String> list=new LinkedList<>();
         for (File file : listOfFiles) {
