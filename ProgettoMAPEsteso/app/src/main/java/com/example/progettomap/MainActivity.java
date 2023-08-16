@@ -1,70 +1,44 @@
 package com.example.progettomap;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
+import com.example.progettomap.api.ApiClient;
+import com.example.progettomap.custom.RangeInputFilter;
+import com.example.progettomap.fragment.Dashboard;
+
+/**
+ * <h2> MainActivity rappresenta il main dell'applicazione</h2>
+ */
 
 public class MainActivity extends AppCompatActivity {
 
-    private ApiService apiService;
-    private EditText tbServerIP, tbServerPORT;
-    private Button btConnectToServer;
 
-    public static void openMainActivity(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
-    }
-
+    /**
+     * <h4>Metodo che crea l'activity</h4>
+     * <p>Questo metodo crea l'activity e gestisce la connessione iniziale al server</p>
+     * @param savedInstanceState stato dell'istanza
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            getSplashScreen().setOnExitAnimationListener(splashScreenView -> {
-                final ObjectAnimator slideUp = ObjectAnimator.ofFloat(
-                        splashScreenView,
-                        View.TRANSLATION_Y,
-                        0f,
-                        -splashScreenView.getHeight()
-                );
-                slideUp.setInterpolator(new AnticipateInterpolator());
-                slideUp.setDuration(200L);
-
-                // Call SplashScreenView.remove at the end of your custom animation.
-                slideUp.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        splashScreenView.remove();
-                    }
-                });
-
-                // Run your animation.
-                slideUp.start();
-            });
-        }*/
-
-        tbServerIP = findViewById(R.id.tbServerIP);
-        tbServerPORT = findViewById(R.id.tbServerPORT);
-        btConnectToServer = findViewById(R.id.btConnectToServer);
-
+        EditText tbServerIP = findViewById(R.id.tbServerIP);
+        EditText tbServerPORT = findViewById(R.id.tbServerPORT);
+        tbServerPORT.setFilters(new InputFilter[] { new RangeInputFilter(0,65535)});
+        Button btConnectToServer = findViewById(R.id.btConnectToServer);
         btConnectToServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
                 openDialog("ERRORE", "Inserire tutti i campi!");
             } else {
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 try {
-                    apiService = ApiClient.getClient().create(ApiService.class);
+                    ApiClient.updateServer();
                     Bundle b = new Bundle();
                     b.putString("serverIP", tbServerIP.getText().toString());
                     b.putString("serverPORT", tbServerPORT.getText().toString());
@@ -77,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * <h4>Metodo che apre un dialog</h4>
+     * <p>Questo metodo apre un dialog con un messaggio</p>
+     * @param titolo titolo del dialog
+     * @param messaggio messaggio del dialog
+     */
     private void openDialog(String titolo, String messaggio) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle(titolo);
@@ -86,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * <h4>Metodo che gestisce il tasto back</h4>
+     * <p>Questo metodo gestisce il tasto back</p>
+     */
     @Override
     public void onBackPressed() {
         finish();

@@ -123,7 +123,7 @@ public class ClusterSet implements Serializable {
         List<String> centroids=new LinkedList<>();
         for (int i = 0; i < C.length; i++) {
             if (C[i] != null)
-                centroids.add(i + ":" + C[i].toString(data) + "\n");
+                centroids.add(C[i].toString(data) + "\n");
         }
         return centroids;
     }

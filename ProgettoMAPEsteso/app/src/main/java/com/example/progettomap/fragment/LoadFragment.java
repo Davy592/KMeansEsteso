@@ -1,13 +1,9 @@
-package com.example.progettomap;
+package com.example.progettomap.fragment;
 
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
+import com.example.progettomap.R;
+import com.example.progettomap.api.ApiClient;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,24 +30,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * <h2>Fragment che permette di caricare un file dal server</h2>
+ */
 public class LoadFragment extends Fragment {
 
-    private ApiService apiService;
+    /**
+     * <h4>Metodo che permette di creare la view del fragment</h4>
+     * @param inflater inflater
+     * @param container container
+     * @param savedInstanceState savedInstanceState
+     * @return view del fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_load, container, false);
-        Bundle b = this.getArguments();
-        String port = "", server = "";
-        try {
-            port = b.getString("serverPORT");
-            server = b.getString("serverIP");
-        } catch (NullPointerException e) {
-            Toast.makeText(getContext(), "Errore: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        ApiClient.setBaseUrl(server, Integer.parseInt(port));
-        apiService = ApiClient.getClient().create(ApiService.class);
-
         TextView tvFileNames = view.findViewById(R.id.tvFileNames);
         final Dialog fileDialog = new Dialog(requireContext());
         tvFileNames.setOnClickListener(v -> {
@@ -79,7 +79,6 @@ public class LoadFragment extends Fragment {
                 fileDialog.dismiss();
             });
 
-            // Aggiungi un ritardo di 200 millisecondi (o più) prima di popolare la ListView
             new Handler().postDelayed(adapter::notifyDataSetChanged, 200);
         });
 
@@ -91,7 +90,7 @@ public class LoadFragment extends Fragment {
                 String fileName = tvFileNames.getText().toString();
                 List<String> list = new LinkedList<>();
                 list.add(fileName);
-                Call<List<String>> call = apiService.sendFileToServer(list);
+                Call<List<String>> call = ApiClient.getApiService().sendFileToServer(list);
                 call.enqueue(new Callback<List<String>>() {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -114,8 +113,12 @@ public class LoadFragment extends Fragment {
         return view;
     }
 
+    /**
+     * <h4>Metodo che permette di richiedere i nomi dei file presenti sul server</h4>
+     * @return lista dei nomi dei file presenti sul server
+     */
     private List<String> requestFilesName() {
-        Call<List<String>> call = apiService.requestFilesName();
+        Call<List<String>> call = ApiClient.getApiService().requestFilesName();
         List<String> list = new LinkedList<>();
         call.enqueue(new Callback<List<String>>() {
             @Override
@@ -131,6 +134,11 @@ public class LoadFragment extends Fragment {
         return list;
     }
 
+    /**
+     * <h4>Metodo che permette di aprire un dialog</h4>
+     * @param titolo titolo del dialog
+     * @param messaggio messaggio del dialog
+     */
     private void openDialog(String titolo, String messaggio) {
         AlertDialog alertDialog = new AlertDialog.Builder(requireContext()).create();
         alertDialog.setTitle(titolo);

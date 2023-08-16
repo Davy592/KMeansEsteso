@@ -76,7 +76,7 @@ public class Controller {
         {
             KMeansMiner kMeansMiner = new KMeansMiner(numC);
             int numIter=kMeansMiner.kmeans(this.data);
-            kMeansMiner.salva("Salvataggi//"+database+table+numC+".dat");
+            kMeansMiner.salva("Salvataggi//" +database+table+numC+".dat");
             list=kMeansMiner.getC().toString(data);
             ((LinkedList<String>) list).addFirst("Numero di iterazioni:"+numIter);
             data=null;
@@ -85,10 +85,6 @@ public class Controller {
         } catch (IOException e) {
             list.clear();
             list.add("ERRORE");
-        }
-        //print using for-each
-        for (String str : list) {
-            System.out.println(str);
         }
         return list;
     }
@@ -105,7 +101,7 @@ public class Controller {
         List<String> list=new LinkedList<>();
         String result;
         try {
-            String path = "Salvataggi/"+info.get(0);
+            String path = "Salvataggi//" +info.get(0);
             System.out.println(path);
             KMeansMiner kMeansMiner = new KMeansMiner(path);
             result = kMeansMiner.getC().toString();

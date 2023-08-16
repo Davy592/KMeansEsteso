@@ -1,59 +1,47 @@
-package com.example.progettomap;
+package com.example.progettomap.fragment;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.progettomap.R;
+import com.example.progettomap.api.ApiClient;
+import com.example.progettomap.api.ApiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.LinkedList;
-import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+/**
+ * <h2>La classe Dashboard gestisce la navigazione tra i fragment</h2>
+ * <p> La navigazione tra i fragment avviene tramite un BottomNavigationView</p>
+ */
 public class Dashboard extends AppCompatActivity implements FragmentToActivity {
 
-    private BottomNavigationView bnv;
-    private ApiService apiService;
-    private EditText tbServer, tbPort, tbDatabase, tbTable, tbUser, tbPassword,tbServerIP,tbServerPORT;
-    private Spinner spinnerCluster;
-    private Button btConnect, btCalc, btFile, btClusterSet, btFileConnect;
-    public static void openDashboard(Context context) {
-        Intent intent = new Intent(context, Dashboard.class);
-        context.startActivity(intent);
-    }
-
+    /**
+     * <h4> Metodo statico che apre la Dashboard</h4>
+     * @param context contesto
+     * @param params parametri
+     */
     public static void openDashboardWithBundle(Context context, Bundle params) {
         Intent i = new Intent(context, Dashboard.class);
         i.putExtras(params);
         context.startActivity(i);
     }
 
+    /**
+     * <h4> Metodo che crea la Dashboard</h4>
+     * @param savedInstanceState stato dell'istanza
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         setContentView(R.layout.dashboard);
-        bnv = findViewById(R.id.navbarview);
+        BottomNavigationView bnv = findViewById(R.id.navbarview);
         Fragment initialF = new AddFragment();
         initialF.setArguments(b);
-
-
         getSupportFragmentManager().beginTransaction().replace(R.id.container, initialF).commit();
         bnv.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -76,20 +64,20 @@ public class Dashboard extends AppCompatActivity implements FragmentToActivity {
 
             return false;
         });
-
-
-
     }
 
-    @Override
-    public void disableNavbar(boolean disable) {
-        //bnv.getMenu().setGroupEnabled(bnv.getMenu().size(), disable);
-        bnv.setVisibility(disable ? View.GONE : View.VISIBLE);
-    }
+    /**
+     * <h4> Metodo che aggiorna la connessione con il server</h4>
+     * @param data dati
+     */
     @Override
     public void updateServer(ApiService data) {
-        apiService = data;
+        ApiClient.updateServer(data);
     }
+
+    /**
+     * <h4> Metodo che gestisce il tasto back</h4>
+     */
     @Override
     public void onBackPressed() {
         finish();
