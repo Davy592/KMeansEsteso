@@ -25,6 +25,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +47,9 @@ public class AddFragment extends Fragment {
         Bundle b = this.getArguments();
 
         Button btConnect = view.findViewById(R.id.btConnect);
-        EditText tbServer, tbPort, tbDatabase, tbTable, tbUser, tbPassword;
+        EditText tbServer, tbPort, tbDatabase, tbTable, tbUser;
+        TextInputEditText tbEditPassword;
+        TextInputLayout tbPassword;
         tbServer = view.findViewById(R.id.tbServer);
         tbPort = view.findViewById(R.id.tbPort);
         tbDatabase = view.findViewById(R.id.tbDatabase);
@@ -57,6 +62,7 @@ public class AddFragment extends Fragment {
         });
         tbTable = view.findViewById(R.id.tbTable);
         tbUser = view.findViewById(R.id.tbUser);
+        tbEditPassword = view.findViewById(R.id.tbEditPassword);
         tbPassword = view.findViewById(R.id.tbPassword);
         String port = "", server = "";
         try {
@@ -74,17 +80,17 @@ public class AddFragment extends Fragment {
             tbDatabase.setText("");
             tbTable.setText("");
             tbUser.setText("");
-            tbPassword.setText("");
+            tbEditPassword.setText("");
         });
         btConnect.setOnClickListener(v -> {
-            if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbPassword.getText().toString().equals("")) {
+            if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbEditPassword.getText().toString().equals("")) {
                 tbServer.setText("localhost");
                 tbPort.setText("3306");
                 tbDatabase.setText("MapDB");
                 tbTable.setText("playtennis");
                 tbUser.setText("MapUser");
-                tbPassword.setText("map");
-            } else if (tbServer.getText().toString().equals("") || tbPort.getText().toString().equals("") || tbDatabase.getText().toString().equals("") || tbTable.getText().toString().equals("") || tbUser.getText().toString().equals("") || tbPassword.getText().toString().equals("")) {
+                tbEditPassword.setText("map");
+            } else if (tbServer.getText().toString().equals("") || tbPort.getText().toString().equals("") || tbDatabase.getText().toString().equals("") || tbTable.getText().toString().equals("") || tbUser.getText().toString().equals("") || tbEditPassword.getText().toString().equals("")) {
                 openDialog("ERRORE", "Inserire tutti i campi!");
             } else {
                 showNonClosableAlertDialog(requireContext());
@@ -94,7 +100,7 @@ public class AddFragment extends Fragment {
                 list.add(tbDatabase.getText().toString());
                 list.add(tbTable.getText().toString());
                 list.add(tbUser.getText().toString());
-                list.add(tbPassword.getText().toString());
+                list.add(tbEditPassword.getText().toString());
                 Call<List<String>> call = apiService.sendInfoToServer(list);
                 call.enqueue(new Callback<List<String>>() {
                     @Override
@@ -118,9 +124,10 @@ public class AddFragment extends Fragment {
                                 tbDatabase.setVisibility(View.GONE);
                                 tbTable.setVisibility(View.GONE);
                                 tbUser.setVisibility(View.GONE);
-                                tbPassword.setVisibility(View.GONE);
+                                tbEditPassword.setVisibility(View.GONE);
                                 btConnect.setVisibility(View.GONE);
                                 btDbInfoReset.setVisibility(View.GONE);
+                                tbPassword.setVisibility(View.GONE);
                                 TextView spinnerCluster;
                                 spinnerCluster = view.findViewById(R.id.spinnerCluster);
                                 spinnerCluster.setVisibility(View.VISIBLE);
@@ -191,9 +198,10 @@ public class AddFragment extends Fragment {
                                                 tbDatabase.setVisibility(View.VISIBLE);
                                                 tbTable.setVisibility(View.VISIBLE);
                                                 tbUser.setVisibility(View.VISIBLE);
-                                                tbPassword.setVisibility(View.VISIBLE);
+                                                tbEditPassword.setVisibility(View.VISIBLE);
                                                 btConnect.setVisibility(View.VISIBLE);
                                                 btDbInfoReset.setVisibility(View.VISIBLE);
+                                                tbPassword.setVisibility(View.VISIBLE);
                                             } else {
                                                 View dialogView = alertDialog.getWindow().getDecorView();
                                                 TextView messageTextView = dialogView.findViewById(R.id.messageTextView);

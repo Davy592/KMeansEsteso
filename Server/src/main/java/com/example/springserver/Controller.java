@@ -43,15 +43,16 @@ public class Controller {
     }
 
     @PostMapping("/newClusterSet")
-    public List<String> receiveNumberOfClusters(@RequestBody List<String> numCluster) {
-        String str_numCluster=numCluster.get(0).replace("\"","");
+    public List<String> receiveNumberOfClusters(@RequestBody List<Integer> numCluster) {
+        int numC=numCluster.get(0);
         List<String> list = new LinkedList<>();
         String result;
         try
         {
-            KMeansMiner kMeansMiner = new KMeansMiner(Integer.parseInt(str_numCluster));
+            KMeansMiner kMeansMiner = new KMeansMiner(numC);
             int numIter=kMeansMiner.kmeans(this.data);
-            kMeansMiner.salva(".//Salvataggi//"+database+table+str_numCluster+".dat");
+            kMeansMiner.salva(".//Salvataggi//"+database+table+numC+".dat");
+            System.out.println("4");
             result="Numero di iterazioni:"+numIter+"\n"+kMeansMiner.getC().toString(data);
             data=null;
             table=null;
