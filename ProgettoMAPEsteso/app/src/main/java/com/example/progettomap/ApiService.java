@@ -1,7 +1,5 @@
 package com.example.progettomap;
 
-import android.os.Parcelable;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -12,7 +10,7 @@ public interface ApiService {
     @POST("connectionInfo")
     Call<List<String>> sendInfoToServer(@Body List<String> list);
     @POST("newClusterSet")
-    Call<List<String>> requestNewClusterSet(@Body List<String> numCluster);
+    Call<List<String>> requestNewClusterSet(@Body List<Integer> numCluster);
 
     @POST("fileInfo")
     Call<List<String>> sendFileToServer(@Body List<String> list);

@@ -1,13 +1,18 @@
 package com.example.progettomap;
 
+import android.app.Dialog;
 import android.app.MediaRouteButton;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -107,8 +113,6 @@ public class AddFragment extends Fragment {
                                 for (int i = 0; i < numCluster; i++) {
                                     listCluster.add(i + 1);
                                 }
-                                ArrayAdapter<Integer> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, listCluster);
-                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 tbServer.setVisibility(View.GONE);
                                 tbPort.setVisibility(View.GONE);
                                 tbDatabase.setVisibility(View.GONE);
@@ -117,16 +121,54 @@ public class AddFragment extends Fragment {
                                 tbPassword.setVisibility(View.GONE);
                                 btConnect.setVisibility(View.GONE);
                                 btDbInfoReset.setVisibility(View.GONE);
-                                Spinner spinnerCluster;
+                                TextView spinnerCluster;
                                 spinnerCluster = view.findViewById(R.id.spinnerCluster);
-                                spinnerCluster.setAdapter(adapter);
                                 spinnerCluster.setVisibility(View.VISIBLE);
+                                final Dialog clusterDialog = new Dialog(requireContext());
+                                spinnerCluster.setOnClickListener(v->{
+                                    clusterDialog.setContentView(R.layout.cluster_searchable_spinner);
+                                    clusterDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                    clusterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    ListView listView = clusterDialog.findViewById(R.id.list_view);
+                                    EditText editText = clusterDialog.findViewById(R.id.edit_text);
+                                    ArrayAdapter<Integer> adapter1 = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, listCluster);
+                                    listView.setAdapter(adapter1);
+                                    clusterDialog.show();
+                                    editText.addTextChangedListener(new TextWatcher() {
+                                        @Override
+                                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                        }
+                                        @Override
+                                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                            adapter1.getFilter().filter(s);
+                                        }
+                                        @Override
+                                        public void afterTextChanged(Editable s) {
+                                        }
+                                    });
+
+                                    listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+                                        spinnerCluster.setText(adapter1.getItem(i).toString());
+                                        clusterDialog.dismiss();
+                                    });
+
+                                    // Aggiungi un ritardo di 200 millisecondi (o più) prima di popolare la ListView
+                                    new Handler().postDelayed(adapter1::notifyDataSetChanged, 200);
+                                });
                                 Button btCalc = view.findViewById(R.id.btCalc);
                                 btCalc.setVisibility(View.VISIBLE);
                                 btCalc.setOnClickListener(v -> {
                                     showNonClosableAlertDialog(requireContext());
-                                    String k = spinnerCluster.getSelectedItem().toString();
-                                    List<String> list = new LinkedList<>();
+                                    int k;
+                                    try {
+                                        k = Integer.parseInt(spinnerCluster.getText().toString());
+                                    }
+                                    catch(NumberFormatException e)
+                                    {
+                                        openDialog("ERRORE", "Inserire un numero di cluster valido!");
+                                        return;
+                                    }
+                                    List<Integer> list = new LinkedList<>();
                                     list.add(k);
                                     Call<List<String>> newClusterCall = apiService.requestNewClusterSet(list);
                                     newClusterCall.enqueue(new Callback<List<String>>() {
