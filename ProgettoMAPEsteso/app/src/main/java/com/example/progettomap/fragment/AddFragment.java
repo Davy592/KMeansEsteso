@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,6 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -27,12 +27,14 @@ import androidx.fragment.app.Fragment;
 import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
 import com.example.progettomap.custom.CustomizedExpandableListAdapter;
+import com.example.progettomap.custom.RangeInputFilter;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,8 +53,9 @@ public class AddFragment extends Fragment {
 
     /**
      * <h4> Metodo che crea il fragment</h4>
-     * @param inflater oggetto che permette di "gonfiare" un layout XML in una View corrispondente
-     * @param container se non nullo, questo fragment viene ricostruito da uno stato precedente salvato come valore in questo bundle.
+     *
+     * @param inflater           oggetto che permette di "gonfiare" un layout XML in una View corrispondente
+     * @param container          se non nullo, questo fragment viene ricostruito da uno stato precedente salvato come valore in questo bundle.
      * @param savedInstanceState se non nullo, questo fragment viene ricostruito da uno stato precedente salvato come valore in questo bundle.
      * @return la View del fragment
      */
@@ -61,15 +64,40 @@ public class AddFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container, false);
         Button btConnect = view.findViewById(R.id.btConnect);
-        EditText tbServer, tbPort, tbDatabase, tbTable, tbUser;
-        TextInputEditText tbEditPassword;
+        EditText tbServer = view.findViewById(R.id.tbServer), tbPort = view.findViewById(R.id.tbPort),
+                tbDatabase = view.findViewById(R.id.tbDatabase), tbTable = view.findViewById(R.id.tbTable),
+                tbUser = view.findViewById(R.id.tbUser);
+        TextInputEditText tbEditPassword = view.findViewById(R.id.tbEditPassword);
+
+         TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbEditPassword.getText().toString().equals("")) {
+                    btConnect.setText("USA PREDEFINITI");
+                } else {
+                    btConnect.setText("CONNETTI AL DATABASE");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        };
+
+
+        tbDatabase.addTextChangedListener(textWatcher);
+        tbTable.addTextChangedListener(textWatcher);
+        tbUser.addTextChangedListener(textWatcher);
+        tbServer.addTextChangedListener(textWatcher);
+        tbPort.addTextChangedListener(textWatcher);
         ExpandableListView expandableListView = view.findViewById(R.id.expandableListView);
-        ConstraintLayout infoLayout=view.findViewById(R.id.infoLayout);
-        ConstraintLayout clusterLayout=view.findViewById(R.id.clusterLayout);
-        ConstraintLayout resultLayout=view.findViewById(R.id.resultLayout);
-        tbServer = view.findViewById(R.id.tbServer);
-        tbPort = view.findViewById(R.id.tbPort);
-        tbDatabase = view.findViewById(R.id.tbDatabase);
+        ConstraintLayout infoLayout = view.findViewById(R.id.infoLayout),
+                clusterLayout = view.findViewById(R.id.clusterLayout),
+                resultLayout = view.findViewById(R.id.resultLayout);
+        Button btDbInfoReset = view.findViewById(R.id.btDbInfoReset);
+
         tbDatabase.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 tbDatabase.setHint("MapDB");
@@ -77,10 +105,35 @@ public class AddFragment extends Fragment {
                 tbDatabase.setHint("Database");
             }
         });
-        tbTable = view.findViewById(R.id.tbTable);
-        tbUser = view.findViewById(R.id.tbUser);
-        tbEditPassword = view.findViewById(R.id.tbEditPassword);
-        Button btDbInfoReset = view.findViewById(R.id.btDbInfoReset);
+        tbTable.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                tbTable.setHint("playtennis");
+            } else {
+                tbTable.setHint("Tabella");
+            }
+        });
+        tbUser.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                tbUser.setHint("MapUser");
+            } else {
+                tbUser.setHint("Utente");
+            }
+        });
+        tbPort.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                tbPort.setHint("3306");
+            } else {
+                tbPort.setHint("Porta");
+            }
+        });
+        tbServer.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                tbServer.setHint("localhost");
+            } else {
+                tbServer.setHint("Server");
+            }
+        });
+        tbPort.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         btDbInfoReset.setOnClickListener(v -> {
             tbServer.setText("");
             tbPort.setText("");
@@ -88,9 +141,11 @@ public class AddFragment extends Fragment {
             tbTable.setText("");
             tbUser.setText("");
             tbEditPassword.setText("");
+            btConnect.setText("USA PREDEFINITI");
         });
 
-        btConnect.setOnClickListener(v -> {
+
+            btConnect.setOnClickListener(v -> {
             if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbEditPassword.getText().toString().equals("")) {
                 tbServer.setText("localhost");
                 tbPort.setText("3306");
@@ -115,8 +170,8 @@ public class AddFragment extends Fragment {
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                         if (response.isSuccessful()) {
                             List<String> responseList = response.body();
-                            clusterLayout.setVisibility(View.VISIBLE);
                             if (responseList.get(0).equals("OK")) {
+                                clusterLayout.setVisibility(View.VISIBLE);
                                 View dialogView = alertDialog.getWindow().getDecorView();
                                 TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
                                 messageTextView.setText("Connessione riuscita!");
@@ -131,7 +186,7 @@ public class AddFragment extends Fragment {
                                 spinnerCluster = view.findViewById(R.id.spinnerCluster);
                                 spinnerCluster.setVisibility(View.VISIBLE);
                                 final Dialog clusterDialog = new Dialog(requireContext());
-                                spinnerCluster.setOnClickListener(v->{
+                                spinnerCluster.setOnClickListener(v -> {
                                     clusterDialog.setContentView(R.layout.cluster_searchable_spinner);
                                     clusterDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                                     clusterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -144,10 +199,12 @@ public class AddFragment extends Fragment {
                                         @Override
                                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                                         }
+
                                         @Override
                                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                                             adapter1.getFilter().filter(s);
                                         }
+
                                         @Override
                                         public void afterTextChanged(Editable s) {
                                         }
@@ -164,29 +221,19 @@ public class AddFragment extends Fragment {
                                 btCalc.setVisibility(View.VISIBLE);
                                 btCalc.setOnClickListener(v -> {
                                     showNonClosableAlertDialog(requireContext());
-                                    int k;
-                                    try {
-                                        k = Integer.parseInt(spinnerCluster.getText().toString());
-                                    }
-                                    catch(NumberFormatException e)
-                                    {
-                                        openDialog("ERRORE", "Inserire un numero di cluster valido!");
-                                        return;
-                                    }
                                     List<Integer> list = new LinkedList<>();
-                                    list.add(k);
+                                    list.add(Integer.parseInt(spinnerCluster.getText().toString()));
                                     Call<List<String>> newClusterCall = ApiClient.getApiService().requestNewClusterSet(list);
                                     newClusterCall.enqueue(new Callback<List<String>>() {
                                         @Override
                                         public void onResponse(Call<List<String>> newClusterCall, Response<List<String>> response) {
                                             if (response.isSuccessful()) {
                                                 List<String> responseList = response.body();
-                                                if(responseList.get(0).equals("ERRORE"))
-                                                {
+                                                if (responseList.get(0).equals("ERRORE")) {
                                                     View dialogView = alertDialog.getWindow().getDecorView();
                                                     TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
                                                     messageTextView.setText("ERRORE");
-                                                    dialogView.postDelayed(() -> alertDialog.dismiss(),1500);
+                                                    dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
                                                     return;
 
                                                 }
@@ -197,20 +244,16 @@ public class AddFragment extends Fragment {
                                                 TextView tvResult = view.findViewById(R.id.tvResult);
                                                 tvResult.setText(nrIter);
                                                 responseList.remove(0);
-                                                HashMap<String,List<String>> clusterMap = new HashMap<>();
-                                                for(String str:responseList)
-                                                {
+                                                HashMap<String, List<String>> clusterMap = new HashMap<>();
+                                                for (String str : responseList) {
                                                     String[] split = str.split("Examples:");
                                                     List<String> list = new LinkedList<>();
-                                                    for(int i=1;i<split.length;i++)
-                                                    {
-                                                        list.add(split[i]);
-                                                    }
-                                                    clusterMap.put(split[0],list);
+                                                    list.addAll(Arrays.asList(split).subList(1, split.length));
+                                                    clusterMap.put(split[0], list);
                                                 }
-                                                List<String> keys=new ArrayList<>();
+                                                List<String> keys = new ArrayList<>();
                                                 keys.addAll(clusterMap.keySet());
-                                                CustomizedExpandableListAdapter expandableListAdapter = new CustomizedExpandableListAdapter(requireContext(),keys,clusterMap);
+                                                CustomizedExpandableListAdapter expandableListAdapter = new CustomizedExpandableListAdapter(requireContext(), keys, clusterMap);
                                                 expandableListView.setAdapter(expandableListAdapter);
                                                 dialogView.postDelayed(() -> alertDialog.dismiss(), 100);
                                                 btConnect.setEnabled(true);
@@ -264,6 +307,7 @@ public class AddFragment extends Fragment {
     /**
      * <h4>Chiamato quando un fragment viene attaccato per la prima volta al suo contesto.</h4>
      * <p>onCreate (android.os.Bundle) verrà chiamato dopo questo</p>
+     *
      * @param context il contesto in cui il fragment è stato attaccato
      */
     @Override
@@ -288,11 +332,9 @@ public class AddFragment extends Fragment {
     private void showNonClosableAlertDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(false);
-
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_layout, null);
         builder.setView(dialogView);
-
         alertDialog = builder.create();
         alertDialog.show();
     }
