@@ -78,4 +78,8 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

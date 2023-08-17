@@ -102,7 +102,6 @@ public class Controller {
         String result;
         try {
             String path = "Salvataggi//" +info.get(0);
-            System.out.println(path);
             KMeansMiner kMeansMiner = new KMeansMiner(path);
             result = kMeansMiner.getC().toString();
         } catch (IOException e) {

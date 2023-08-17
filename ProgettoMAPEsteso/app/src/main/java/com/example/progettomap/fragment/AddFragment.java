@@ -2,8 +2,6 @@ package com.example.progettomap.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -28,7 +26,6 @@ import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
 import com.example.progettomap.custom.CustomizedExpandableListAdapter;
 import com.example.progettomap.custom.RangeInputFilter;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +48,15 @@ public class AddFragment extends Fragment {
      */
     private AlertDialog alertDialog;
 
+
+    private EditText tbServer;
+    private EditText tbPort;
+    private EditText tbDatabase;
+    private EditText tbTable;
+    private EditText tbUser;
+    private EditText tbEditPassword;
+
+
     /**
      * <h4> Metodo che crea il fragment</h4>
      *
@@ -63,15 +69,17 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container, false);
+        tbServer = view.findViewById(R.id.tbServer);
+        tbPort = view.findViewById(R.id.tbPort);
+        tbDatabase = view.findViewById(R.id.tbDatabase);
+        tbTable = view.findViewById(R.id.tbTable);
+        tbUser = view.findViewById(R.id.tbUser);
+        tbEditPassword = view.findViewById(R.id.tbEditPassword);
         Button btConnect = view.findViewById(R.id.btConnect);
-        EditText tbServer = view.findViewById(R.id.tbServer), tbPort = view.findViewById(R.id.tbPort),
-                tbDatabase = view.findViewById(R.id.tbDatabase), tbTable = view.findViewById(R.id.tbTable),
-                tbUser = view.findViewById(R.id.tbUser);
-        TextInputEditText tbEditPassword = view.findViewById(R.id.tbEditPassword);
-
-         TextWatcher textWatcher = new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -187,9 +195,8 @@ public class AddFragment extends Fragment {
                                 spinnerCluster.setVisibility(View.VISIBLE);
                                 final Dialog clusterDialog = new Dialog(requireContext());
                                 spinnerCluster.setOnClickListener(v -> {
-                                    clusterDialog.setContentView(R.layout.cluster_searchable_spinner);
+                                    clusterDialog.setContentView(R.layout.dialog_searchable_spinner);
                                     clusterDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                                    clusterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                     ListView listView = clusterDialog.findViewById(R.id.list_view);
                                     EditText editText = clusterDialog.findViewById(R.id.edit_text);
                                     ArrayAdapter<Integer> adapter1 = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, listCluster);
@@ -218,7 +225,6 @@ public class AddFragment extends Fragment {
                                     new Handler().postDelayed(adapter1::notifyDataSetChanged, 200);
                                 });
                                 Button btCalc = view.findViewById(R.id.btCalc);
-                                btCalc.setVisibility(View.VISIBLE);
                                 btCalc.setOnClickListener(v -> {
                                     showNonClosableAlertDialog(requireContext());
                                     List<Integer> list = new LinkedList<>();
@@ -338,4 +344,5 @@ public class AddFragment extends Fragment {
         alertDialog = builder.create();
         alertDialog.show();
     }
+
 }

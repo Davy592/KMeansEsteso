@@ -1,6 +1,5 @@
 package com.example.progettomap.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
@@ -22,10 +21,6 @@ import com.example.progettomap.custom.RangeInputFilter;
  */
 public class ServerFragment extends Fragment {
 
-    /**
-     * Permette la comunicazione tra fragment e activity
-     */
-    private FragmentToActivity dataPasser;
 
     /**
      * <h4>Metodo che permette di creare la view del fragment</h4>
@@ -57,17 +52,6 @@ public class ServerFragment extends Fragment {
         return view;
     }
 
-
-    /**
-     * <h4>Metodo che permette di attaccare il fragment all'activity</h4>
-     *
-     * @param context context
-     */
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        dataPasser = (FragmentToActivity) context;
-    }
 
     /**
      * <h4>Metodo che permette di aprire un dialog</h4>

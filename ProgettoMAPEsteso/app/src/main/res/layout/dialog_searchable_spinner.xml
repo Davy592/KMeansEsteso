@@ -4,16 +4,15 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/background_dark"
     android:orientation="vertical"
     android:padding="16dp">
-    >
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleziona file"
+        android:text="Seleziona"
+        android:textColor="@color/textSpinner"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -26,6 +25,7 @@
         android:singleLine="true"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/textSpinner"
        />
 
     <ListView
@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
+        android:textColor="@color/textSpinner"
  />
 
 

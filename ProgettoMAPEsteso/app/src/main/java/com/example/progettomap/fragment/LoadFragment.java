@@ -1,8 +1,6 @@
 package com.example.progettomap.fragment;
 
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -51,7 +49,6 @@ public class LoadFragment extends Fragment {
         tvFileNames.setOnClickListener(v -> {
             fileDialog.setContentView(R.layout.dialog_searchable_spinner);
             fileDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            fileDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             ListView listView = fileDialog.findViewById(R.id.list_view);
             EditText editText = fileDialog.findViewById(R.id.edit_text);
             List<String> FileArray = requestFilesName();

@@ -3,4 +3,5 @@
     <color name="primary">#0099ff</color>
     <color name="accent">#D81B60</color>
     <color name="text">#FFFFFF</color>
+    <color name="textSpinner">#000000</color>
 </resources>

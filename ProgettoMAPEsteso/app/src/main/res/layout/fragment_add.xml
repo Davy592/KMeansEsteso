@@ -41,7 +41,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvInfo" />
+            app:layout_constraintTop_toTopOf="@id/tvInfo"
+            />
 
         <EditText
             android:id="@+id/tbPort"
@@ -58,7 +59,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tbServer" />
+            app:layout_constraintTop_toBottomOf="@id/tbServer"
+            />
 
         <EditText
             android:id="@+id/tbDatabase"
@@ -75,7 +77,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tbPort" />
+            app:layout_constraintTop_toBottomOf="@id/tbPort"
+            />
 
         <EditText
             android:id="@+id/tbTable"
@@ -92,7 +95,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tbDatabase" />
+            app:layout_constraintTop_toBottomOf="@id/tbDatabase"
+            />
 
         <EditText
             android:id="@+id/tbUser"
@@ -177,6 +181,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
+        tools:context=".fragment.AddFragment">
         >
 
         <TextView
@@ -187,6 +192,7 @@
             android:text="SELEZIONA IL NUMERO DI CLUSTER"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="@color/textSpinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -201,11 +207,11 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
-            android:background="@drawable/round_border"
             android:gravity="center"
             android:inputType="number"
             android:padding="16dp"
             android:text="1"
+            android:textColor="@color/textSpinner"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

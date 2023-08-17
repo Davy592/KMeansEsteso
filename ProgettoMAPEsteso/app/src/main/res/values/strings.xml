@@ -12,4 +12,6 @@
     <string name="add_fragment">Add</string>
     <string name="load_fragment">Load</string>
     <string name="change_server_fragment">Change Server</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
