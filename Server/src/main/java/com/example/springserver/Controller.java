@@ -105,8 +105,10 @@ public class Controller {
             KMeansMiner kMeansMiner = new KMeansMiner(path);
             result = kMeansMiner.getC().toString();
         } catch (IOException e) {
+            list.add("ERRORE");
             result = "FILE NON ESISTENTE";
         } catch (ClassNotFoundException e) {
+            list.add("ERRORE");
             result = "SI E' VERIFICATO UN ERRORE ";
         }
         list.add(result);

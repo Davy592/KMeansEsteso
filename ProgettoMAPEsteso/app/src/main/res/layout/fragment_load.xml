@@ -42,4 +42,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tvFileNames" />
 
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/listResult"
+        android:clickable="false"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/btFileConnect"
+        />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

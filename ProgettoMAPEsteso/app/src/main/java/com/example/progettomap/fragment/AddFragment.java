@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
+import com.example.progettomap.custom.CustomDialog;
 import com.example.progettomap.custom.CustomizedExpandableListAdapter;
 import com.example.progettomap.custom.RangeInputFilter;
 
@@ -162,7 +163,7 @@ public class AddFragment extends Fragment {
                 tbUser.setText("MapUser");
                 tbEditPassword.setText("map");
             } else if (tbServer.getText().toString().equals("") || tbPort.getText().toString().equals("") || tbDatabase.getText().toString().equals("") || tbTable.getText().toString().equals("") || tbUser.getText().toString().equals("") || tbEditPassword.getText().toString().equals("")) {
-                openDialog("ERRORE", "Inserire tutti i campi!");
+                CustomDialog.openDialog(requireContext(),"ERRORE", "Inserire tutti i campi!");
             } else {
                 showNonClosableAlertDialog(requireContext());
                 List<String> list = new LinkedList<>();
@@ -321,16 +322,6 @@ public class AddFragment extends Fragment {
         super.onAttach(context);
     }
 
-    /**
-     * <h4>Apre un dialog per mostrare dei messaggi a schermo.</h4>
-     */
-    private void openDialog(String titolo, String messaggio) {
-        AlertDialog alertDialog = new AlertDialog.Builder(requireContext()).create();
-        alertDialog.setTitle(titolo);
-        alertDialog.setMessage(messaggio);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", (dialog, which) -> dialog.dismiss());
-        alertDialog.show();
-    }
 
     /**
      * <h4>Mostra un dialog non chiudibile.</h4>

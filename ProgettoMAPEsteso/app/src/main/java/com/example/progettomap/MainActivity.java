@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.progettomap.api.ApiClient;
+import com.example.progettomap.custom.CustomDialog;
 import com.example.progettomap.custom.RangeInputFilter;
 import com.example.progettomap.fragment.Dashboard;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Button btConnectToServer = findViewById(R.id.btConnectToServer);
         btConnectToServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
-                openDialog("ERRORE", "Inserire tutti i campi!");
+                CustomDialog.openDialog(this,"ERRORE", "Inserire tutti i campi!");
             } else {
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 try {
@@ -45,27 +46,13 @@ public class MainActivity extends AppCompatActivity {
                     b.putString("serverPORT", tbServerPORT.getText().toString());
                     Dashboard.openDashboardWithBundle(this, b);
                 } catch (Exception e) {
-                    openDialog("ERRORE", "Errore di connessione al server!" + e.getMessage());
+                    CustomDialog.openDialog(this,"ERRORE", "Errore di connessione al server!" + e.getMessage());
                 }
             }
         });
 
     }
 
-    /**
-     * <h4>Metodo che apre un dialog</h4>
-     * <p>Questo metodo apre un dialog con un messaggio</p>
-     *
-     * @param titolo    titolo del dialog
-     * @param messaggio messaggio del dialog
-     */
-    private void openDialog(String titolo, String messaggio) {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle(titolo);
-        alertDialog.setMessage(messaggio);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", (dialog, which) -> dialog.dismiss());
-        alertDialog.show();
-    }
 
 
     /**
@@ -78,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * <h4>Metodo che gestisce la ripresa dell'activity</h4>
+     * <p>Questo metodo gestisce la ripresa dell'activity</p>
+     */
     @Override
     public void onResume() {
         super.onResume();

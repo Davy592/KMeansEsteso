@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
+import com.example.progettomap.custom.CustomDialog;
 import com.example.progettomap.custom.RangeInputFilter;
 
 /**
@@ -40,7 +41,7 @@ public class ServerFragment extends Fragment {
         tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         btChangeServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
-                openDialog("ERRORE", "Inserire tutti i campi!");
+                CustomDialog.openDialog(requireContext(),"ERRORE", "Inserire tutti i campi!");
             } else {
                 ApiClient.closeClient();
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
@@ -52,19 +53,5 @@ public class ServerFragment extends Fragment {
         return view;
     }
 
-
-    /**
-     * <h4>Metodo che permette di aprire un dialog</h4>
-     *
-     * @param titolo    titolo del dialog
-     * @param messaggio messaggio del dialog
-     */
-    private void openDialog(String titolo, String messaggio) {
-        AlertDialog alertDialog = new AlertDialog.Builder(requireContext()).create();
-        alertDialog.setTitle(titolo);
-        alertDialog.setMessage(messaggio);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", (dialog, which) -> dialog.dismiss());
-        alertDialog.show();
-    }
 
 }

@@ -13,12 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
+import com.example.progettomap.custom.CustomDialog;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -81,8 +82,9 @@ public class LoadFragment extends Fragment {
 
         Button btFileConnect = view.findViewById(R.id.btFileConnect);
         btFileConnect.setOnClickListener(v -> {
-            if (tvFileNames.getText().equals("")) {
-                openDialog("ERRORE", "SELEZIONA UN FILE!");
+            System.out.println(tvFileNames.getText());
+            if (tvFileNames.getText().equals("SELEZIONA FILE")) {
+                CustomDialog.openDialog(requireContext(),"ERRORE", "SELEZIONA UN FILE!");
             } else {
                 String fileName = tvFileNames.getText().toString();
                 List<String> list = new LinkedList<>();
@@ -92,17 +94,24 @@ public class LoadFragment extends Fragment {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                         if (response.isSuccessful()) {
-                            String responseString = response.body().get(0);
-                            openDialog("RISULTATO", responseString + "\nPREMERE OK PER CONTINUARE");
-
-                        } else {
-                            openDialog("ERRORE", "Connessione non riuscita!");
+                            if (response.body().get(0).equals("ERRORE")) {
+                                CustomDialog.openDialog(requireContext(), "ERRORE", response.body().get(1));
+                            } else {
+                                ListView listResult = view.findViewById(R.id.listResult);
+                                String[] responseString = response.body().get(0).split("\n");
+                                Toast.makeText(requireContext(), "RISULTATI", Toast.LENGTH_SHORT).show();
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, responseString);
+                                listResult.setAdapter(adapter);
+                            }
+                        }
+                        else {
+                            CustomDialog.openDialog(requireContext(),"ERRORE", "Connessione non riuscita!");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<String>> call, Throwable t) {
-                        openDialog("ERRORE", t.getMessage());
+                        CustomDialog.openDialog(requireContext(),"ERRORE", t.getMessage());
                     }
                 });
             }
@@ -126,23 +135,9 @@ public class LoadFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                openDialog("ERRORE", t.getMessage());
+                CustomDialog.openDialog(requireContext(), "ERRORE", t.getMessage());
             }
         });
         return list;
-    }
-
-    /**
-     * <h4>Metodo che permette di aprire un dialog</h4>
-     *
-     * @param titolo    titolo del dialog
-     * @param messaggio messaggio del dialog
-     */
-    private void openDialog(String titolo, String messaggio) {
-        AlertDialog alertDialog = new AlertDialog.Builder(requireContext()).create();
-        alertDialog.setTitle(titolo);
-        alertDialog.setMessage(messaggio);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", (dialog, which) -> dialog.dismiss());
-        alertDialog.show();
     }
 }
