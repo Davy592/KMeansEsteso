@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -37,8 +36,9 @@ public class LoadFragment extends Fragment {
 
     /**
      * <h4>Metodo che permette di creare la view del fragment</h4>
-     * @param inflater inflater
-     * @param container container
+     *
+     * @param inflater           inflater
+     * @param container          container
      * @param savedInstanceState savedInstanceState
      * @return view del fragment
      */
@@ -115,6 +115,7 @@ public class LoadFragment extends Fragment {
 
     /**
      * <h4>Metodo che permette di richiedere i nomi dei file presenti sul server</h4>
+     *
      * @return lista dei nomi dei file presenti sul server
      */
     private List<String> requestFilesName() {
@@ -136,7 +137,8 @@ public class LoadFragment extends Fragment {
 
     /**
      * <h4>Metodo che permette di aprire un dialog</h4>
-     * @param titolo titolo del dialog
+     *
+     * @param titolo    titolo del dialog
      * @param messaggio messaggio del dialog
      */
     private void openDialog(String titolo, String messaggio) {

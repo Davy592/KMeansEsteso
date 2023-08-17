@@ -21,8 +21,9 @@ public class Dashboard extends AppCompatActivity implements FragmentToActivity {
 
     /**
      * <h4> Metodo statico che apre la Dashboard</h4>
+     *
      * @param context contesto
-     * @param params parametri
+     * @param params  parametri
      */
     public static void openDashboardWithBundle(Context context, Bundle params) {
         Intent i = new Intent(context, Dashboard.class);
@@ -32,6 +33,7 @@ public class Dashboard extends AppCompatActivity implements FragmentToActivity {
 
     /**
      * <h4> Metodo che crea la Dashboard</h4>
+     *
      * @param savedInstanceState stato dell'istanza
      */
     @Override
@@ -68,6 +70,7 @@ public class Dashboard extends AppCompatActivity implements FragmentToActivity {
 
     /**
      * <h4> Metodo che aggiorna la connessione con il server</h4>
+     *
      * @param data dati
      */
     @Override

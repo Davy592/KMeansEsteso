@@ -29,8 +29,9 @@ public class ServerFragment extends Fragment {
 
     /**
      * <h4>Metodo che permette di creare la view del fragment</h4>
-     * @param inflater inflater
-     * @param container container
+     *
+     * @param inflater           inflater
+     * @param container          container
      * @param savedInstanceState savedInstanceState
      * @return view del fragment
      */
@@ -41,7 +42,7 @@ public class ServerFragment extends Fragment {
         Button btChangeServer = view.findViewById(R.id.btChangeServer);
         EditText tbServerIP = view.findViewById(R.id.tbServerIP);
         EditText tbServerPORT = view.findViewById(R.id.tbServerPORT);
-        tbServerPORT.setFilters(new InputFilter[] { new RangeInputFilter(0,65535)});
+        tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         btChangeServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
                 openDialog("ERRORE", "Inserire tutti i campi!");
@@ -59,6 +60,7 @@ public class ServerFragment extends Fragment {
 
     /**
      * <h4>Metodo che permette di attaccare il fragment all'activity</h4>
+     *
      * @param context context
      */
     @Override
@@ -69,7 +71,8 @@ public class ServerFragment extends Fragment {
 
     /**
      * <h4>Metodo che permette di aprire un dialog</h4>
-     * @param titolo titolo del dialog
+     *
+     * @param titolo    titolo del dialog
      * @param messaggio messaggio del dialog
      */
     private void openDialog(String titolo, String messaggio) {

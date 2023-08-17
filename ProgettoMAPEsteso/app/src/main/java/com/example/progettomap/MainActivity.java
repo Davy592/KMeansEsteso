@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * <h4>Metodo che crea l'activity</h4>
      * <p>Questo metodo crea l'activity e gestisce la connessione iniziale al server</p>
+     *
      * @param savedInstanceState stato dell'istanza
      */
     @Override
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         EditText tbServerIP = findViewById(R.id.tbServerIP);
         EditText tbServerPORT = findViewById(R.id.tbServerPORT);
-        tbServerPORT.setFilters(new InputFilter[] { new RangeInputFilter(0,65535)});
+        tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         Button btConnectToServer = findViewById(R.id.btConnectToServer);
         btConnectToServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * <h4>Metodo che apre un dialog</h4>
      * <p>Questo metodo apre un dialog con un messaggio</p>
-     * @param titolo titolo del dialog
+     *
+     * @param titolo    titolo del dialog
      * @param messaggio messaggio del dialog
      */
     private void openDialog(String titolo, String messaggio) {

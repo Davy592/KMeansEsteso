@@ -10,6 +10,7 @@ public interface FragmentToActivity {
 
     /**
      * <h2>Metodo che permette di aggiornare i dati del server</h2>
+     *
      * @param data dati del server
      */
     void updateServer(ApiService data);

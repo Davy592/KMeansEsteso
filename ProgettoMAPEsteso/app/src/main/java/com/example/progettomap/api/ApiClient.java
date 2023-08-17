@@ -1,4 +1,5 @@
 package com.example.progettomap.api;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -38,9 +39,9 @@ public class ApiClient {
 
     /**
      * <h4>Metodo che setta l'URL del server</h4>
-     * @param server Indirizzo del server
-     * @param port Porta del server
      *
+     * @param server Indirizzo del server
+     * @param port   Porta del server
      */
     public static void setBaseUrl(String server, int port) {
         instance.BASE_URL = "http://" + server + ":" + port + "/";
@@ -67,6 +68,7 @@ public class ApiClient {
     /**
      * <h4>Metodo che crea un oggetto che gestisce la connessione con il server</h4>
      * <p>L'oggetto viene passato come parametro</p>
+     *
      * @param apiService Oggetto che gestisce le chiamate al server
      */
     public static void updateServer(ApiService apiService) {
@@ -82,6 +84,7 @@ public class ApiClient {
 
     /**
      * <h4>Metodo che restituisce l'oggetto che gestisce le chiamate al server</h4>
+     *
      * @return Oggetto che gestisce le chiamate al server
      */
     public static ApiService getApiService() {

@@ -10,11 +10,11 @@ public class RangeInputFilter implements InputFilter {
     /**
      * Valore minimo accettabile.
      */
-    private int minValue;
+    private final int minValue;
     /**
      * Valore massimo accettabile.
      */
-    private int maxValue;
+    private final int maxValue;
 
     /**
      * <h4>Costruttore della classe</h4>.
@@ -29,12 +29,13 @@ public class RangeInputFilter implements InputFilter {
 
     /**
      * <h4>Controlla che l'input sia all'interno del range accettabile.</h4>
+     *
      * @param source Input da controllare.
-     * @param start Indice di inizio dell'input.
-     * @param end Indice di fine dell'input.
-     * @param dest Testo di destinazione.
+     * @param start  Indice di inizio dell'input.
+     * @param end    Indice di fine dell'input.
+     * @param dest   Testo di destinazione.
      * @param dstart Indice di inizio del testo di destinazione.
-     * @param dend Indice di fine del testo di destinazione.
+     * @param dend   Indice di fine del testo di destinazione.
      * @return
      */
     @Override

@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.example.progettomap.R;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <h2>Questa classe viene utilizzata per personalizzare l'ExpandableListAdapter</h2>
@@ -19,27 +19,27 @@ import java.util.HashMap;
  * L'elenco è diviso in categorie
  * Le categorie sono le chiavi del HashMap
  * I valori del HashMap sono l'elenco dei valori della categoria
- *
  */
 public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * Context dell'activity
      */
-    private Context context;
+    private final Context context;
     /**
      * Lista delle categorie
      */
-    private List<String> expandableTitleList;
+    private final List<String> expandableTitleList;
     /**
      * Lista dei valori delle categorie
      */
-    private HashMap<String, List<String>> expandableDetailList;
+    private final HashMap<String, List<String>> expandableDetailList;
 
     /**
      * <h4>Costruttore</h4>
-     * @param context Context dell'activity
-     * @param expandableListTitle Lista delle categorie
+     *
+     * @param context              Context dell'activity
+     * @param expandableListTitle  Lista delle categorie
      * @param expandableListDetail Lista dei valori delle categorie
      */
     public CustomizedExpandableListAdapter(Context context, List<String> expandableListTitle,
@@ -51,7 +51,8 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere il valore di un elemento dell'elenco</h4>
-     * @param lstPosn Posizione dell'elemento nell'elenco
+     *
+     * @param lstPosn               Posizione dell'elemento nell'elenco
      * @param expanded_ListPosition Posizione dell'elemento nell'elenco espanso
      * @return Valore dell'elemento
      */
@@ -62,7 +63,8 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere l'ID di un elemento dell'elenco</h4>
-     * @param listPosition Posizione dell'elemento nell'elenco
+     *
+     * @param listPosition          Posizione dell'elemento nell'elenco
      * @param expanded_ListPosition Posizione dell'elemento nell'elenco espanso
      * @return ID dell'elemento
      */
@@ -73,11 +75,12 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere la View di un elemento dell'elenco</h4>
-     * @param lstPosn Posizione dell'elemento nell'elenco
+     *
+     * @param lstPosn               Posizione dell'elemento nell'elenco
      * @param expanded_ListPosition Posizione dell'elemento nell'elenco espanso
-     * @param isLastChild Indica se l'elemento è l'ultimo dell'elenco
-     * @param convertView View dell'elemento
-     * @param parent View del parent
+     * @param isLastChild           Indica se l'elemento è l'ultimo dell'elenco
+     * @param convertView           View dell'elemento
+     * @param parent                View del parent
      * @return
      */
     @Override
@@ -95,6 +98,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere il numero di elementi dell'elenco</h4>
+     *
      * @param listPosition Posizione dell'elemento nell'elenco
      * @return Numero di elementi dell'elenco
      */
@@ -105,6 +109,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere l'elemento dell'elenco</h4>
+     *
      * @param listPosition Posizione dell'elemento nell'elenco
      * @return Elemento dell'elenco
      */
@@ -115,6 +120,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere il numero di gruppi</h4>
+     *
      * @return Numero di gruppi
      */
     @Override
@@ -124,6 +130,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere l'ID di un gruppo</h4>
+     *
      * @param listPosition Posizione dell'elemento nell'elenco
      * @return ID dell'elemento
      */
@@ -134,10 +141,11 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per ottenere la View di un gruppo</h4>
+     *
      * @param listPosition Posizione dell'elemento nell'elenco
-     * @param isExpanded Indica se l'elemento è espanso
-     * @param convertView View dell'elemento
-     * @param parent View del parent
+     * @param isExpanded   Indica se l'elemento è espanso
+     * @param convertView  View dell'elemento
+     * @param parent       View del parent
      * @return View dell'elemento
      */
     @Override
@@ -156,6 +164,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per indicare se i gruppi hanno ID stabili</h4>
+     *
      * @return Indica se i gruppi hanno ID stabili
      */
     @Override
@@ -165,6 +174,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * <h4> Metodo per indicare se i gruppi sono selezionabili</h4>
+     *
      * @param listPosition Posizione dell'elemento nell'elenco
      * @return Indica se i gruppi sono selezionabili
      */
