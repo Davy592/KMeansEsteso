@@ -1,7 +1,6 @@
 package com.example.progettomap.fragment;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -17,7 +16,6 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -44,11 +42,6 @@ import retrofit2.Response;
  * <h2>Classe che gestisce il fragment per la creazione di un nuovo cluster</h2>
  */
 public class AddFragment extends Fragment {
-
-    /**
-     * Dialog per la visualizzazione di messaggi
-     */
-    private AlertDialog alertDialog;
 
 
     private EditText tbServer;
