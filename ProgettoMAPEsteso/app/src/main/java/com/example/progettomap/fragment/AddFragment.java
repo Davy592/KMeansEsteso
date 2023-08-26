@@ -17,6 +17,7 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -24,8 +25,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
-import com.example.progettomap.custom.CustomDialog;
 import com.example.progettomap.custom.CustomizedExpandableListAdapter;
+import com.example.progettomap.custom.NonClosableDialog;
 import com.example.progettomap.custom.RangeInputFilter;
 
 import java.util.ArrayList;
@@ -163,9 +164,14 @@ public class AddFragment extends Fragment {
                 tbUser.setText("MapUser");
                 tbEditPassword.setText("map");
             } else if (tbServer.getText().toString().equals("") || tbPort.getText().toString().equals("") || tbDatabase.getText().toString().equals("") || tbTable.getText().toString().equals("") || tbUser.getText().toString().equals("") || tbEditPassword.getText().toString().equals("")) {
-                CustomDialog.openDialog(requireContext(),"ERRORE", "Inserire tutti i campi!");
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setTitle("ERRORE");
+                builder.setMessage("Inserire tutti i campi!");
+                builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                builder.show();
             } else {
-                showNonClosableAlertDialog(requireContext());
+                NonClosableDialog ncd = new NonClosableDialog();
+                ncd.show(getChildFragmentManager(), "Tentativo di connessione");
                 List<String> list = new LinkedList<>();
                 list.add(tbServer.getText().toString());
                 list.add(tbPort.getText().toString());
@@ -181,10 +187,8 @@ public class AddFragment extends Fragment {
                             List<String> responseList = response.body();
                             if (responseList.get(0).equals("OK")) {
                                 clusterLayout.setVisibility(View.VISIBLE);
-                                View dialogView = alertDialog.getWindow().getDecorView();
-                                TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                                messageTextView.setText("Connessione riuscita!");
-                                dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
+                                ncd.setText("Connessione riuscita!");
+                                ncd.dismiss();
                                 int numCluster = Integer.parseInt(responseList.get(1));
                                 List<Integer> listCluster = new LinkedList<>();
                                 for (int i = 0; i < numCluster; i++) {
@@ -227,7 +231,8 @@ public class AddFragment extends Fragment {
                                 });
                                 Button btCalc = view.findViewById(R.id.btCalc);
                                 btCalc.setOnClickListener(v -> {
-                                    showNonClosableAlertDialog(requireContext());
+                                    NonClosableDialog ncd1 = new NonClosableDialog();
+                                    ncd1.show(getChildFragmentManager(), "Calcolo in corso");
                                     List<Integer> list = new LinkedList<>();
                                     list.add(Integer.parseInt(spinnerCluster.getText().toString()));
                                     Call<List<String>> newClusterCall = ApiClient.getApiService().requestNewClusterSet(list);
@@ -237,16 +242,12 @@ public class AddFragment extends Fragment {
                                             if (response.isSuccessful()) {
                                                 List<String> responseList = response.body();
                                                 if (responseList.get(0).equals("ERRORE")) {
-                                                    View dialogView = alertDialog.getWindow().getDecorView();
-                                                    TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                                                    messageTextView.setText("ERRORE");
-                                                    dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
+                                                    ncd1.setText("Errore: " + responseList.get(1));
+                                                    ncd1.dismiss();
                                                     return;
-
                                                 }
-                                                View dialogView = alertDialog.getWindow().getDecorView();
-                                                TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                                                messageTextView.setText("Risultati arrivati");
+                                                ncd1.setText("Risultati arrivati correttamente!");
+                                                ncd1.dismiss();
                                                 String nrIter = responseList.get(0);
                                                 TextView tvResult = view.findViewById(R.id.tvResult);
                                                 tvResult.setText(nrIter);
@@ -262,78 +263,42 @@ public class AddFragment extends Fragment {
                                                 keys.addAll(clusterMap.keySet());
                                                 CustomizedExpandableListAdapter expandableListAdapter = new CustomizedExpandableListAdapter(requireContext(), keys, clusterMap);
                                                 expandableListView.setAdapter(expandableListAdapter);
-                                                dialogView.postDelayed(() -> alertDialog.dismiss(), 100);
+                                                // dialogView.postDelayed(() -> alertDialog.dismiss(), 100);
                                                 btConnect.setEnabled(true);
                                                 clusterLayout.setVisibility(LinearLayout.GONE);
                                                 resultLayout.setVisibility(LinearLayout.VISIBLE);
                                             } else {
-                                                View dialogView = alertDialog.getWindow().getDecorView();
-                                                TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                                                messageTextView.setText("Connessione non riuscita.");
-                                                dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
+                                                ncd.setText("Connessione non riuscita.");
+                                                ncd.dismiss();
                                             }
                                         }
 
                                         @Override
                                         public void onFailure(Call<List<String>> call, Throwable t) {
-                                            View dialogView = alertDialog.getWindow().getDecorView();
-                                            TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                                            messageTextView.setText("Tempo scaduto.");
-                                            dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
+                                            ncd.setText("Tempo scaduto.");
+                                            ncd.dismiss();
                                         }
 
                                     });
                                 });
                             } else {
-                                View dialogView = alertDialog.getWindow().getDecorView();
-                                TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                                messageTextView.setText("Connessione non riuscita: " + responseList.get(0));
-                                dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
+                                ncd.setText("Connessione non riuscita: " + responseList.get(0));
+                                ncd.dismiss();
                             }
                         } else {
-                            View dialogView = alertDialog.getWindow().getDecorView();
-                            TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                            messageTextView.setText("Connessione non riuscita.");
-                            dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
+                            ncd.setText("Connessione non riuscita.");
+                            ncd.dismiss();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<String>> call, Throwable t) {
-                        View dialogView = alertDialog.getWindow().getDecorView();
-                        TextView messageTextView = dialogView.findViewById(R.id.messageTextView);
-                        messageTextView.setText("Connessione non riuscita.");
-                        dialogView.postDelayed(() -> alertDialog.dismiss(), 1500);
+                        ncd.setText("Connessione non riuscita.");
+                        ncd.dismiss();
                     }
                 });
             }
         });
         return view;
     }
-
-    /**
-     * <h4>Chiamato quando un fragment viene attaccato per la prima volta al suo contesto.</h4>
-     * <p>onCreate (android.os.Bundle) verrà chiamato dopo questo</p>
-     *
-     * @param context il contesto in cui il fragment è stato attaccato
-     */
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-
-    /**
-     * <h4>Mostra un dialog non chiudibile.</h4>
-     */
-    private void showNonClosableAlertDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setCancelable(false);
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.dialog_layout, null);
-        builder.setView(dialogView);
-        alertDialog = builder.create();
-        alertDialog.show();
-    }
-
 }

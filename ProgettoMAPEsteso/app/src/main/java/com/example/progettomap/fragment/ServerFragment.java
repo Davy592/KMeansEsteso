@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
-import com.example.progettomap.custom.CustomDialog;
 import com.example.progettomap.custom.RangeInputFilter;
 
 /**
@@ -41,7 +40,11 @@ public class ServerFragment extends Fragment {
         tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         btChangeServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
-                CustomDialog.openDialog(requireContext(),"ERRORE", "Inserire tutti i campi!");
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setTitle("Errore!");
+                builder.setMessage("Inserire tutti i campi");
+                builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                builder.show();
             } else {
                 ApiClient.closeClient();
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));

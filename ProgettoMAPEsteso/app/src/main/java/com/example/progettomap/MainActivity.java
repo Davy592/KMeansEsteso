@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.progettomap.api.ApiClient;
-import com.example.progettomap.custom.CustomDialog;
 import com.example.progettomap.custom.RangeInputFilter;
 import com.example.progettomap.fragment.Dashboard;
 
@@ -36,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
         Button btConnectToServer = findViewById(R.id.btConnectToServer);
         btConnectToServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
-                CustomDialog.openDialog(this,"ERRORE", "Inserire tutti i campi!");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("ERRORE");
+                builder.setMessage("Inserire IP e PORTA del server!");
+                builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                builder.show();
             } else {
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 try {
@@ -46,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
                     b.putString("serverPORT", tbServerPORT.getText().toString());
                     Dashboard.openDashboardWithBundle(this, b);
                 } catch (Exception e) {
-                    CustomDialog.openDialog(this,"ERRORE", "Errore di connessione al server!" + e.getMessage());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("ERRORE");
+                    builder.setMessage("Errore di connessione al server!" + e.getMessage());
+                    builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                    builder.show();
                 }
             }
         });
