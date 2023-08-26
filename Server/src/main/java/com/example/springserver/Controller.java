@@ -131,6 +131,7 @@ public class Controller {
                 list.add(file.getName());
             }
         }
+        if (listOfFiles.length == 0) list.add("ERRORE");
         return list;
     }
 
