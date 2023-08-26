@@ -20,7 +20,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
 import com.example.progettomap.api.ApiClient;
+import com.example.progettomap.custom.NonClosableDialog;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.ConnectException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,11 +52,11 @@ public class LoadFragment extends Fragment {
         TextView tvFileNames = view.findViewById(R.id.tvFileNames);
         final Dialog fileDialog = new Dialog(requireContext());
         tvFileNames.setOnClickListener(v -> {
+            List<String> FileArray = requestFilesName();
             fileDialog.setContentView(R.layout.dialog_searchable_spinner);
             fileDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             ListView listView = fileDialog.findViewById(R.id.list_view);
             EditText editText = fileDialog.findViewById(R.id.edit_text);
-            List<String> FileArray = requestFilesName();
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     requireContext(), android.R.layout.simple_list_item_1, FileArray);
             listView.setAdapter(adapter);
@@ -77,12 +81,11 @@ public class LoadFragment extends Fragment {
                 fileDialog.dismiss();
             });
 
-            new Handler().postDelayed(adapter::notifyDataSetChanged, 200);
+            new Handler().postDelayed(adapter::notifyDataSetChanged, 1000);
         });
 
         Button btFileConnect = view.findViewById(R.id.btFileConnect);
         btFileConnect.setOnClickListener(v -> {
-            System.out.println(tvFileNames.getText());
             if (tvFileNames.getText().equals("SELEZIONA FILE")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Errore!");
@@ -146,14 +149,17 @@ public class LoadFragment extends Fragment {
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                list.addAll(response.body());
+                if (response.isSuccessful()) {
+                    list.addAll(response.body());
+                }
             }
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
+                list.clear();
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Errore!");
-                builder.setMessage("Connessione non riuscita: " + t.getMessage());
+                builder.setMessage("Connessione non riuscita");
                 builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
                 builder.show();
             }
