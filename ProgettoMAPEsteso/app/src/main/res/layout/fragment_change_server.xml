@@ -13,7 +13,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:text="INSERISCI LE INFORMAZIONI DEL SERVER"
+        android:text="@string/info_server"
         android:textStyle="bold"
         android:textSize="26sp"
         android:textAlignment="center"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_border"
         android:ems="10"
-        android:hint="Server"
+        android:hint="@string/server"
         android:inputType="text"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_bg"
-        android:text="CAMBIA SERVER"
+        android:text="@string/server_conn"
         android:textColor="@color/text"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -76,53 +76,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbServerPORT" />
 
-    <LinearLayout
-        android:id="@+id/llOpt2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-black"
-            android:text="SELEZIONA UN FILE TRA QUELLI DISPONIBILI"
-            android:textAlignment="center"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/tvFileNames"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:drawableEnd="@android:color/background_light"
-            android:hint="SELEZIONA FILE" />
-
-        <LinearLayout
-            android:id="@+id/llChangeServer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btFileConnect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="Recupera file" />
-        </LinearLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

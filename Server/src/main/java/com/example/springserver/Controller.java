@@ -40,6 +40,7 @@ public class Controller {
      * <h4>Riceve dal client le informazioni per la creazione di un nuovo dataset.</h4>
      * <p>Le informazioni sono: server, porta, nome del database, nome della tabella, nome utente e password.</p>
      * <p>Restituisce una lista di stringhe che contiene "OK" se non ci sono stati errori, altrimenti contiene un messaggio di errore.</p>
+     *
      * @param info la lista delle informazioni
      * @return la lista dei database
      */
@@ -53,11 +54,12 @@ public class Controller {
             table = info.get(3);
             String user = info.get(4);
             String password = info.get(5);
-            this.data = new Data(server, Integer.parseInt(port), database,  user,  password,  table);
+            this.data = new Data(server, Integer.parseInt(port), database, user, password, table);
             list.add("OK");
             list.add(String.valueOf(data.getNumberOfExamples()));
-        } catch (NoValueException | DatabaseConnectionException | EmptySetException | SQLException | NumberFormatException e) {
-             list.add("SI E' VERIFICATO UN ERRORE DURANTE L'INTERROGAZIONE AL DATABASE -> " + e.getMessage());
+        } catch (NoValueException | DatabaseConnectionException | EmptySetException | SQLException |
+                 NumberFormatException e) {
+            list.add("SI E' VERIFICATO UN ERRORE DURANTE L'INTERROGAZIONE AL DATABASE -> " + e.getMessage());
         }
         return list;
     }
@@ -65,26 +67,27 @@ public class Controller {
     /**
      * <h4>Riceve dal client il numero di cluster da creare.</h4>
      * <p>Restituisce una lista di stringhe che contiene i cluster.</p>
+     *
      * @param numCluster il numero di cluster
      * @return la lista dei cluster
      */
     @PostMapping("/newClusterSet")
     public List<String> receiveNumberOfClusters(@RequestBody List<Integer> numCluster) {
-        int numC=numCluster.get(0);
+        int numC = numCluster.get(0);
         List<String> list = new LinkedList<>();
-        try
-        {
+        try {
             KMeansMiner kMeansMiner = new KMeansMiner(numC);
-            int numIter=kMeansMiner.kmeans(this.data);
-            kMeansMiner.salva("Salvataggi//" +database+table+numC+".dat");
-            list=kMeansMiner.getC().toString(data);
-            ((LinkedList<String>) list).addFirst("Numero di iterazioni:"+numIter);
-            data=null;
-            table=null;
-            database=null;
+            int numIter = kMeansMiner.kmeans(this.data);
+            kMeansMiner.salva("Salvataggi//" + database + table + numC + ".dat");
+            list = kMeansMiner.getC().toString(data);
+            ((LinkedList<String>) list).addFirst("Numero di iterazioni:" + numIter);
+            data = null;
+            table = null;
+            database = null;
         } catch (IOException e) {
             list.clear();
             list.add("ERRORE");
+            list.add("ERRORE NEL SALVATAGGIO DEL FILE");
         }
         return list;
     }
@@ -93,15 +96,16 @@ public class Controller {
     /**
      * <h4>Riceve dal client il nome del file da caricare.</h4>
      * <p>Restituisce una lista di stringhe che contiene i centroidi dei cluster.</p>
+     *
      * @param info il nome del file
      * @return la lista dei centroidi
      */
     @PostMapping("/fileInfo")
     public List<String> receiveInfoFile(@RequestBody List<String> info) {
-        List<String> list=new LinkedList<>();
+        List<String> list = new LinkedList<>();
         String result;
         try {
-            String path = "Salvataggi//" +info.get(0);
+            String path = "Salvataggi//" + info.get(0);
             KMeansMiner kMeansMiner = new KMeansMiner(path);
             result = kMeansMiner.getC().toString();
         } catch (IOException e) {
@@ -118,20 +122,25 @@ public class Controller {
     /**
      * <h4>Restituisce la lista dei file salvati.</h4>
      * <p>Restituisce una lista di stringhe che contiene i nomi dei file salvati.</p>
+     *
      * @return la lista dei file
      */
     @PostMapping("/fileNames")
-    public List<String> sendFilesName()
-    {
-        File folder = new File("Salvataggi//");
-        File[] listOfFiles = folder.listFiles();
-        List<String> list=new LinkedList<>();
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                list.add(file.getName());
-            }
+    public List<String> sendFilesName() {
+        List<String> list = new LinkedList<>();
+        try {
+            File folder = new File("Salvataggi//");
+            File[] listOfFiles = folder.listFiles();
+            if (listOfFiles.length == 0) list.add("ERRORE");
+            else
+                for (File file : listOfFiles) {
+                    if (file.isFile()) {
+                        list.add(file.getName());
+                    }
+                }
+        } catch (NullPointerException e) {
+            list.add("ERRORE");
         }
-        if (listOfFiles.length == 0) list.add("ERRORE");
         return list;
     }
 

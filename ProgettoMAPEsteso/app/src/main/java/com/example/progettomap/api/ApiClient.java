@@ -65,15 +65,6 @@ public class ApiClient {
         instance.apiService = instance.retrofit.create(ApiService.class);
     }
 
-    /**
-     * <h4>Metodo che crea un oggetto che gestisce la connessione con il server</h4>
-     * <p>L'oggetto viene passato come parametro</p>
-     *
-     * @param apiService Oggetto che gestisce le chiamate al server
-     */
-    public static void updateServer(ApiService apiService) {
-        instance.apiService = apiService;
-    }
 
     /**
      * <h4>Metodo che chiude la connessione con il server</h4>

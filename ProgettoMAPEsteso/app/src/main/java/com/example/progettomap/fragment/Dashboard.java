@@ -16,15 +16,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 public class Dashboard extends AppCompatActivity {
 
+
+    /**
+     * Variabile che rappresenta il BottomNavigationView
+     */
+    private  BottomNavigationView bnv;
+
     /**
      * <h4> Metodo statico che apre la Dashboard</h4>
      *
      * @param context contesto
-     * @param params  parametri
      */
-    public static void openDashboardWithBundle(Context context, Bundle params) {
+    public static void openDashboardWithBundle(Context context) {
         Intent i = new Intent(context, Dashboard.class);
-        i.putExtras(params);
         context.startActivity(i);
     }
 
@@ -37,7 +41,7 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
-        BottomNavigationView bnv = findViewById(R.id.navbarview);
+        bnv = findViewById(R.id.navbarview);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new AddFragment()).commit();
         bnv.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -63,7 +67,7 @@ public class Dashboard extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        BottomNavigationView bnv = findViewById(R.id.navbarview);
+        bnv = findViewById(R.id.navbarview);
         if (bnv.getSelectedItemId() == R.id.nav_add) {
             bnv.setSelectedItemId(R.id.nav_add);
         } else if (bnv.getSelectedItemId() == R.id.nav_load) {

@@ -1,5 +1,4 @@
 package com.example.springserver.database;
-
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;

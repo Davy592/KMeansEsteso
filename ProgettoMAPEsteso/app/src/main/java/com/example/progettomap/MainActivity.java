@@ -36,23 +36,20 @@ public class MainActivity extends AppCompatActivity {
         btConnectToServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("ERRORE");
-                builder.setMessage("Inserire IP e PORTA del server!");
-                builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                builder.setTitle(R.string.errore);
+                builder.setMessage(R.string.inserire_tutti_i_campi);
+                builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                 builder.show();
             } else {
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 try {
                     ApiClient.updateServer();
-                    Bundle b = new Bundle();
-                    b.putString("serverIP", tbServerIP.getText().toString());
-                    b.putString("serverPORT", tbServerPORT.getText().toString());
-                    Dashboard.openDashboardWithBundle(this, b);
+                    Dashboard.openDashboardWithBundle(this);
                 } catch (Exception e) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("ERRORE");
-                    builder.setMessage("Errore di connessione al server!" + e.getMessage());
-                    builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                    builder.setTitle(R.string.errore);
+                    builder.setMessage(R.string.connessione_non_riuscita + e.getMessage());
+                    builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                     builder.show();
                 }
             }

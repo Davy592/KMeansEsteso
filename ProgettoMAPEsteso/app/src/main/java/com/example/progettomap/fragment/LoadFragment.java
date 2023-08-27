@@ -49,6 +49,11 @@ public class LoadFragment extends Fragment {
      */
     private NonClosableDialog dialog;
 
+    /**
+     * Variabile che rappresenta il bottone per la connessione al server
+     */
+    private  Button btFileConnect;
+
 
     /**
      * <h4>Metodo che gestisce la richiesta dei file presenti sul server</h4>
@@ -65,13 +70,13 @@ public class LoadFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_load, container, false);
         tvFileNames = view.findViewById(R.id.tvFileNames);
         tvFileNames.setOnClickListener(v -> requestFilesName());
-        Button btFileConnect = view.findViewById(R.id.btFileConnect);
+        btFileConnect = view.findViewById(R.id.btFileConnect);
         btFileConnect.setOnClickListener(v -> {
-            if (tvFileNames.getText().equals("SELEZIONA FILE")) {
+            if (tvFileNames.getText().equals(R.string.seleziona_file)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                builder.setTitle("Errore!");
-                builder.setMessage("Seleziona un file");
-                builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                builder.setTitle(R.string.errore);
+                builder.setMessage(R.string.seleziona_file);
+                builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                 builder.show();
             } else {
                 String fileName = tvFileNames.getText().toString();
@@ -84,14 +89,14 @@ public class LoadFragment extends Fragment {
                         if (response.isSuccessful()) {
                             ListView listResult = view.findViewById(R.id.listResult);
                             String[] responseString = response.body().get(0).split("\n");
-                            Toast.makeText(requireContext(), "Risultati caricati correttamente!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), R.string.risultati_arrivati_correttamente, Toast.LENGTH_SHORT).show();
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, responseString);
                             listResult.setAdapter(adapter);
                         } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                            builder.setTitle("Errore!");
-                            builder.setMessage("Connessione non riuscita");
-                            builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                            builder.setTitle(R.string.errore);
+                            builder.setMessage(R.string.connessione_non_riuscita);
+                            builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                             builder.show();
                         }
                     }
@@ -99,9 +104,9 @@ public class LoadFragment extends Fragment {
                     @Override
                     public void onFailure(Call<List<String>> call, Throwable t) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                        builder.setTitle("Errore!");
-                        builder.setMessage("Connessione non riuscita: " + t.getMessage());
-                        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                        builder.setTitle(R.string.errore);
+                        builder.setMessage(R.string.connessione_non_riuscita+": " + t.getMessage());
+                        builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                         builder.show();
                     }
                 });
@@ -115,7 +120,7 @@ public class LoadFragment extends Fragment {
      */
     private void requestFilesName() {
         dialog = new NonClosableDialog();
-        dialog.show(getParentFragmentManager(), "Tenativo di connessione");
+        dialog.show(getParentFragmentManager(), R.string.tentativo_di_connessione+"");
         Call<List<String>> call = ApiClient.getApiService().requestFilesName();
         List<String> list = new LinkedList<>();
         call.enqueue(new Callback<List<String>>() {
@@ -127,14 +132,14 @@ public class LoadFragment extends Fragment {
                     showFileDialog(list);
                 } else {
                     dialog.dismiss();
-                    Toast.makeText(requireContext(), "Connessione non riuscita", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.connessione_non_riuscita, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
                 dialog.dismiss();
-                Toast.makeText(requireContext(), "Connessione non riuscita", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.connessione_non_riuscita, Toast.LENGTH_SHORT).show();
             }
         });
     }

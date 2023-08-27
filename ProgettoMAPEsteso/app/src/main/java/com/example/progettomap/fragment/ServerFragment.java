@@ -21,6 +21,21 @@ import com.example.progettomap.custom.RangeInputFilter;
  */
 public class ServerFragment extends Fragment {
 
+    /**
+     * Variabile che rappresenta il bottone per la connessione al server
+     */
+    private Button btChangeServer;
+
+    /**
+     * Variabile che rappresenta l'editText per l'ip del server
+     */
+    private EditText tbServerIP;
+
+    /**
+     * Variabile che rappresenta l'editText per la porta del server
+     */
+    private EditText tbServerPORT;
+
 
     /**
      * <h4>Metodo che permette di creare la view del fragment</h4>
@@ -34,22 +49,22 @@ public class ServerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_change_server, container, false);
-        Button btChangeServer = view.findViewById(R.id.btChangeServer);
-        EditText tbServerIP = view.findViewById(R.id.tbServerIP);
-        EditText tbServerPORT = view.findViewById(R.id.tbServerPORT);
+        btChangeServer = view.findViewById(R.id.btChangeServer);
+        tbServerIP = view.findViewById(R.id.tbServerIP);
+        tbServerPORT = view.findViewById(R.id.tbServerPORT);
         tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         btChangeServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                builder.setTitle("Errore!");
-                builder.setMessage("Inserire tutti i campi");
-                builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+                builder.setTitle(R.string.errore);
+                builder.setMessage(R.string.inserire_tutti_i_campi);
+                builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                 builder.show();
             } else {
                 ApiClient.closeClient();
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 ApiClient.updateServer();
-                Toast.makeText(requireContext(), "Server cambiato correttamente", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), R.string.server_cambiato_correttamente+"", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -44,13 +44,77 @@ import retrofit2.Response;
 public class AddFragment extends Fragment {
 
 
+    /**
+     * Variabile che rappresenta l'EditText del server
+     */
     private EditText tbServer;
+
+    /**
+     * Variabile che rappresenta l'EditText della porta del server
+     */
     private EditText tbPort;
+
+    /**
+     * Variabile che rappresenta l'EditText del database
+     */
     private EditText tbDatabase;
+
+    /**
+     * Variabile che rappresenta l'EditText della tabella
+     */
     private EditText tbTable;
+
+    /**
+     * Variabile che rappresenta l'EditText dell'utente
+     */
     private EditText tbUser;
+
+    /**
+     * Variabile che rappresenta l'EditText della password
+     */
     private EditText tbEditPassword;
 
+    /**
+     * Variabile che rappresenta il bottone per la connessione
+     */
+    private Button btConnect;
+
+
+    /**
+     * Variabile che rappresenta il botttone per il reset delle informazioni
+     */
+    private Button btDbInfoReset;
+
+    /**
+     * Variabile che rappresenta il bottone per il calcolo del cluster
+     */
+    private Button btCalc;
+
+
+    /**
+     * Variabile che rappresenta la lista per il numero di cluster
+     */
+    private  ExpandableListView expandableListView;
+
+    /**
+     * Variabile che rappresenta il layout per le informazioni del database
+     */
+    private ConstraintLayout infoLayout;
+
+    /**
+     * Variabile che rappresenta il layout per la selezione del cluster
+     */
+    private ConstraintLayout clusterLayout;
+
+    /**
+     * Variabile che rappresenta il layout per il risultato
+     */
+    private ConstraintLayout resultLayout;
+
+    /**
+     * Variabile che rappresenta il testo per il numero di cluster
+     */
+    private TextView spinnerCluster;
 
     /**
      * <h4> Metodo che crea il fragment</h4>
@@ -70,7 +134,7 @@ public class AddFragment extends Fragment {
         tbTable = view.findViewById(R.id.tbTable);
         tbUser = view.findViewById(R.id.tbUser);
         tbEditPassword = view.findViewById(R.id.tbEditPassword);
-        Button btConnect = view.findViewById(R.id.btConnect);
+        btConnect = view.findViewById(R.id.btConnect);
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -79,9 +143,9 @@ public class AddFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbEditPassword.getText().toString().equals("")) {
-                    btConnect.setText("USA PREDEFINITI");
+                    btConnect.setText(R.string.usa_predefiniti);
                 } else {
-                    btConnect.setText("CONNETTI AL DATABASE");
+                    btConnect.setText(R.string.conn);
                 }
             }
 
@@ -95,45 +159,45 @@ public class AddFragment extends Fragment {
         tbUser.addTextChangedListener(textWatcher);
         tbServer.addTextChangedListener(textWatcher);
         tbPort.addTextChangedListener(textWatcher);
-        ExpandableListView expandableListView = view.findViewById(R.id.expandableListView);
-        ConstraintLayout infoLayout = view.findViewById(R.id.infoLayout),
-                clusterLayout = view.findViewById(R.id.clusterLayout),
-                resultLayout = view.findViewById(R.id.resultLayout);
-        Button btDbInfoReset = view.findViewById(R.id.btDbInfoReset);
+        expandableListView = view.findViewById(R.id.expandableListView);
+        infoLayout = view.findViewById(R.id.infoLayout);
+        clusterLayout = view.findViewById(R.id.clusterLayout);
+        resultLayout = view.findViewById(R.id.resultLayout);
+        btDbInfoReset = view.findViewById(R.id.btDbInfoReset);
 
         tbDatabase.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                tbDatabase.setHint("MapDB");
+                tbDatabase.setHint(R.string.db_hint);
             } else {
-                tbDatabase.setHint("Database");
+                tbDatabase.setHint(R.string.database);
             }
         });
         tbTable.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                tbTable.setHint("playtennis");
+                tbTable.setHint(R.string.tabella_hint);
             } else {
-                tbTable.setHint("Tabella");
+                tbTable.setHint(R.string.tabella);
             }
         });
         tbUser.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                tbUser.setHint("MapUser");
+                tbUser.setHint(R.string.utente_hint);
             } else {
-                tbUser.setHint("Utente");
+                tbUser.setHint(R.string.utente);
             }
         });
         tbPort.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                tbPort.setHint("3306");
+                tbPort.setHint(R.string.porta_hint);
             } else {
-                tbPort.setHint("Porta");
+                tbPort.setHint(R.string.porta);
             }
         });
         tbServer.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                tbServer.setHint("localhost");
+                tbServer.setHint(R.string.server_hint);
             } else {
-                tbServer.setHint("Server");
+                tbServer.setHint(R.string.server);
             }
         });
         tbPort.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
@@ -144,27 +208,27 @@ public class AddFragment extends Fragment {
             tbTable.setText("");
             tbUser.setText("");
             tbEditPassword.setText("");
-            btConnect.setText("USA PREDEFINITI");
+            btConnect.setText(R.string.usa_predefiniti);
         });
 
 
             btConnect.setOnClickListener(v -> {
             if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbEditPassword.getText().toString().equals("")) {
-                tbServer.setText("localhost");
-                tbPort.setText("3306");
-                tbDatabase.setText("MapDB");
-                tbTable.setText("playtennis");
-                tbUser.setText("MapUser");
-                tbEditPassword.setText("map");
+                tbServer.setText(R.string.server_hint);
+                tbPort.setText(R.string.porta_hint);
+                tbDatabase.setText(R.string.db_hint);
+                tbTable.setText(R.string.tabella_hint);
+                tbUser.setText(R.string.utente_hint);
+                tbEditPassword.setText(R.string.password_hint);
             } else if (tbServer.getText().toString().equals("") || tbPort.getText().toString().equals("") || tbDatabase.getText().toString().equals("") || tbTable.getText().toString().equals("") || tbUser.getText().toString().equals("") || tbEditPassword.getText().toString().equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                builder.setTitle("ERRORE");
-                builder.setMessage("Inserire tutti i campi!");
+                builder.setTitle(R.string.errore);
+                builder.setMessage(R.string.inserire_tutti_i_campi);
                 builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
                 builder.show();
             } else {
                 NonClosableDialog ncd = new NonClosableDialog();
-                ncd.show(getChildFragmentManager(), "Tentativo di connessione");
+                ncd.show(getChildFragmentManager(), getString(R.string.tentativo_di_connessione));
                 List<String> list = new LinkedList<>();
                 list.add(tbServer.getText().toString());
                 list.add(tbPort.getText().toString());
@@ -180,7 +244,7 @@ public class AddFragment extends Fragment {
                             List<String> responseList = response.body();
                             if (responseList.get(0).equals("OK")) {
                                 clusterLayout.setVisibility(View.VISIBLE);
-                                ncd.setText("Connessione riuscita!");
+                                ncd.setText(getString(R.string.connessione_riuscita));
                                 ncd.dismiss();
                                 int numCluster = Integer.parseInt(responseList.get(1));
                                 List<Integer> listCluster = new LinkedList<>();
@@ -188,7 +252,6 @@ public class AddFragment extends Fragment {
                                     listCluster.add(i + 1);
                                 }
                                 infoLayout.setVisibility(View.GONE);
-                                TextView spinnerCluster;
                                 spinnerCluster = view.findViewById(R.id.spinnerCluster);
                                 spinnerCluster.setVisibility(View.VISIBLE);
                                 final Dialog clusterDialog = new Dialog(requireContext());
@@ -222,10 +285,10 @@ public class AddFragment extends Fragment {
 
                                     new Handler().postDelayed(adapter1::notifyDataSetChanged, 200);
                                 });
-                                Button btCalc = view.findViewById(R.id.btCalc);
+                                btCalc = view.findViewById(R.id.btCalc);
                                 btCalc.setOnClickListener(v -> {
                                     NonClosableDialog ncd1 = new NonClosableDialog();
-                                    ncd1.show(getChildFragmentManager(), "Calcolo in corso");
+                                    ncd1.show(getChildFragmentManager(), getString(R.string.calcolo_in_corso));
                                     List<Integer> list = new LinkedList<>();
                                     list.add(Integer.parseInt(spinnerCluster.getText().toString()));
                                     Call<List<String>> newClusterCall = ApiClient.getApiService().requestNewClusterSet(list);
@@ -235,11 +298,11 @@ public class AddFragment extends Fragment {
                                             if (response.isSuccessful()) {
                                                 List<String> responseList = response.body();
                                                 if (responseList.get(0).equals("ERRORE")) {
-                                                    ncd1.setText("Errore: " + responseList.get(1));
+                                                    ncd1.setText(R.string.errore+": "+responseList.get(1));
                                                     ncd1.dismiss();
                                                     return;
                                                 }
-                                                ncd1.setText("Risultati arrivati correttamente!");
+                                                ncd1.setText(getString(R.string.risultati_arrivati_correttamente));
                                                 ncd1.dismiss();
                                                 String nrIter = responseList.get(0);
                                                 TextView tvResult = view.findViewById(R.id.tvResult);
@@ -256,37 +319,36 @@ public class AddFragment extends Fragment {
                                                 keys.addAll(clusterMap.keySet());
                                                 CustomizedExpandableListAdapter expandableListAdapter = new CustomizedExpandableListAdapter(requireContext(), keys, clusterMap);
                                                 expandableListView.setAdapter(expandableListAdapter);
-                                                // dialogView.postDelayed(() -> alertDialog.dismiss(), 100);
                                                 btConnect.setEnabled(true);
                                                 clusterLayout.setVisibility(LinearLayout.GONE);
                                                 resultLayout.setVisibility(LinearLayout.VISIBLE);
                                             } else {
-                                                ncd.setText("Connessione non riuscita.");
+                                                ncd.setText(getString(R.string.connessione_non_riuscita));
                                                 ncd.dismiss();
                                             }
                                         }
 
                                         @Override
                                         public void onFailure(Call<List<String>> call, Throwable t) {
-                                            ncd.setText("Tempo scaduto.");
+                                            ncd.setText(getString(R.string.tempo_scaduto));
                                             ncd.dismiss();
                                         }
 
                                     });
                                 });
                             } else {
-                                ncd.setText("Connessione non riuscita: " + responseList.get(0));
+                                ncd.setText(R.string.connessione_non_riuscita+": " + responseList.get(0));
                                 ncd.dismiss();
                             }
                         } else {
-                            ncd.setText("Connessione non riuscita.");
+                            ncd.setText(R.string.connessione_non_riuscita+"");
                             ncd.dismiss();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<String>> call, Throwable t) {
-                        ncd.setText("Connessione non riuscita.");
+                        ncd.setText(R.string.connessione_non_riuscita+"");
                         ncd.dismiss();
                     }
                 });

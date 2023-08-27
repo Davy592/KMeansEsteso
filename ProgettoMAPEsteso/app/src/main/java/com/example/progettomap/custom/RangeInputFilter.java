@@ -36,25 +36,18 @@ public class RangeInputFilter implements InputFilter {
      * @param dest   Testo di destinazione.
      * @param dstart Indice di inizio del testo di destinazione.
      * @param dend   Indice di fine del testo di destinazione.
-     * @return
+     * @return Restituisce null se l'input è all'interno del range accettabile, altrimenti restituisce una stringa vuota.
      */
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
         try {
-            // Costruisci il nuovo testo dopo l'inserimento
             String newValue = dest.subSequence(0, dstart).toString() + source.subSequence(start, end) + dest.subSequence(dend, dest.length());
-
             int inputNumber = Integer.parseInt(newValue);
-
             if (inputNumber >= minValue && inputNumber <= maxValue) {
-                // L'input è all'interno del range accettabile
                 return null;
             }
         } catch (NumberFormatException ignored) {
-            // Ignora il parsing in caso di errore
         }
-
-        // Restringi l'input se il numero è al di fuori del range
         return "";
     }
 }
