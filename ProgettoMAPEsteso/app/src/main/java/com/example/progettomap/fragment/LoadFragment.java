@@ -72,7 +72,7 @@ public class LoadFragment extends Fragment {
         tvFileNames.setOnClickListener(v -> requestFilesName());
         btFileConnect = view.findViewById(R.id.btFileConnect);
         btFileConnect.setOnClickListener(v -> {
-            if (tvFileNames.getText().equals(R.string.seleziona_file)) {
+            if (tvFileNames.getText().equals(getResources().getString(R.string.seleziona_file))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle(R.string.errore);
                 builder.setMessage(R.string.seleziona_file);
@@ -89,6 +89,14 @@ public class LoadFragment extends Fragment {
                         if (response.isSuccessful()) {
                             ListView listResult = view.findViewById(R.id.listResult);
                             String[] responseString = response.body().get(0).split("\n");
+                            if (responseString[0].equals("ERRORE")) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                                builder.setTitle(R.string.errore);
+                                builder.setMessage("File non valido");
+                                builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
+                                builder.show();
+                                return;
+                            }
                             Toast.makeText(requireContext(), R.string.risultati_arrivati_correttamente, Toast.LENGTH_SHORT).show();
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, responseString);
                             listResult.setAdapter(adapter);
@@ -105,7 +113,7 @@ public class LoadFragment extends Fragment {
                     public void onFailure(Call<List<String>> call, Throwable t) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                         builder.setTitle(R.string.errore);
-                        builder.setMessage(R.string.connessione_non_riuscita+": " + t.getMessage());
+                        builder.setMessage(R.string.connessione_non_riuscita + ": " + t.getMessage());
                         builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                         builder.show();
                     }

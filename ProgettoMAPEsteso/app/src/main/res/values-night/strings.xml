@@ -31,7 +31,7 @@
     <string name="seleziona_num_cluster">SELEZIONA IL NUMERO DI CLUSTER</string>
     <string name="calcola">CALCOLA</string>
     <string name="info_server">INSERISCI LE INFORMAZIONI DEL SERVER</string>
-    <string name="seleziona_file">SELEZIONA FILE</string>
+    <string name="seleziona_file">SELEZIONA UN FILE</string>
     <string name="recupera_file">RECUPERA FILE</string>
     <string name="db_hint">MapDB</string>
     <string name="tabella_hint">playtennis</string>
