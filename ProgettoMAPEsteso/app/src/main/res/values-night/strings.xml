@@ -4,6 +4,7 @@
     <string name="port">Porta</string>
     <string name="conn">CONNETTI</string>
     <string name="server_conn">Connessione al server</string>
+    <string name="server_change">CAMBIA SERVER</string>
     <string name="desc_logo_login">Logo dell\'applicazione</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="tab_text_1">Tab 1</string>
@@ -45,7 +46,7 @@
     <string name="connessione_riuscita">Connessione riuscita!</string>
     <string name="calcolo_in_corso">Calcolo in corso</string>
     <string name="risultati_arrivati_correttamente">Risultati arrivati correttamente!</string>
-    <string name="connessione_non_riuscita">Connessione non riuscita.</string>
+    <string name="connessione_non_riuscita">Connessione non riuscita</string>
     <string name="tempo_scaduto">Tempo scaduto.</string>
 
 </resources>
