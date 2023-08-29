@@ -116,6 +116,8 @@ public class AddFragment extends Fragment {
      */
     private TextView spinnerCluster;
 
+    private TextView tvActualServer;
+
     /**
      * <h4> Metodo che crea il fragment</h4>
      *
@@ -134,6 +136,8 @@ public class AddFragment extends Fragment {
         tbTable = view.findViewById(R.id.tbTable);
         tbUser = view.findViewById(R.id.tbUser);
         tbEditPassword = view.findViewById(R.id.tbEditPassword);
+        tvActualServer = view.findViewById(R.id.tvActualServer);
+        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7)));
         btConnect = view.findViewById(R.id.btConnect);
 
         TextWatcher textWatcher = new TextWatcher() {

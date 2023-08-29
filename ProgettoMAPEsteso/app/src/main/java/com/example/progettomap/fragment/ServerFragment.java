@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -36,6 +37,11 @@ public class ServerFragment extends Fragment {
      */
     private EditText tbServerPORT;
 
+    /**
+     * Variabile che rappresenta il textView per l'ip del server a cui si è connessi
+     */
+    private TextView tvActualServer;
+
 
     /**
      * <h4>Metodo che permette di creare la view del fragment</h4>
@@ -53,6 +59,8 @@ public class ServerFragment extends Fragment {
         tbServerIP = view.findViewById(R.id.tbServerIP);
         tbServerPORT = view.findViewById(R.id.tbServerPORT);
         tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
+        tvActualServer = view.findViewById(R.id.tvActualServer);
+        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7)));
         btChangeServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -65,6 +73,7 @@ public class ServerFragment extends Fragment {
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 ApiClient.updateServer();
                 Toast.makeText(requireContext(), getResources().getString(R.string.server_cambiato_correttamente), Toast.LENGTH_LONG).show();
+                tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7)));
             }
         });
 

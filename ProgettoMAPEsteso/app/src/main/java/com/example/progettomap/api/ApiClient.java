@@ -37,6 +37,10 @@ public class ApiClient {
     private ApiClient() {
     }
 
+    public static String getBaseUrl() {
+        return instance.BASE_URL;
+    }
+
     /**
      * <h4>Metodo che setta l'URL del server</h4>
      *
