@@ -60,7 +60,7 @@ public class ServerFragment extends Fragment {
         tbServerPORT = view.findViewById(R.id.tbServerPORT);
         tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         tvActualServer = view.findViewById(R.id.tvActualServer);
-        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7)));
+        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
         btChangeServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());

@@ -137,7 +137,7 @@ public class AddFragment extends Fragment {
         tbUser = view.findViewById(R.id.tbUser);
         tbEditPassword = view.findViewById(R.id.tbEditPassword);
         tvActualServer = view.findViewById(R.id.tvActualServer);
-        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7)));
+        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
         btConnect = view.findViewById(R.id.btConnect);
 
         TextWatcher textWatcher = new TextWatcher() {

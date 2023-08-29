@@ -54,6 +54,11 @@ public class LoadFragment extends Fragment {
      */
     private  Button btFileConnect;
 
+    /**
+     * Variabile che rappresenta il textView per l'ip del server a cui si è connessi
+     */
+    private TextView tvActualServer;
+
 
     /**
      * <h4>Metodo che gestisce la richiesta dei file presenti sul server</h4>
@@ -71,6 +76,8 @@ public class LoadFragment extends Fragment {
         tvFileNames = view.findViewById(R.id.tvFileNames);
         tvFileNames.setOnClickListener(v -> requestFilesName());
         btFileConnect = view.findViewById(R.id.btFileConnect);
+        tvActualServer = view.findViewById(R.id.tvActualServer);
+        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
         btFileConnect.setOnClickListener(v -> {
             if (tvFileNames.getText().equals(getResources().getString(R.string.seleziona_file))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
