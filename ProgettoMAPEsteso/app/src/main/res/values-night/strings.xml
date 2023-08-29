@@ -26,7 +26,7 @@
     <string name="tabella">Tabella</string>
     <string name="utente">Utente</string>
     <string name="password">Password</string>
-    <string name="usa_predefiniti">USA PREDEFINITI</string>
+    <string name="usa_predefiniti">USA VALORI PREDEFINITI</string>
     <string name="resetta_valori">RESETTA VALORI</string>
     <string name="seleziona_num_cluster">SELEZIONA IL NUMERO DI CLUSTER</string>
     <string name="calcola">CALCOLA</string>

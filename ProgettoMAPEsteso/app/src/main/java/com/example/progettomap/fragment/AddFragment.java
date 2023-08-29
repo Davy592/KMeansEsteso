@@ -135,6 +135,7 @@ public class AddFragment extends Fragment {
         tbUser = view.findViewById(R.id.tbUser);
         tbEditPassword = view.findViewById(R.id.tbEditPassword);
         btConnect = view.findViewById(R.id.btConnect);
+
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -159,6 +160,8 @@ public class AddFragment extends Fragment {
         tbUser.addTextChangedListener(textWatcher);
         tbServer.addTextChangedListener(textWatcher);
         tbPort.addTextChangedListener(textWatcher);
+        tbEditPassword.addTextChangedListener(textWatcher);
+
         expandableListView = view.findViewById(R.id.expandableListView);
         infoLayout = view.findViewById(R.id.infoLayout);
         clusterLayout = view.findViewById(R.id.clusterLayout);
