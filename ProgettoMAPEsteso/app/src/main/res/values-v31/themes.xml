@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="SplashActivity" parent="Theme.AppCompat.NoActionBar">      <!-- Point 3-->
-        <item name="android:windowSplashScreenBackground">#FFFFFF</item>      <!-- Point 2-->
-        <item name="android:windowSplashScreenIconBackgroundColor">
-            #000000
-        </item>      <!-- Point 1-->
-    </style>
 </resources>

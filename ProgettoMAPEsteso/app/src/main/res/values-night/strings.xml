@@ -6,10 +6,6 @@
     <string name="server_conn">Connessione al server</string>
     <string name="server_change">CAMBIA SERVER</string>
     <string name="desc_logo_login">Logo dell\'applicazione</string>
-    <string name="home_fragment">Home</string>
-    <string name="add_fragment">Add</string>
-    <string name="load_fragment">Load</string>
-    <string name="change_server_fragment">Change Server</string>
     <string name="cambia_server">Cambia Server</string>
     <string name="carica">Carica</string>
     <string name="nuovo">Nuovo</string>

@@ -318,12 +318,10 @@ public class AddFragment extends Fragment {
                                                 HashMap<String, List<String>> clusterMap = new HashMap<>();
                                                 for (String str : responseList) {
                                                     String[] split = str.split("Examples:");
-                                                    List<String> list = new LinkedList<>();
-                                                    list.addAll(Arrays.asList(split).subList(1, split.length));
+                                                    List<String> list = new LinkedList<>(Arrays.asList(split).subList(1, split.length));
                                                     clusterMap.put(split[0], list);
                                                 }
-                                                List<String> keys = new ArrayList<>();
-                                                keys.addAll(clusterMap.keySet());
+                                                List<String> keys = new ArrayList<>(clusterMap.keySet());
                                                 CustomizedExpandableListAdapter expandableListAdapter = new CustomizedExpandableListAdapter(requireContext(), keys, clusterMap);
                                                 expandableListView.setAdapter(expandableListAdapter);
                                                 clusterLayout.setVisibility(LinearLayout.GONE);

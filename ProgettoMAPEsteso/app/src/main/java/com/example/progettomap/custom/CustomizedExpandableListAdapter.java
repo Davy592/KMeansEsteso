@@ -81,7 +81,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
      * @param isLastChild           Indica se l'elemento è l'ultimo dell'elenco
      * @param convertView           View dell'elemento
      * @param parent                View del parent
-     * @return
+     * @return la child view
      */
     @Override
     public View getChildView(int lstPosn, final int expanded_ListPosition,
@@ -91,7 +91,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item, null);
         }
-        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.expandedListItem);
+        TextView expandedListTextView = convertView.findViewById(R.id.expandedListItem);
         expandedListTextView.setText(expandedListText);
         return convertView;
     }
@@ -156,7 +156,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group, null);
         }
-        TextView listTitleTextView = (TextView) convertView.findViewById(R.id.listTitle);
+        TextView listTitleTextView = convertView.findViewById(R.id.listTitle);
         listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(listTitle);
         return convertView;

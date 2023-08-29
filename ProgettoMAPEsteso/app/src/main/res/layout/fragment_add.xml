@@ -200,7 +200,7 @@
         android:layout_height="match_parent"
         android:visibility="gone"
         tools:context=".fragment.AddFragment">
-        >
+
 
         <TextView
             android:layout_width="match_parent"

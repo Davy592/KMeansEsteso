@@ -61,7 +61,7 @@ public class LoadFragment extends Fragment {
      * @param inflater           Il LayoutInflater che viene utilizzato per "gonfiare" la View
      * @param container          Se non-null, questo è il padre a cui la View viene agganciata.
      * @param savedInstanceState Se non-null, questo è un precedente stato salvato della View
-     * @return
+     * @return la view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

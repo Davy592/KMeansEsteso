@@ -7,8 +7,4 @@
 
     </style>
 
-    <style name="SplashScreen" parent="Base.Theme.ProgettoMAP">
-        <item name="android:windowBackground">@drawable/splashscreen</item>
-        <item name="android:statusBarColor" >?attr/colorPrimary</item>
-    </style>
 </resources>
