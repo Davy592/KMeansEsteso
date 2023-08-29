@@ -64,7 +64,7 @@ public class ServerFragment extends Fragment {
                 ApiClient.closeClient();
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 ApiClient.updateServer();
-                Toast.makeText(requireContext(), R.string.server_cambiato_correttamente+"", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), getResources().getString(R.string.server_cambiato_correttamente), Toast.LENGTH_LONG).show();
             }
         });
 

@@ -247,7 +247,7 @@ public class AddFragment extends Fragment {
                             List<String> responseList = response.body();
                             if (responseList.get(0).equals("OK")) {
                                 clusterLayout.setVisibility(View.VISIBLE);
-                                ncd.setText(getString(R.string.connessione_riuscita));
+                                ncd.setText(getResources().getString(R.string.connessione_riuscita));
                                 ncd.dismiss();
                                 int numCluster = Integer.parseInt(responseList.get(1));
                                 List<Integer> listCluster = new LinkedList<>();
@@ -301,7 +301,7 @@ public class AddFragment extends Fragment {
                                             if (response.isSuccessful()) {
                                                 List<String> responseList = response.body();
                                                 if (responseList.get(0).equals("ERRORE")) {
-                                                    ncd1.setText(R.string.errore+": "+responseList.get(1));
+                                                    ncd1.setText(getResources().getString(R.string.errore)+": "+responseList.get(1));
                                                     ncd1.dismiss();
                                                     return;
                                                 }
@@ -322,7 +322,6 @@ public class AddFragment extends Fragment {
                                                 keys.addAll(clusterMap.keySet());
                                                 CustomizedExpandableListAdapter expandableListAdapter = new CustomizedExpandableListAdapter(requireContext(), keys, clusterMap);
                                                 expandableListView.setAdapter(expandableListAdapter);
-                                                btConnect.setEnabled(true);
                                                 clusterLayout.setVisibility(LinearLayout.GONE);
                                                 resultLayout.setVisibility(LinearLayout.VISIBLE);
                                             } else {
@@ -333,25 +332,25 @@ public class AddFragment extends Fragment {
 
                                         @Override
                                         public void onFailure(Call<List<String>> call, Throwable t) {
-                                            ncd.setText(getString(R.string.tempo_scaduto));
+                                            ncd.setText(getResources().getString(R.string.tempo_scaduto));
                                             ncd.dismiss();
                                         }
 
                                     });
                                 });
                             } else {
-                                ncd.setText(R.string.connessione_non_riuscita+": " + responseList.get(0));
+                                ncd.setText(getResources().getString(R.string.connessione_non_riuscita)+": " + responseList.get(0));
                                 ncd.dismiss();
                             }
                         } else {
-                            ncd.setText(R.string.connessione_non_riuscita+"");
+                            ncd.setText(getResources().getString(R.string.connessione_non_riuscita));
                             ncd.dismiss();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<String>> call, Throwable t) {
-                        ncd.setText(R.string.connessione_non_riuscita+"");
+                        ncd.setText(getResources().getString(R.string.connessione_non_riuscita));
                         ncd.dismiss();
                     }
                 });
