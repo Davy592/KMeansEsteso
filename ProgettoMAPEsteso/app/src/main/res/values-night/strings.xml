@@ -13,6 +13,7 @@
     <string name="seleziona">Seleziona</string>
     <string name="cerca">Cerca…</string>
     <string name="dati_db">Inserire i dati del database</string>
+    <string name="def_spinner">1</string>
     <string name="server">Server</string>
     <string name="porta">Porta</string>
     <string name="database">Database</string>
