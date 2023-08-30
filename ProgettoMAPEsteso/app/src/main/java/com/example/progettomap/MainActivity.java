@@ -69,12 +69,5 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    /**
-     * <h4>Metodo che gestisce la ripresa dell'activity</h4>
-     * <p>Questo metodo gestisce la ripresa dell'activity</p>
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 }

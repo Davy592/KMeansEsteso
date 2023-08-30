@@ -43,7 +43,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         bnv = findViewById(R.id.navbarview);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new AddFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new AddFragment()).addToBackStack("add").commit();
         bnv.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_add) {
@@ -56,7 +56,6 @@ public class Dashboard extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new ServerFragment()).addToBackStack("change").commit();
                 return true;
             }
-
             return false;
         });
 
@@ -87,7 +86,7 @@ public class Dashboard extends AppCompatActivity {
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         bnv = findViewById(R.id.navbarview);
-        if (fm.getBackStackEntryCount() == 1) {
+        if (fm.getBackStackEntryCount() <= 1) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder
                     .setMessage("USCIRE?")
@@ -98,8 +97,8 @@ public class Dashboard extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         } else {
-            String fName = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 2).getName();
             fm.popBackStack();
+            String fName = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 2).getName();
             switch (fName) {
                 case "add":
                     bnv.setSelectedItemId(R.id.nav_add);
