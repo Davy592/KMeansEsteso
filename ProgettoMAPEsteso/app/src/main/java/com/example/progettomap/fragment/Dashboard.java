@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.progettomap.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 
 /**
  * <h2>La classe Dashboard gestisce la navigazione tra i fragment</h2>
@@ -20,7 +21,7 @@ public class Dashboard extends AppCompatActivity {
     /**
      * Variabile che rappresenta il BottomNavigationView
      */
-    private  BottomNavigationView bnv;
+    private BottomNavigationView bnv;
 
     /**
      * <h4> Metodo statico che apre la Dashboard</h4>
@@ -58,6 +59,8 @@ public class Dashboard extends AppCompatActivity {
 
             return false;
         });
+
+        bnv.setOnItemReselectedListener(item -> {});
     }
 
 
@@ -82,7 +85,36 @@ public class Dashboard extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        finish();
-        super.onBackPressed();
+        FragmentManager fm = getSupportFragmentManager();
+        bnv = findViewById(R.id.navbarview);
+        if (fm.getBackStackEntryCount() == 1) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setMessage("USCIRE?")
+                    .setCancelable(true)
+                    .setPositiveButton("SI", (dialogInterface, i) -> finish())
+                    .setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        } else {
+            String fName = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 2).getName();
+            fm.popBackStack();
+            switch (fName) {
+                case "add":
+                    bnv.setSelectedItemId(R.id.nav_add);
+                    break;
+                case "load":
+                    bnv.setSelectedItemId(R.id.nav_load);
+                    break;
+                case "change":
+                    bnv.setSelectedItemId(R.id.nav_change_server);
+                    break;
+                default:
+                    break;
+            }
+            super.onBackPressed();
+        }
     }
-    }
+
+}

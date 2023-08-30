@@ -360,4 +360,5 @@ public class AddFragment extends Fragment {
         });
         return view;
     }
+
 }
