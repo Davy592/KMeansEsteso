@@ -94,7 +94,7 @@ public class AddFragment extends Fragment {
     /**
      * Variabile che rappresenta la lista per il numero di cluster
      */
-    private  ExpandableListView expandableListView;
+    private ExpandableListView expandableListView;
 
     /**
      * Variabile che rappresenta il layout per le informazioni del database
