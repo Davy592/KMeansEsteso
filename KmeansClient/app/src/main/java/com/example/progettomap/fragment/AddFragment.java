@@ -361,4 +361,40 @@ public class AddFragment extends Fragment {
         return view;
     }
 
+    public boolean getVisibilityInfo() {
+        return infoLayout.getVisibility() == View.VISIBLE;
+    }
+
+    public boolean getVisibilityCluster() {
+        return clusterLayout.getVisibility() == View.VISIBLE;
+    }
+
+    public boolean getVisibilityResult() {
+        return resultLayout.getVisibility() == View.VISIBLE;
+    }
+
+    public void setVisibilityInfo(boolean b) {
+        if (b) {
+            infoLayout.setVisibility(View.VISIBLE);
+        } else {
+            infoLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void setVisibilityCluster(boolean b) {
+        if (b) {
+            clusterLayout.setVisibility(View.VISIBLE);
+        } else {
+            clusterLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void setVisibilityResult(boolean b) {
+        if (b) {
+            resultLayout.setVisibility(View.VISIBLE);
+        } else {
+            resultLayout.setVisibility(View.GONE);
+        }
+    }
+
 }

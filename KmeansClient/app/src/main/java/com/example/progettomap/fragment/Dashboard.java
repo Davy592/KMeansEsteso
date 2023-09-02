@@ -86,34 +86,39 @@ public class Dashboard extends AppCompatActivity {
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         bnv = findViewById(R.id.navbarview);
-        if (fm.getBackStackEntryCount() <= 1) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog alertDialog;
+        String fName = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 1).getName();
+        if (fName.equals("add")) {
+            AddFragment af = (AddFragment) fm.getFragments().get(0);
+            if (af.getVisibilityInfo()) {
+                builder
+                        .setMessage("USCIRE?")
+                        .setCancelable(true)
+                        .setPositiveButton("SI", (dialogInterface, i) -> finish())
+                        .setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+
+                alertDialog = builder.create();
+                alertDialog.show();
+            } else {
+                if (af.getVisibilityCluster()) {
+                    af.setVisibilityCluster(false);
+                    af.setVisibilityInfo(true);
+                } else {
+                    af.setVisibilityResult(false);
+                    af.setVisibilityInfo(true);
+                }
+            }
+            bnv.setSelectedItemId(R.id.nav_add);
+        } else {
             builder
                     .setMessage("USCIRE?")
                     .setCancelable(true)
                     .setPositiveButton("SI", (dialogInterface, i) -> finish())
                     .setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
 
-            AlertDialog alertDialog = builder.create();
+            alertDialog = builder.create();
             alertDialog.show();
-        } else {
-            fm.popBackStack();
-            String fName = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 2).getName();
-            switch (fName) {
-                case "add":
-                    bnv.setSelectedItemId(R.id.nav_add);
-                    break;
-                case "load":
-                    bnv.setSelectedItemId(R.id.nav_load);
-                    break;
-                case "change":
-                    bnv.setSelectedItemId(R.id.nav_change_server);
-                    break;
-                default:
-                    break;
-            }
-            super.onBackPressed();
         }
     }
-
 }
