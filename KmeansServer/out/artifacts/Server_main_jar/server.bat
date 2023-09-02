@@ -1,2 +1,2 @@
 @echo off
-java -jar Server.main.jar
+java -jar KmeansServer.jar
