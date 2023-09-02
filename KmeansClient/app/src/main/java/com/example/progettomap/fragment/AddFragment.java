@@ -369,10 +369,6 @@ public class AddFragment extends Fragment {
         return clusterLayout.getVisibility() == View.VISIBLE;
     }
 
-    public boolean getVisibilityResult() {
-        return resultLayout.getVisibility() == View.VISIBLE;
-    }
-
     public void setVisibilityInfo(boolean b) {
         if (b) {
             infoLayout.setVisibility(View.VISIBLE);
