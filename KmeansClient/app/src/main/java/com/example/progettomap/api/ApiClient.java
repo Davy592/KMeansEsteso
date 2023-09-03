@@ -37,6 +37,11 @@ public class ApiClient {
     private ApiClient() {
     }
 
+    /**
+     * <h4>Restituisce l'url del server</h4>
+     *
+     * @return URL del server
+     */
     public static String getBaseUrl() {
         return instance.BASE_URL;
     }

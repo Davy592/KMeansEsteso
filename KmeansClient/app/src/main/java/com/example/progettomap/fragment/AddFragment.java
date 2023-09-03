@@ -384,6 +384,8 @@ public class AddFragment extends Fragment {
 
     /**
      * <h4>Imposta il layout delle informazioni</h4>
+     *
+     * @param b <code>true</code> se il layout delle informazioni deve essere visibile, <code>false</code> altrimenti
      */
     public void setVisibilityInfo(boolean b) {
         if (b) {
@@ -395,6 +397,8 @@ public class AddFragment extends Fragment {
 
     /**
      * <h4>Imposta il layout della selezione dei cluster</h4>
+     *
+     * @param b <code>true</code> se il layout della selezione dei cluster deve essere visibile, <code>false</code> altrimenti
      */
     public void setVisibilityCluster(boolean b) {
         if (b) {
@@ -406,6 +410,8 @@ public class AddFragment extends Fragment {
 
     /**
      * <h4>Imposta il layout dei risultati</h4>
+     *
+     * @param b <code>true</code> se il layout dei risultati deve essere visibile, <code>false</code> altrimenti
      */
     public void setVisibilityResult(boolean b) {
         if (b) {
