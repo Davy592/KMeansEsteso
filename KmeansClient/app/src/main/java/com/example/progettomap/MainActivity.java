@@ -13,14 +13,14 @@ import com.example.progettomap.custom.RangeInputFilter;
 import com.example.progettomap.fragment.Dashboard;
 
 /**
- * <h2> MainActivity rappresenta il main dell'applicazione</h2>
+ * <h2> La classe MainActivity rappresenta il main dell'applicazione</h2>
  */
 
 public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * <h4>Metodo che crea l'activity</h4>
+     * <h4>Crea l'activity</h4>
      * <p>Questo metodo crea l'activity e gestisce la connessione iniziale al server</p>
      *
      * @param savedInstanceState stato dell'istanza
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * <h4>Metodo che gestisce il tasto back</h4>
+     * <h4>Gestisce il tasto back</h4>
      * <p>Questo metodo gestisce il tasto back</p>
      */
     @Override

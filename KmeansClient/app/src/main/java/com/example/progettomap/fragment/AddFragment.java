@@ -117,7 +117,7 @@ public class AddFragment extends Fragment {
     private TextView spinnerCluster;
 
     /**
-     * TextView che mostra il server a cui si è attualmente connessi
+     * TextView che mostra il server a cui si e' attualmente connessi
      */
     private TextView tvActualServer;
 
@@ -365,18 +365,18 @@ public class AddFragment extends Fragment {
     }
 
     /**
-     * <h4>Controlla se il layout delle informazioni è visibile</h4>
+     * <h4>Controlla se il layout delle informazioni e' visibile</h4>
      *
-     * @return <code>true</code> se il layout delle informazioni è visibile, <code>false</code> altrimenti
+     * @return <code>true</code> se il layout delle informazioni e' visibile, <code>false</code> altrimenti
      */
     public boolean getVisibilityInfo() {
         return infoLayout.getVisibility() == View.VISIBLE;
     }
 
     /**
-     * <h4>Controlla se il layout della selezione dei cluster è visibile</h4>
+     * <h4>Controlla se il layout della selezione dei cluster e' visibile</h4>
      *
-     * @return <code>true</code> se il layout della selezione dei cluster è visibile, <code>false</code> altrimenti
+     * @return <code>true</code> se il layout della selezione dei cluster e' visibile, <code>false</code> altrimenti
      */
     public boolean getVisibilityCluster() {
         return clusterLayout.getVisibility() == View.VISIBLE;

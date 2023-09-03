@@ -38,7 +38,7 @@ public class ServerFragment extends Fragment {
     private EditText tbServerPORT;
 
     /**
-     * TextView che mostra il server a cui si è attualmente connessi
+     * TextView che mostra il server a cui si e' attualmente connessi
      */
     private TextView tvActualServer;
 
@@ -47,8 +47,8 @@ public class ServerFragment extends Fragment {
      * <h4>Crea la view del fragment</h4>
      *
      * @param inflater           oggetto che permette di "gonfiare" un layout XML in una View corrispondente
-     * @param container          Se non-null, questo è il padre a cui la View viene agganciata.
-     * @param savedInstanceState Se non-null, questo è un precedente stato salvato della View
+     * @param container          Se non-null, questo e' il padre a cui la View viene agganciata.
+     * @param savedInstanceState Se non-null, questo e' un precedente stato salvato della View
      * @return la view del fragment
      */
     @Override

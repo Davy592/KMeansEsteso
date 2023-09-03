@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * <h2>La classe CustomizedExpandableListAdapter viene utilizzata per personalizzare l'ExpandableListAdapter</h2>
  * Viene utilizzata per visualizzare l'elenco nell'ExpandableListView
- * L'elenco è diviso in categorie
+ * L'elenco e' diviso in categorie
  * Le categorie sono le chiavi di una HashMap
  * I valori dell'HashMap sono l'elenco dei valori della categoria
  */
@@ -78,7 +78,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
      *
      * @param lstPosn               Posizione dell'elemento nell'elenco
      * @param expanded_ListPosition Posizione dell'elemento nell'elenco espanso
-     * @param isLastChild           Indica se l'elemento è l'ultimo dell'elenco
+     * @param isLastChild           Indica se l'elemento e' l'ultimo dell'elenco
      * @param convertView           View dell'elemento
      * @param parent                View del parent
      * @return la child view
@@ -143,7 +143,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
      * <h4> Metodo per ottenere la View di un gruppo</h4>
      *
      * @param listPosition Posizione dell'elemento nell'elenco
-     * @param isExpanded   Indica se l'elemento è espanso
+     * @param isExpanded   Indica se l'elemento e' espanso
      * @param convertView  View dell'elemento
      * @param parent       View del parent
      * @return View dell'elemento

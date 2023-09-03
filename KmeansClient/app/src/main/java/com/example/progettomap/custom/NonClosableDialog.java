@@ -31,7 +31,7 @@ public class NonClosableDialog extends DialogFragment {
     /**
      * <h4>Crea il dialog</h4>
      *
-     * @param savedInstanceState Se non-null, questo è un precedente stato salvato della View
+     * @param savedInstanceState Se non-null, questo e' un precedente stato salvato della View
      * @return Il dialog creato
      */
     @NonNull

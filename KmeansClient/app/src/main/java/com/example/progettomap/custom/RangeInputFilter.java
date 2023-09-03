@@ -17,7 +17,7 @@ public class RangeInputFilter implements InputFilter {
     private final int maxValue;
 
     /**
-     * <h4>Costruttore della classe</h4>.
+     * <h4>Costruttore della classe</h4>
      *
      * @param minValue Valore minimo accettabile.
      * @param maxValue Valore massimo accettabile.
@@ -36,7 +36,7 @@ public class RangeInputFilter implements InputFilter {
      * @param dest   Testo di destinazione.
      * @param dstart Indice di inizio del testo di destinazione.
      * @param dend   Indice di fine del testo di destinazione.
-     * @return <code>null</code> se l'input è all'interno del range accettabile, altrimenti restituisce una stringa vuota.
+     * @return <code>null</code> se l'input e' all'interno del range accettabile, altrimenti restituisce una stringa vuota.
      */
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {

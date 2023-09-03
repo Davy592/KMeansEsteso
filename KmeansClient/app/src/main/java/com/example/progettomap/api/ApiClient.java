@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * <h2>ApiClient è la classe che gestisce la connessione con il server</h2>
+ * <h2>ApiClient e' la classe che gestisce la connessione con il server</h2>
  */
 public class ApiClient {
     /**
@@ -32,7 +32,7 @@ public class ApiClient {
 
     /**
      * <h4>Costruttore privato</h4>
-     * <p>Il costruttore è privato per evitare che vengano create più istanze della classe</p>
+     * <p>Il costruttore e' privato per evitare che vengano create piu' istanze della classe</p>
      */
     private ApiClient() {
     }
@@ -59,7 +59,7 @@ public class ApiClient {
 
     /**
      * <h4>Crea un oggetto che gestisce la connessione con il server</h4>
-     * <p>Se l'oggetto è <code>null</code>, non viene creato un nuovo oggetto</p>
+     * <p>Se l'oggetto e' <code>null</code>, non viene creato un nuovo oggetto</p>
      */
     public static void updateServer() {
         if (instance.retrofit == null) {
