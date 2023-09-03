@@ -469,7 +469,7 @@
 											"top": 444,
 											"width": 419.478515625,
 											"height": 13,
-											"text": "~ContinuousAttribute(name: String, index.: int, min: double, max: double)",
+											"text": "~ContinuousAttribute(name: String, index: int, min: double, max: double)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9278,7 +9278,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 2512,
-											"top": -848,
+											"top": -864,
 											"height": 13
 										},
 										{
@@ -9289,8 +9289,8 @@
 											},
 											"font": "Arial;13;1",
 											"left": 3461,
-											"top": 1399,
-											"width": 397.01416015625,
+											"top": 1391,
+											"width": 571.15576171875,
 											"height": 13,
 											"text": "springserver.Controller"
 										},
@@ -9303,7 +9303,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 2512,
-											"top": -848,
+											"top": -864,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -9317,15 +9317,15 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 2512,
-											"top": -848,
+											"top": -864,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 3456,
-									"top": 1392,
-									"width": 407.01416015625,
+									"top": 1384,
+									"width": 581.15576171875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGJ/tTlWYvv9vM="
@@ -9361,10 +9361,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3461,
-											"top": 1422,
-											"width": 397.01416015625,
+											"top": 1414,
+											"width": 571.15576171875,
 											"height": 13,
-											"text": "-table: String",
+											"text": "-clientDataMap: Map<String, Data>  = new ConcurrentHashMap<>()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9378,18 +9378,35 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3461,
-											"top": 1437,
-											"width": 397.01416015625,
+											"top": 1429,
+											"width": 571.15576171875,
 											"height": 13,
-											"text": "-database: String",
+											"text": "-clientTable: Map<String, String> = new ConcurrentHashMap<>()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGKXNEM/O6Rx1U=",
+											"_parent": {
+												"$ref": "AAAAAAGJ/tTlWYvzwAU="
+											},
+											"model": {
+												"$ref": "AAAAAAGKXNEMz+5zIaE="
+											},
+											"font": "Arial;13;0",
+											"left": 3461,
+											"top": 1444,
+											"width": 571.15576171875,
+											"height": 13,
+											"text": "-clientDatabase: Map<String, String>  = new ConcurrentHashMap<>()",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 3456,
-									"top": 1417,
-									"width": 407.01416015625,
-									"height": 38
+									"top": 1409,
+									"width": 581.15576171875,
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -9412,8 +9429,8 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3461,
-											"top": 1460,
-											"width": 397.01416015625,
+											"top": 1467,
+											"width": 571.15576171875,
 											"height": 13,
 											"text": "+Controller()",
 											"horizontalAlignment": 0
@@ -9429,10 +9446,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3461,
-											"top": 1475,
-											"width": 397.01416015625,
+											"top": 1482,
+											"width": 571.15576171875,
 											"height": 13,
-											"text": "+receiveInfoFromClient(List<String> info) : List<String>()",
+											"text": "+receiveInfoFromClient(request: HttpServletRequest, info: List<String>) : List<String>()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9446,10 +9463,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3461,
-											"top": 1490,
-											"width": 397.01416015625,
+											"top": 1497,
+											"width": 571.15576171875,
 											"height": 13,
-											"text": "+receiveNumberOfClusters(List<Integer> numCluster): List<String>()",
+											"text": "+receiveNumberOfClusters(request: HttpServletRequest, numCluster: List<Integer>): List<String>()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9463,10 +9480,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3461,
-											"top": 1505,
-											"width": 397.01416015625,
+											"top": 1512,
+											"width": 571.15576171875,
 											"height": 13,
-											"text": "+receiveInfoFile(List<String> info): List<String>()",
+											"text": "+receiveInfoFile(info: List<String>): List<String>()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9480,8 +9497,8 @@
 											},
 											"font": "Arial;13;0",
 											"left": 3461,
-											"top": 1520,
-											"width": 397.01416015625,
+											"top": 1527,
+											"width": 571.15576171875,
 											"height": 13,
 											"text": "+sendFilesName(): List<String>()",
 											"horizontalAlignment": 0
@@ -9489,8 +9506,8 @@
 									],
 									"font": "Arial;13;0",
 									"left": 3456,
-									"top": 1455,
-									"width": 407.01416015625,
+									"top": 1462,
+									"width": 581.15576171875,
 									"height": 83
 								},
 								{
@@ -9505,7 +9522,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1256,
-									"top": -424,
+									"top": -432,
 									"width": 10,
 									"height": 10
 								},
@@ -9521,7 +9538,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1256,
-									"top": -424,
+									"top": -432,
 									"width": 10,
 									"height": 10
 								}
@@ -9529,9 +9546,9 @@
 							"font": "Arial;13;0",
 							"containerChangeable": true,
 							"left": 3456,
-							"top": 1392,
-							"width": 407.01416015625,
-							"height": 146,
+							"top": 1384,
+							"width": 581.15576171875,
+							"height": 161,
 							"nameCompartment": {
 								"$ref": "AAAAAAGJ/tTlWYvuiQU="
 							},
@@ -9904,7 +9921,7 @@
 							"tail": {
 								"$ref": "AAAAAAGJ/tTlWYvt624="
 							},
-							"points": "3862:1464;4336:1464;4336:1240;4177:1240",
+							"points": "4036:1464;4336:1464;4336:1240;4177:1240",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGJ/t4h7CgqstA="
@@ -9997,7 +10014,7 @@
 							"tail": {
 								"$ref": "AAAAAAGJ/tTlWYvt624="
 							},
-							"points": "3862:1464;4480:1464;4480:1088;4208:1088",
+							"points": "4036:1464;4480:1464;4480:1088;4208:1088",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGJ/t4zJC29ZtQ="
@@ -10090,7 +10107,7 @@
 							"tail": {
 								"$ref": "AAAAAAGJ/tTlWYvt624="
 							},
-							"points": "3862:1464;4608:1464;4608:944;4182:944",
+							"points": "4036:1464;4608:1464;4608:944;4182:944",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGJ/t4/FDMU7IU="
@@ -10193,594 +10210,6 @@
 							},
 							"propertyLabel": {
 								"$ref": "AAAAAAGJ/t692GfNwuU="
-							}
-						},
-						{
-							"_type": "UMLClassView",
-							"_id": "AAAAAAGKW/UmZV3eRkQ=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"model": {
-								"$ref": "AAAAAAGI+G/raB6+YB0="
-							},
-							"subViews": [
-								{
-									"_type": "UMLNameCompartmentView",
-									"_id": "AAAAAAGKW/UmZV3fe1M=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UmZV3eRkQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"subViews": [
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UmZV3gMTY=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UmZV3fe1M="
-											},
-											"font": "Arial;13;0",
-											"left": 849,
-											"top": 624,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "«exception»"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UmZV3hhhA=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UmZV3fe1M="
-											},
-											"font": "Arial;13;1",
-											"left": 849,
-											"top": 639,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "springserver.database.DatabaseConnectionException"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UmZV3iB5k=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UmZV3fe1M="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -1844,
-											"top": 515,
-											"width": 73.67724609375,
-											"height": 13,
-											"text": "(from Model)"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UmZV3jtdE=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UmZV3fe1M="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -1844,
-											"top": 515,
-											"height": 13,
-											"horizontalAlignment": 1
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 844,
-									"top": 619,
-									"width": 343.05517578125,
-									"height": 38,
-									"stereotypeLabel": {
-										"$ref": "AAAAAAGKW/UmZV3gMTY="
-									},
-									"nameLabel": {
-										"$ref": "AAAAAAGKW/UmZV3hhhA="
-									},
-									"namespaceLabel": {
-										"$ref": "AAAAAAGKW/UmZV3iB5k="
-									},
-									"propertyLabel": {
-										"$ref": "AAAAAAGKW/UmZV3jtdE="
-									}
-								},
-								{
-									"_type": "UMLAttributeCompartmentView",
-									"_id": "AAAAAAGKW/UmZV3kiYo=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UmZV3eRkQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"font": "Arial;13;0",
-									"left": 844,
-									"top": 657,
-									"width": 343.05517578125,
-									"height": 10
-								},
-								{
-									"_type": "UMLOperationCompartmentView",
-									"_id": "AAAAAAGKW/UmZV3l0IY=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UmZV3eRkQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"subViews": [
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGKW/UmZV3m9xw=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UmZV3l0IY="
-											},
-											"model": {
-												"$ref": "AAAAAAGI+HBGSx7p0Ig="
-											},
-											"font": "Arial;13;0",
-											"left": 849,
-											"top": 672,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "~DatabaseConnectionException(msg: String)",
-											"horizontalAlignment": 0
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 844,
-									"top": 667,
-									"width": 343.05517578125,
-									"height": 23
-								},
-								{
-									"_type": "UMLReceptionCompartmentView",
-									"_id": "AAAAAAGKW/UmZV3n6q0=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UmZV3eRkQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -2420,
-									"top": 107,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLTemplateParameterCompartmentView",
-									"_id": "AAAAAAGKW/UmZV3ojqo=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UmZV3eRkQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -2420,
-									"top": 107,
-									"width": 10,
-									"height": 10
-								}
-							],
-							"font": "Arial;13;0",
-							"containerChangeable": true,
-							"left": 844,
-							"top": 619,
-							"width": 343.05517578125,
-							"height": 71,
-							"nameCompartment": {
-								"$ref": "AAAAAAGKW/UmZV3fe1M="
-							},
-							"attributeCompartment": {
-								"$ref": "AAAAAAGKW/UmZV3kiYo="
-							},
-							"operationCompartment": {
-								"$ref": "AAAAAAGKW/UmZV3l0IY="
-							},
-							"receptionCompartment": {
-								"$ref": "AAAAAAGKW/UmZV3n6q0="
-							},
-							"templateParameterCompartment": {
-								"$ref": "AAAAAAGKW/UmZV3ojqo="
-							}
-						},
-						{
-							"_type": "UMLClassView",
-							"_id": "AAAAAAGKW/UwuWAYOs4=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"model": {
-								"$ref": "AAAAAAGI+G/raB6+YB0="
-							},
-							"subViews": [
-								{
-									"_type": "UMLNameCompartmentView",
-									"_id": "AAAAAAGKW/UwuWAZM10=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UwuWAYOs4="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"subViews": [
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UwuWAaYn8=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UwuWAZM10="
-											},
-											"font": "Arial;13;0",
-											"left": 849,
-											"top": 624,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "«exception»"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UwuWAbm2c=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UwuWAZM10="
-											},
-											"font": "Arial;13;1",
-											"left": 849,
-											"top": 639,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "springserver.database.DatabaseConnectionException"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UwuWAcRNg=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UwuWAZM10="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -1844,
-											"top": 515,
-											"width": 73.67724609375,
-											"height": 13,
-											"text": "(from Model)"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/UwuWAd3eM=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UwuWAZM10="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -1844,
-											"top": 515,
-											"height": 13,
-											"horizontalAlignment": 1
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 844,
-									"top": 619,
-									"width": 343.05517578125,
-									"height": 38,
-									"stereotypeLabel": {
-										"$ref": "AAAAAAGKW/UwuWAaYn8="
-									},
-									"nameLabel": {
-										"$ref": "AAAAAAGKW/UwuWAbm2c="
-									},
-									"namespaceLabel": {
-										"$ref": "AAAAAAGKW/UwuWAcRNg="
-									},
-									"propertyLabel": {
-										"$ref": "AAAAAAGKW/UwuWAd3eM="
-									}
-								},
-								{
-									"_type": "UMLAttributeCompartmentView",
-									"_id": "AAAAAAGKW/UwuWAe1eA=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UwuWAYOs4="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"font": "Arial;13;0",
-									"left": 844,
-									"top": 657,
-									"width": 343.05517578125,
-									"height": 10
-								},
-								{
-									"_type": "UMLOperationCompartmentView",
-									"_id": "AAAAAAGKW/UwuWAfllQ=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UwuWAYOs4="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"subViews": [
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGKW/UwuWAgoCY=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/UwuWAfllQ="
-											},
-											"model": {
-												"$ref": "AAAAAAGI+HBGSx7p0Ig="
-											},
-											"font": "Arial;13;0",
-											"left": 849,
-											"top": 672,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "~DatabaseConnectionException(msg: String)",
-											"horizontalAlignment": 0
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 844,
-									"top": 667,
-									"width": 343.05517578125,
-									"height": 23
-								},
-								{
-									"_type": "UMLReceptionCompartmentView",
-									"_id": "AAAAAAGKW/UwuWAhSNQ=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UwuWAYOs4="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -2420,
-									"top": 107,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLTemplateParameterCompartmentView",
-									"_id": "AAAAAAGKW/UwuWAiCrA=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/UwuWAYOs4="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -2420,
-									"top": 107,
-									"width": 10,
-									"height": 10
-								}
-							],
-							"font": "Arial;13;0",
-							"containerChangeable": true,
-							"left": 844,
-							"top": 619,
-							"width": 343.05517578125,
-							"height": 71,
-							"nameCompartment": {
-								"$ref": "AAAAAAGKW/UwuWAZM10="
-							},
-							"attributeCompartment": {
-								"$ref": "AAAAAAGKW/UwuWAe1eA="
-							},
-							"operationCompartment": {
-								"$ref": "AAAAAAGKW/UwuWAfllQ="
-							},
-							"receptionCompartment": {
-								"$ref": "AAAAAAGKW/UwuWAhSNQ="
-							},
-							"templateParameterCompartment": {
-								"$ref": "AAAAAAGKW/UwuWAiCrA="
-							}
-						},
-						{
-							"_type": "UMLClassView",
-							"_id": "AAAAAAGKW/V38HYC++Y=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"model": {
-								"$ref": "AAAAAAGI+G/raB6+YB0="
-							},
-							"subViews": [
-								{
-									"_type": "UMLNameCompartmentView",
-									"_id": "AAAAAAGKW/V38HYDWqQ=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/V38HYC++Y="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"subViews": [
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/V38HYEeJ0=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/V38HYDWqQ="
-											},
-											"font": "Arial;13;0",
-											"left": 962,
-											"top": 696,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "«exception»"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/V38HYFUMQ=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/V38HYDWqQ="
-											},
-											"font": "Arial;13;1",
-											"left": 962,
-											"top": 711,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "springserver.database.DatabaseConnectionException"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/V38HYGS7U=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/V38HYDWqQ="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -1731,
-											"top": 587,
-											"width": 73.67724609375,
-											"height": 13,
-											"text": "(from Model)"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGKW/V38HYHJnY=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/V38HYDWqQ="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -1731,
-											"top": 587,
-											"height": 13,
-											"horizontalAlignment": 1
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 957,
-									"top": 691,
-									"width": 343.05517578125,
-									"height": 38,
-									"stereotypeLabel": {
-										"$ref": "AAAAAAGKW/V38HYEeJ0="
-									},
-									"nameLabel": {
-										"$ref": "AAAAAAGKW/V38HYFUMQ="
-									},
-									"namespaceLabel": {
-										"$ref": "AAAAAAGKW/V38HYGS7U="
-									},
-									"propertyLabel": {
-										"$ref": "AAAAAAGKW/V38HYHJnY="
-									}
-								},
-								{
-									"_type": "UMLAttributeCompartmentView",
-									"_id": "AAAAAAGKW/V38HYIEu8=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/V38HYC++Y="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"font": "Arial;13;0",
-									"left": 957,
-									"top": 729,
-									"width": 343.05517578125,
-									"height": 10
-								},
-								{
-									"_type": "UMLOperationCompartmentView",
-									"_id": "AAAAAAGKW/V38HYJOzU=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/V38HYC++Y="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"subViews": [
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGKW/V38HYKpFc=",
-											"_parent": {
-												"$ref": "AAAAAAGKW/V38HYJOzU="
-											},
-											"model": {
-												"$ref": "AAAAAAGI+HBGSx7p0Ig="
-											},
-											"font": "Arial;13;0",
-											"left": 962,
-											"top": 744,
-											"width": 333.05517578125,
-											"height": 13,
-											"text": "~DatabaseConnectionException(msg: String)",
-											"horizontalAlignment": 0
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 957,
-									"top": 739,
-									"width": 343.05517578125,
-									"height": 23
-								},
-								{
-									"_type": "UMLReceptionCompartmentView",
-									"_id": "AAAAAAGKW/V38HYLZaw=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/V38HYC++Y="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -2307,
-									"top": 179,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLTemplateParameterCompartmentView",
-									"_id": "AAAAAAGKW/V38HYMIGE=",
-									"_parent": {
-										"$ref": "AAAAAAGKW/V38HYC++Y="
-									},
-									"model": {
-										"$ref": "AAAAAAGI+G/raB6+YB0="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -2307,
-									"top": 179,
-									"width": 10,
-									"height": 10
-								}
-							],
-							"font": "Arial;13;0",
-							"containerChangeable": true,
-							"left": 957,
-							"top": 691,
-							"width": 343.05517578125,
-							"height": 71,
-							"nameCompartment": {
-								"$ref": "AAAAAAGKW/V38HYDWqQ="
-							},
-							"attributeCompartment": {
-								"$ref": "AAAAAAGKW/V38HYIEu8="
-							},
-							"operationCompartment": {
-								"$ref": "AAAAAAGKW/V38HYJOzU="
-							},
-							"receptionCompartment": {
-								"$ref": "AAAAAAGKW/V38HYLZaw="
-							},
-							"templateParameterCompartment": {
-								"$ref": "AAAAAAGKW/V38HYMIGE="
 							}
 						},
 						{
@@ -11427,7 +10856,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGI+CGxuRau2t8="
 									},
-									"name": "index.",
+									"name": "index",
 									"type": "int"
 								},
 								{
@@ -14499,9 +13928,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGJ/tTlWYvrxR4="
 							},
-							"name": "table",
-							"visibility": "private",
-							"type": "String"
+							"name": "clientDataMap: Map<String, Data>  = new ConcurrentHashMap<>()",
+							"visibility": "private"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -14509,9 +13937,19 @@
 							"_parent": {
 								"$ref": "AAAAAAGJ/tTlWYvrxR4="
 							},
-							"name": "database",
+							"name": "clientTable: Map<String, String> = new ConcurrentHashMap<>()",
 							"visibility": "private",
-							"type": "String"
+							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGKXNEMz+5zIaE=",
+							"_parent": {
+								"$ref": "AAAAAAGJ/tTlWYvrxR4="
+							},
+							"name": "clientDatabase: Map<String, String>  = new ConcurrentHashMap<>()",
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -14529,7 +13967,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGJ/tTlWYvrxR4="
 							},
-							"name": "receiveInfoFromClient(List<String> info) : List<String>"
+							"name": "receiveInfoFromClient(request: HttpServletRequest, info: List<String>) : List<String>"
 						},
 						{
 							"_type": "UMLOperation",
@@ -14537,7 +13975,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGJ/tTlWYvrxR4="
 							},
-							"name": "receiveNumberOfClusters(List<Integer> numCluster): List<String>"
+							"name": "receiveNumberOfClusters(request: HttpServletRequest, numCluster: List<Integer>): List<String>"
 						},
 						{
 							"_type": "UMLOperation",
@@ -14545,7 +13983,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGJ/tTlWYvrxR4="
 							},
-							"name": "receiveInfoFile(List<String> info): List<String>"
+							"name": "receiveInfoFile(info: List<String>): List<String>"
 						},
 						{
 							"_type": "UMLOperation",
