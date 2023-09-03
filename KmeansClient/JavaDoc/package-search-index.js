@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.progettomap"},{"l":"com.example.progettomap.api"},{"l":"com.example.progettomap.custom"},{"l":"com.example.progettomap.fragment"}];updateSearchResults();
