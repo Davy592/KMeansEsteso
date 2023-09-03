@@ -1,6 +1,7 @@
 package com.example.springserver.mining;
 
 import com.example.springserver.data.Data;
+import com.example.springserver.data.OutOfRangeSampleSize;
 
 
 import java.io.*;
@@ -8,7 +9,7 @@ import java.io.*;
 public class KMeansMiner {
     private ClusterSet C;
 
-    public KMeansMiner(int k){
+    public KMeansMiner(int k) throws OutOfRangeSampleSize {
         C = new ClusterSet(k);
     }
 
@@ -22,7 +23,7 @@ public class KMeansMiner {
         return C;
     }
 
-    public int kmeans(Data data) {
+    public int kmeans(Data data) throws OutOfRangeSampleSize {
         int numberOfIterations = 0;
         //STEP 1. Scelta casuale di centroidi per k clusters
         C.initializeCentroids(data);

@@ -1,6 +1,7 @@
 package com.example.springserver.mining;
 
 import com.example.springserver.data.Data;
+import com.example.springserver.data.OutOfRangeSampleSize;
 import com.example.springserver.data.Tuple;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -29,9 +30,15 @@ public class ClusterSet implements Serializable {
     /**
      * <h4>Costruisce un insieme di cluster con il numero di cluster specificato.</h4>
      * @param k il numero di cluster
+     * @throws OutOfRangeSampleSize se il numero di cluster è minore di 1
+     * @see NegativeArraySizeException
      */
-    ClusterSet(int k) {
-        C = new Cluster[k];
+    ClusterSet(int k) throws OutOfRangeSampleSize {
+        try {
+            C = new Cluster[k];
+        } catch (NegativeArraySizeException e) {
+            throw new OutOfRangeSampleSize("Numero di cluster non valido, deve essere maggiore di 0");
+        }
     }
 
 
@@ -48,13 +55,14 @@ public class ClusterSet implements Serializable {
      * <h4>Inizializza i centroidi dei cluster con k tuple casuali del dataset, una per cluster.</h4>
      * @param data il dataset*
      */
-    void initializeCentroids(Data data) {
+    void initializeCentroids(Data data) throws OutOfRangeSampleSize{
         int[] centroidIndexes = data.sampling(C.length);
         for (int centroidIndex : centroidIndexes) {
             Tuple centroidI = data.getItemSet(centroidIndex);
             add(new Cluster(centroidI));
         }
     }
+
     /**
      * <h4>Restituisce il cluster più vicino alla tupla specificata.</h4>
      * @param tuple la tupla

@@ -142,8 +142,11 @@ public class Data {
      * <h4>Restituisce un array di k interi distinti generati casualmente.</h4>
      * @param k numero di interi da generare
      * @return L'array di k interi distinti generati casualmente
+     * @throws OutOfRangeSampleSize in caso di numero di cluster non valido
      */
-    public int[] sampling(int k){
+    public int[] sampling(int k) throws OutOfRangeSampleSize{
+        if (k <= 0 || k > data.size())
+            throw new OutOfRangeSampleSize("Numero di cluster non valido, deve essere compreso tra 1 e " + data.size());
         int[] centroidIndexes = new int[k];
         Random rand = new Random();
         rand.setSeed(System.currentTimeMillis());

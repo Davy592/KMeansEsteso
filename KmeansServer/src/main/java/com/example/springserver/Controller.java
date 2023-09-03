@@ -1,6 +1,7 @@
 package com.example.springserver;
 
 import com.example.springserver.data.Data;
+import com.example.springserver.data.OutOfRangeSampleSize;
 import com.example.springserver.database.DatabaseConnectionException;
 import com.example.springserver.database.EmptySetException;
 import com.example.springserver.database.NoValueException;
@@ -88,6 +89,10 @@ public class Controller {
             list.clear();
             list.add("ERRORE");
             list.add("ERRORE NEL SALVATAGGIO DEL FILE");
+        } catch (OutOfRangeSampleSize e){
+            list.clear();
+            list.add("ERRORE");
+            list.add("NUMERO DI CLUSTER NON VALIDO");
         }
         return list;
     }
