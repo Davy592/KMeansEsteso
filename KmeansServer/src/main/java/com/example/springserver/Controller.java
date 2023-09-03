@@ -6,6 +6,8 @@ import com.example.springserver.database.DatabaseConnectionException;
 import com.example.springserver.database.EmptySetException;
 import com.example.springserver.database.NoValueException;
 import com.example.springserver.mining.KMeansMiner;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,47 +17,56 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CompletableFuture;
 
 
 /**
  * <h2>La classe Controller gestisce le richieste del client.</h2>
  * <p>Il controller riceve le richieste del client e restituisce le risposte.</p>
  */
+@EnableAsync
 @RestController
 public class Controller {
 
     /**
      * <h4>Dataset.</h4>
      */
-    private Data data;
+    private Map<String, Data> clientDataMap = new ConcurrentHashMap<>();
     /**
      * <h4>Nome della tabella.</h4>
      */
-    private String table;
+    private Map<String, String> clientTable = new ConcurrentHashMap<>();
     /**
      * <h4>Nome del database.</h4>
      */
-    private String database;
+    private Map<String, String> clientDatabase = new ConcurrentHashMap<>();
 
     /**
      * <h4>Riceve dal client le informazioni per la creazione di un nuovo dataset.</h4>
      * <p>Le informazioni sono: server, porta, nome del database, nome della tabella, nome utente e password.</p>
      * <p>Restituisce una lista di stringhe che contiene "OK" se non ci sono stati errori, altrimenti contiene un messaggio di errore.</p>
      *
+     * @param request contiene le informazioni della richiesta http
      * @param info la lista delle informazioni
      * @return la lista delle transazioni, o un messaggio di errore
      */
     @PostMapping("/connectionInfo")
-    public List<String> receiveInfoFromClient(@RequestBody List<String> info) {
+    public List<String> receiveInfoFromClient(HttpServletRequest request, @RequestBody List<String> info) {
         List<String> list = new LinkedList<>();
         try {
+            String client=request.getRemoteAddr();
             String server = info.get(0);
             String port = info.get(1);
-            database = info.get(2);
-            table = info.get(3);
+            String database = info.get(2);
+            String table = info.get(3);
             String user = info.get(4);
             String password = info.get(5);
-            this.data = new Data(server, Integer.parseInt(port), database, user, password, table);
+            Data data = new Data(server, Integer.parseInt(port), database, user, password, table);
+            clientDataMap.put(client,data);
+            clientDatabase.put(client,database);
+            clientTable.put(client,table);
             list.add("OK");
             list.add(String.valueOf(data.getNumberOfExamples()));
         } catch (NoValueException | DatabaseConnectionException | EmptySetException | SQLException |
@@ -68,34 +79,55 @@ public class Controller {
     /**
      * <h4>Riceve dal client il numero di cluster da creare.</h4>
      * <p>Restituisce una lista di stringhe che contiene i cluster, altrimenti contiene un messaggio di errore.</p>
-     *
+     * @param request contiene le informazioni della richiesta http
      * @param numCluster il numero di cluster
      * @return la lista dei cluster o un messaggio di errore
      */
     @PostMapping("/newClusterSet")
-    public List<String> receiveNumberOfClusters(@RequestBody List<Integer> numCluster) {
-        int numC = numCluster.get(0);
-        List<String> list = new LinkedList<>();
+    public synchronized List<String> receiveNumberOfClusters(HttpServletRequest request,@RequestBody List<Integer> numCluster) {
+        Data localData = clientDataMap.get(request.getRemoteAddr());
+        String localDatabase=clientDatabase.get(request.getRemoteAddr());
+        String localTable=this.clientTable.get(request.getRemoteAddr());
+        CompletableFuture<List<String>> future = CompletableFuture.supplyAsync(() -> {
+            int numC = numCluster.get(0);
+            try {
+                    KMeansMiner kMeansMiner = new KMeansMiner(numC);
+                    int numIter = kMeansMiner.kmeans(localData);
+                    kMeansMiner.salva("Salvataggi//" + localDatabase + localTable + numC + ".dat");
+                    List<String> result = kMeansMiner.getC().toString(localData);
+                    ((LinkedList<String>) result).addFirst("Numero di iterazioni:" + numIter);
+                    return result;
+            } catch (IOException e) {
+                List<String> errorResult = new LinkedList<>();
+                errorResult.add("ERRORE");
+                errorResult.add("ERRORE NEL SALVATAGGIO DEL FILE");
+                return errorResult;
+            } catch (OutOfRangeSampleSize e) {
+                List<String> errorResult = new LinkedList<>();
+                errorResult.add("ERRORE");
+                errorResult.add("NUMERO DI CLUSTER NON VALIDO");
+                return errorResult;
+            }
+            catch (NullPointerException e)
+            {
+                List<String> errorResult = new LinkedList<>();
+                errorResult.add("ERRORE");
+                errorResult.add("SI E' VERIFICATO UN ERRORE DURANTE IL CLUSTERING, REINSERIRE I DATI");
+                return errorResult;
+            }
+        });
+
         try {
-            KMeansMiner kMeansMiner = new KMeansMiner(numC);
-            int numIter = kMeansMiner.kmeans(this.data);
-            kMeansMiner.salva("Salvataggi//" + database + table + numC + ".dat");
-            list = kMeansMiner.getC().toString(data);
-            ((LinkedList<String>) list).addFirst("Numero di iterazioni:" + numIter);
-            data = null;
-            table = null;
-            database = null;
-        } catch (IOException e) {
-            list.clear();
-            list.add("ERRORE");
-            list.add("ERRORE NEL SALVATAGGIO DEL FILE");
-        } catch (OutOfRangeSampleSize e){
-            list.clear();
-            list.add("ERRORE");
-            list.add("NUMERO DI CLUSTER NON VALIDO");
+            return future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            List<String> errorResult = new LinkedList<>();
+            errorResult.add("ERRORE");
+            errorResult.add("ERRORE NEL SERVER");
+            return errorResult;
         }
-        return list;
     }
+
 
 
     /**

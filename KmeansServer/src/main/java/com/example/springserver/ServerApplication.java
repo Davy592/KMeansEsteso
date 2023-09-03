@@ -2,11 +2,13 @@ package com.example.springserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * <h2>La classe ServerApplication è la classe principale del server.</h2>
  */
 @SpringBootApplication
+@EnableAsync
 public class ServerApplication {
 
 	/**
