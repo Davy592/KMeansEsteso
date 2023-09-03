@@ -31,15 +31,15 @@ import java.util.concurrent.CompletableFuture;
 public class Controller {
 
     /**
-     * <h4>Dataset.</h4>
+     * <h4>Mappa dei dataset richiesti dai client.</h4>
      */
     private Map<String, Data> clientDataMap = new ConcurrentHashMap<>();
     /**
-     * <h4>Nome della tabella.</h4>
+     * <h4>Mappa dei nomi della tabella richiesti dai client.</h4>
      */
     private Map<String, String> clientTable = new ConcurrentHashMap<>();
     /**
-     * <h4>Nome del database.</h4>
+     * <h4>Mappa dei nomi del database richiesti dai client.</h4>
      */
     private Map<String, String> clientDatabase = new ConcurrentHashMap<>();
 
@@ -79,6 +79,7 @@ public class Controller {
     /**
      * <h4>Riceve dal client il numero di cluster da creare.</h4>
      * <p>Restituisce una lista di stringhe che contiene i cluster, altrimenti contiene un messaggio di errore.</p>
+     *
      * @param request contiene le informazioni della richiesta http
      * @param numCluster il numero di cluster
      * @return la lista dei cluster o un messaggio di errore
