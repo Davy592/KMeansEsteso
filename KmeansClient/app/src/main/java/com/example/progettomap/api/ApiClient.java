@@ -1,13 +1,16 @@
 package com.example.progettomap.api;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * <h2>Classe che gestisce la connessione con il server</h2>
+ * <h2>ApiClient è la classe che gestisce la connessione con il server</h2>
  */
 public class ApiClient {
     /**
@@ -42,7 +45,7 @@ public class ApiClient {
     }
 
     /**
-     * <h4>Metodo che setta l'URL del server</h4>
+     * <h4>Modifica l'URL del server</h4>
      *
      * @param server Indirizzo del server
      * @param port   Porta del server
@@ -53,8 +56,8 @@ public class ApiClient {
 
 
     /**
-     * <h4>Metodo che crea un oggetto che gestisce la connessione con il server</h4>
-     * <p>Se l'oggetto è già stato creato, non viene creato un nuovo oggetto</p>
+     * <h4>Crea un oggetto che gestisce la connessione con il server</h4>
+     * <p>Se l'oggetto è <code>null</code>, non viene creato un nuovo oggetto</p>
      */
     public static void updateServer() {
         if (instance.retrofit == null) {
@@ -67,18 +70,19 @@ public class ApiClient {
                     .build();
         }
         instance.apiService = instance.retrofit.create(ApiService.class);
+
     }
 
 
     /**
-     * <h4>Metodo che chiude la connessione con il server</h4>
+     * <h4>Chiude la connessione con il server</h4>
      */
     public static void closeClient() {
         instance.retrofit = null;
     }
 
     /**
-     * <h4>Metodo che restituisce l'oggetto che gestisce le chiamate al server</h4>
+     * <h4>Restituisce l'oggetto che gestisce le chiamate al server</h4>
      *
      * @return Oggetto che gestisce le chiamate al server
      */

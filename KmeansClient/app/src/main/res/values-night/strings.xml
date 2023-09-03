@@ -4,8 +4,8 @@
     <string name="port">Porta</string>
     <string name="conn">CONNETTI</string>
     <string name="server_conn">Connessione al server</string>
-    <string name="server_change">CAMBIA SERVER</string>
     <string name="desc_logo_login">Logo dell\'applicazione</string>
+    <string name="server_attuale">Server attuale: %1$s</string>
     <string name="cambia_server">Cambia Server</string>
     <string name="carica">Carica</string>
     <string name="nuovo">Nuovo</string>
@@ -13,11 +13,11 @@
     <string name="seleziona">Seleziona</string>
     <string name="cerca">Cerca…</string>
     <string name="dati_db">Inserire i dati del database</string>
-    <string name="def_spinner">1</string>
     <string name="server">Server</string>
     <string name="porta">Porta</string>
     <string name="database">Database</string>
     <string name="tabella">Tabella</string>
+    <string name="def_spinner">1</string>
     <string name="utente">Utente</string>
     <string name="password">Password</string>
     <string name="usa_predefiniti">USA VALORI PREDEFINITI</string>
@@ -41,5 +41,10 @@
     <string name="risultati_arrivati_correttamente">Risultati arrivati correttamente!</string>
     <string name="connessione_non_riuscita">Connessione non riuscita</string>
     <string name="tempo_scaduto">Tempo scaduto.</string>
+    <string name="ok">OK</string>
+    <string name="si">SI</string>
+    <string name="no">NO</string>
+    <string name="server_cambiato_correttamente">Server cambiato correttamente</string>
+    <string name="uscire">Sei sicuro di voler uscire?</string>
 
 </resources>

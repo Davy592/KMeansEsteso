@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle(R.string.errore);
-                    builder.setMessage(R.string.connessione_non_riuscita + e.getMessage());
+                    builder.setMessage(R.string.connessione_non_riuscita);
                     builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                     builder.show();
                 }

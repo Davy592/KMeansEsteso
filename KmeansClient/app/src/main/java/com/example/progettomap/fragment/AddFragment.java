@@ -39,87 +39,90 @@ import retrofit2.Response;
 
 
 /**
- * <h2>Classe che gestisce il fragment per la creazione di un nuovo cluster</h2>
+ * <h2>La classe AddFragment gestisce il fragment preposto alla creazione di un nuovo cluster</h2>
  */
 public class AddFragment extends Fragment {
 
 
     /**
-     * Variabile che rappresenta l'EditText del server
+     * EditText del server
      */
     private EditText tbServer;
 
     /**
-     * Variabile che rappresenta l'EditText della porta del server
+     * EditText della porta del server
      */
     private EditText tbPort;
 
     /**
-     * Variabile che rappresenta l'EditText del database
+     * EditText del database
      */
     private EditText tbDatabase;
 
     /**
-     * Variabile che rappresenta l'EditText della tabella
+     * EditText della tabella
      */
     private EditText tbTable;
 
     /**
-     * Variabile che rappresenta l'EditText dell'utente
+     * EditText dell'utente
      */
     private EditText tbUser;
 
     /**
-     * Variabile che rappresenta l'EditText della password
+     * EditText della password
      */
     private EditText tbEditPassword;
 
     /**
-     * Variabile che rappresenta il bottone per la connessione
+     * Button per la connessione
      */
     private Button btConnect;
 
 
     /**
-     * Variabile che rappresenta il botttone per il reset delle informazioni
+     * Button per il reset degli EditText
      */
     private Button btDbInfoReset;
 
     /**
-     * Variabile che rappresenta il bottone per il calcolo del cluster
+     * Button per il calcolo del cluster
      */
     private Button btCalc;
 
 
     /**
-     * Variabile che rappresenta la lista per il numero di cluster
+     * Lista per il numero di cluster
      */
     private ExpandableListView expandableListView;
 
     /**
-     * Variabile che rappresenta il layout per le informazioni del database
+     * Layout per le informazioni del database
      */
     private ConstraintLayout infoLayout;
 
     /**
-     * Variabile che rappresenta il layout per la selezione del cluster
+     * Layout per la selezione del cluster
      */
     private ConstraintLayout clusterLayout;
 
     /**
-     * Variabile che rappresenta il layout per il risultato
+     * Layout per il risultato
      */
     private ConstraintLayout resultLayout;
 
     /**
-     * Variabile che rappresenta il testo per il numero di cluster
+     * TextView per decidere il numero di cluster
      */
     private TextView spinnerCluster;
 
+    /**
+     * TextView che mostra il server a cui si è attualmente connessi
+     */
     private TextView tvActualServer;
 
     /**
-     * <h4> Metodo che crea il fragment</h4>
+     * <h4>Crea la View del fragment</h4>
      *
      * @param inflater           oggetto che permette di "gonfiare" un layout XML in una View corrispondente
      * @param container          se non nullo, questo fragment viene ricostruito da uno stato precedente salvato come valore in questo bundle.
@@ -137,7 +140,7 @@ public class AddFragment extends Fragment {
         tbUser = view.findViewById(R.id.tbUser);
         tbEditPassword = view.findViewById(R.id.tbEditPassword);
         tvActualServer = view.findViewById(R.id.tvActualServer);
-        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
+        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
         btConnect = view.findViewById(R.id.btConnect);
 
         TextWatcher textWatcher = new TextWatcher() {
@@ -361,14 +364,27 @@ public class AddFragment extends Fragment {
         return view;
     }
 
+    /**
+     * <h4>Controlla se il layout delle informazioni è visibile</h4>
+     *
+     * @return <code>true</code> se il layout delle informazioni è visibile, <code>false</code> altrimenti
+     */
     public boolean getVisibilityInfo() {
         return infoLayout.getVisibility() == View.VISIBLE;
     }
 
+    /**
+     * <h4>Controlla se il layout della selezione dei cluster è visibile</h4>
+     *
+     * @return <code>true</code> se il layout della selezione dei cluster è visibile, <code>false</code> altrimenti
+     */
     public boolean getVisibilityCluster() {
         return clusterLayout.getVisibility() == View.VISIBLE;
     }
 
+    /**
+     * <h4>Imposta il layout delle informazioni</h4>
+     */
     public void setVisibilityInfo(boolean b) {
         if (b) {
             infoLayout.setVisibility(View.VISIBLE);
@@ -377,6 +393,9 @@ public class AddFragment extends Fragment {
         }
     }
 
+    /**
+     * <h4>Imposta il layout della selezione dei cluster</h4>
+     */
     public void setVisibilityCluster(boolean b) {
         if (b) {
             clusterLayout.setVisibility(View.VISIBLE);
@@ -385,6 +404,9 @@ public class AddFragment extends Fragment {
         }
     }
 
+    /**
+     * <h4>Imposta il layout dei risultati</h4>
+     */
     public void setVisibilityResult(boolean b) {
         if (b) {
             resultLayout.setVisibility(View.VISIBLE);

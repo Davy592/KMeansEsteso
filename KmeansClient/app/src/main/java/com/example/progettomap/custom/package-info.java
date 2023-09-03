@@ -1,4 +1,4 @@
 /**
- * Contiene le classi che definiscono le classi custom per gestire i widget.
+ * Il package custom contiene le classi che definiscono widget custom utilizzati dall'applicazione.
  */
 package com.example.progettomap.custom;

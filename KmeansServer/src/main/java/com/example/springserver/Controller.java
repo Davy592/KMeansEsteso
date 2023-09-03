@@ -24,15 +24,15 @@ import java.util.List;
 public class Controller {
 
     /**
-     * <h4>Il dataset.</h4>
+     * <h4>Dataset.</h4>
      */
     private Data data;
     /**
-     * <h4>Il nome della tabella.</h4>
+     * <h4>Nome della tabella.</h4>
      */
     private String table;
     /**
-     * <h4>Il nome del database.</h4>
+     * <h4>Nome del database.</h4>
      */
     private String database;
 
@@ -42,7 +42,7 @@ public class Controller {
      * <p>Restituisce una lista di stringhe che contiene "OK" se non ci sono stati errori, altrimenti contiene un messaggio di errore.</p>
      *
      * @param info la lista delle informazioni
-     * @return la lista dei database
+     * @return la lista delle transazioni, o un messaggio di errore
      */
     @PostMapping("/connectionInfo")
     public List<String> receiveInfoFromClient(@RequestBody List<String> info) {
@@ -66,10 +66,10 @@ public class Controller {
 
     /**
      * <h4>Riceve dal client il numero di cluster da creare.</h4>
-     * <p>Restituisce una lista di stringhe che contiene i cluster.</p>
+     * <p>Restituisce una lista di stringhe che contiene i cluster, altrimenti contiene un messaggio di errore.</p>
      *
      * @param numCluster il numero di cluster
-     * @return la lista dei cluster
+     * @return la lista dei cluster o un messaggio di errore
      */
     @PostMapping("/newClusterSet")
     public List<String> receiveNumberOfClusters(@RequestBody List<Integer> numCluster) {
@@ -95,10 +95,10 @@ public class Controller {
 
     /**
      * <h4>Riceve dal client il nome del file da caricare.</h4>
-     * <p>Restituisce una lista di stringhe che contiene i centroidi dei cluster.</p>
+     * <p>Restituisce una lista di stringhe che contiene i centroidi dei cluster, a meno di errori.</p>
      *
      * @param info il nome del file
-     * @return la lista dei centroidi
+     * @return la lista dei centroidi o un messaggio di errore
      */
     @PostMapping("/fileInfo")
     public List<String> receiveInfoFile(@RequestBody List<String> info) {
@@ -121,9 +121,9 @@ public class Controller {
 
     /**
      * <h4>Restituisce la lista dei file salvati.</h4>
-     * <p>Restituisce una lista di stringhe che contiene i nomi dei file salvati.</p>
+     * <p>Restituisce una lista di stringhe che contiene i nomi dei file salvati, a meno di errori.</p>
      *
-     * @return la lista dei file
+     * @return la lista dei file o un messaggio di errore
      */
     @PostMapping("/fileNames")
     public List<String> sendFilesName() {

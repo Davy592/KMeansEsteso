@@ -19,12 +19,12 @@ public class Dashboard extends AppCompatActivity {
 
 
     /**
-     * Variabile che rappresenta il BottomNavigationView
+     * Rappresenta il BottomNavigationView
      */
     private BottomNavigationView bnv;
 
     /**
-     * <h4> Metodo statico che apre la Dashboard</h4>
+     * <h4>Apre la Dashboard</h4>
      *
      * @param context contesto
      */
@@ -34,7 +34,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     /**
-     * <h4> Metodo che crea la Dashboard</h4>
+     * <h4>Crea la Dashboard</h4>
      *
      * @param savedInstanceState stato dell'istanza
      */
@@ -64,7 +64,7 @@ public class Dashboard extends AppCompatActivity {
 
 
     /**
-     * <h4>Il metodo onResume gestisce il comportamento della applicazione quando viene ripresa in esecuzione</h4>
+     * <h4>Gestisce il comportamento della applicazione quando viene ripresa in esecuzione</h4>
      */
     @Override
     public void onResume() {
@@ -80,7 +80,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     /**
-     * <h4> Metodo che gestisce il tasto back</h4>
+     * <h4>Gestisce la pressione del tasto back</h4>
      */
     @Override
     public void onBackPressed() {
@@ -93,11 +93,10 @@ public class Dashboard extends AppCompatActivity {
             AddFragment af = (AddFragment) fm.getFragments().get(0);
             if (af.getVisibilityInfo()) {
                 builder
-                        .setMessage("USCIRE?")
+                        .setMessage(getResources().getString(R.string.uscire))
                         .setCancelable(true)
-                        .setPositiveButton("SI", (dialogInterface, i) -> finish())
-                        .setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
-
+                        .setPositiveButton(getResources().getString(R.string.si), (dialogInterface, i) -> finish())
+                        .setNegativeButton(getResources().getString(R.string.no), (dialogInterface, i) -> dialogInterface.cancel());
                 alertDialog = builder.create();
                 alertDialog.show();
             } else {
@@ -112,10 +111,12 @@ public class Dashboard extends AppCompatActivity {
             bnv.setSelectedItemId(R.id.nav_add);
         } else {
             builder
-                    .setMessage("USCIRE?")
+                    .setMessage(getResources().getString(R.string.uscire))
                     .setCancelable(true)
-                    .setPositiveButton("SI", (dialogInterface, i) -> finish())
-                    .setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+                    .setPositiveButton(getResources().getString(R.string.si), (dialogInterface, i) -> finish())
+                    .setNegativeButton(getResources().getString(R.string.no), (dialogInterface, i) -> dialogInterface.cancel());
+            alertDialog = builder.create();
+            alertDialog.show();
 
             alertDialog = builder.create();
             alertDialog.show();

@@ -4,7 +4,7 @@ import android.text.InputFilter;
 import android.text.Spanned;
 
 /**
- * <h2>La classe implementa un filtro per gli input numerici.</h2>
+ * <h2>La classe RangeInputFilter implementa un filtro per gli input numerici.</h2>
  */
 public class RangeInputFilter implements InputFilter {
     /**
@@ -36,7 +36,7 @@ public class RangeInputFilter implements InputFilter {
      * @param dest   Testo di destinazione.
      * @param dstart Indice di inizio del testo di destinazione.
      * @param dend   Indice di fine del testo di destinazione.
-     * @return Restituisce null se l'input è all'interno del range accettabile, altrimenti restituisce una stringa vuota.
+     * @return <code>null</code> se l'input è all'interno del range accettabile, altrimenti restituisce una stringa vuota.
      */
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {

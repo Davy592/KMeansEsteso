@@ -14,11 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * <h2>Questa classe viene utilizzata per personalizzare l'ExpandableListAdapter</h2>
+ * <h2>La classe CustomizedExpandableListAdapter viene utilizzata per personalizzare l'ExpandableListAdapter</h2>
  * Viene utilizzata per visualizzare l'elenco nell'ExpandableListView
  * L'elenco è diviso in categorie
- * Le categorie sono le chiavi del HashMap
- * I valori del HashMap sono l'elenco dei valori della categoria
+ * Le categorie sono le chiavi di una HashMap
+ * I valori dell'HashMap sono l'elenco dei valori della categoria
  */
 public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -50,7 +50,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * <h4> Metodo per ottenere il valore di un elemento dell'elenco</h4>
+     * <h4>Permette di ottenere il valore di un elemento dell'elenco</h4>
      *
      * @param lstPosn               Posizione dell'elemento nell'elenco
      * @param expanded_ListPosition Posizione dell'elemento nell'elenco espanso
@@ -62,7 +62,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * <h4> Metodo per ottenere l'ID di un elemento dell'elenco</h4>
+     * <h4> Permette di ottenere l'ID di un elemento dell'elenco</h4>
      *
      * @param listPosition          Posizione dell'elemento nell'elenco
      * @param expanded_ListPosition Posizione dell'elemento nell'elenco espanso
@@ -74,7 +74,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * <h4> Metodo per ottenere la View di un elemento dell'elenco</h4>
+     * <h4>Restituisce la View (UI) di un elemento dell'elenco</h4>
      *
      * @param lstPosn               Posizione dell'elemento nell'elenco
      * @param expanded_ListPosition Posizione dell'elemento nell'elenco espanso
@@ -97,7 +97,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * <h4> Metodo per ottenere il numero di elementi dell'elenco</h4>
+     * <h4>Restituisce il numero di elementi dell'elenco</h4>
      *
      * @param listPosition Posizione dell'elemento nell'elenco
      * @return Numero di elementi dell'elenco
@@ -108,7 +108,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * <h4> Metodo per ottenere l'elemento dell'elenco</h4>
+     * <h4>Restituisce l'elemento dell'elenco di una data posizione</h4>
      *
      * @param listPosition Posizione dell'elemento nell'elenco
      * @return Elemento dell'elenco
@@ -119,7 +119,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * <h4> Metodo per ottenere il numero di gruppi</h4>
+     * <h4> Permette di ottenere il numero di gruppi</h4>
      *
      * @return Numero di gruppi
      */
@@ -129,7 +129,7 @@ public class CustomizedExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * <h4> Metodo per ottenere l'ID di un gruppo</h4>
+     * <h4> Permette di ottenere l'ID di un gruppo</h4>
      *
      * @param listPosition Posizione dell'elemento nell'elenco
      * @return ID dell'elemento

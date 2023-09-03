@@ -29,41 +29,41 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * <h2>Classe che gestisce il fragment per il caricamento dei file</h2>
+ * <h2>La classe LoadFragment gestisce il fragment per il caricamento dei file</h2>
  */
 
 public class LoadFragment extends Fragment {
 
     /**
-     * Variabile che rappresenta il dialog per la selezione del file
+     * Dialog per la selezione del file
      */
     private Dialog fileDialog;
 
     /**
-     * Variabile che rappresenta la TextView per la selezione del file
+     * TextView per la selezione del file
      */
     private TextView tvFileNames;
 
     /**
-     * Variabile che rappresenta il dialog non chiudibile per i caricamenti
+     * Dialog non chiudibile per i caricamenti
      */
     private NonClosableDialog dialog;
 
     /**
-     * Variabile che rappresenta il bottone per la connessione al server
+     * Button per la connessione al server
      */
     private Button btFileConnect;
 
     /**
-     * Variabile che rappresenta il textView per l'ip del server a cui si è connessi
+     * TextView che mostra il server a cui si è attualmente connessi
      */
     private TextView tvActualServer;
 
 
     /**
-     * <h4>Metodo che gestisce la richiesta dei file presenti sul server</h4>
+     * <h4>Crea la View del fragment</h4>
      *
-     * @param inflater           Il LayoutInflater che viene utilizzato per "gonfiare" la View
+     * @param inflater           oggetto che permette di "gonfiare" un layout XML in una View corrispondente
      * @param container          Se non-null, questo è il padre a cui la View viene agganciata.
      * @param savedInstanceState Se non-null, questo è un precedente stato salvato della View
      * @return la view
@@ -77,7 +77,7 @@ public class LoadFragment extends Fragment {
         tvFileNames.setOnClickListener(v -> requestFilesName());
         btFileConnect = view.findViewById(R.id.btFileConnect);
         tvActualServer = view.findViewById(R.id.tvActualServer);
-        tvActualServer.setText(getResources().getString(R.string.actual_server, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
+        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
         btFileConnect.setOnClickListener(v -> {
             if (tvFileNames.getText().equals(getResources().getString(R.string.seleziona_file))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -120,7 +120,7 @@ public class LoadFragment extends Fragment {
                     public void onFailure(Call<List<String>> call, Throwable t) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                         builder.setTitle(R.string.errore);
-                        builder.setMessage(R.string.connessione_non_riuscita + ": " + t.getMessage());
+                        builder.setMessage(getResources().getString(R.string.connessione_non_riuscita) + ": " + t.getMessage());
                         builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
                         builder.show();
                     }
@@ -131,7 +131,7 @@ public class LoadFragment extends Fragment {
     }
 
     /**
-     * <h4>Metodo che gestisce la richiesta dei file presenti sul server</h4>
+     * <h4>Gestisce la richiesta dei file presenti sul server</h4>
      */
     private void requestFilesName() {
         dialog = new NonClosableDialog();
@@ -161,7 +161,7 @@ public class LoadFragment extends Fragment {
 
 
     /**
-     * <h4>Metodo che gestisce la visualizzazione del dialog per la selezione del file</h4>
+     * <h4>Gestisce la visualizzazione del dialog per la selezione del file</h4>
      *
      * @param fileNames Lista dei file presenti sul server
      */
