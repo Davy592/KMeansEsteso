@@ -53,7 +53,8 @@ public class ClusterSet implements Serializable {
 
     /**
      * <h4>Inizializza i centroidi dei cluster con k tuple casuali del dataset, una per cluster.</h4>
-     * @param data il dataset*
+     * @param data il dataset
+     * @throws OutOfRangeSampleSize se il numero di cluster è maggiore del numero di tuple del dataset
      */
     void initializeCentroids(Data data) throws OutOfRangeSampleSize{
         int[] centroidIndexes = data.sampling(C.length);

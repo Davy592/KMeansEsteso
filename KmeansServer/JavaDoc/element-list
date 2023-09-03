@@ -1,0 +1,5 @@
+module:Server.main
+com.example.springserver
+com.example.springserver.data
+com.example.springserver.database
+com.example.springserver.mining
