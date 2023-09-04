@@ -66,13 +66,9 @@ public class ApiClient {
      */
     public static void updateServer() {
         if (instance.retrofit == null) {
-            //create session with cookie
             OkHttpClient httpClient = new OkHttpClient.Builder()
-                    .cookieJar(new JavaNetCookieJar(new CookieManager()))
+                    .cookieJar(new JavaNetCookieJar(new CookieManager())).readTimeout(90, TimeUnit.SECONDS)
                     .build();
-            //set timeout
-            httpClient.newBuilder()
-                    .readTimeout(90, TimeUnit.SECONDS);
             instance.retrofit = new Retrofit.Builder()
                     .baseUrl(instance.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
