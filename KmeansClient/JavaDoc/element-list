@@ -1,4 +1,5 @@
-com.example.progettomap
-com.example.progettomap.api
-com.example.progettomap.custom
-com.example.progettomap.fragment
+com.activity
+com.api
+com.custom
+com.fragment
+com.test

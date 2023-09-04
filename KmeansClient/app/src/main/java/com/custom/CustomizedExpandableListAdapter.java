@@ -1,4 +1,4 @@
-package com.example.progettomap.custom;
+package com.custom;
 
 import android.content.Context;
 import android.graphics.Typeface;

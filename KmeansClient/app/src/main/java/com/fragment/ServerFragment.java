@@ -1,4 +1,4 @@
-package com.example.progettomap.fragment;
+package com.fragment;
 
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -14,8 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
-import com.example.progettomap.api.ApiClient;
-import com.example.progettomap.custom.RangeInputFilter;
+import com.api.ApiClient;
+import com.custom.RangeInputFilter;
 
 /**
  * <h2>La classe ServerFragment gestisce il Fragment che permette di cambiare il server</h2>
@@ -60,7 +60,7 @@ public class ServerFragment extends Fragment {
         tbServerPORT = view.findViewById(R.id.tbServerPORT);
         tbServerPORT.setFilters(new InputFilter[]{new RangeInputFilter(0, 65535)});
         tvActualServer = view.findViewById(R.id.tvActualServer);
-        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
+        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length() - 1)));
         btChangeServer.setOnClickListener(v -> {
             if (tbServerIP.getText().toString().equals("") || tbServerPORT.getText().toString().equals("")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -73,7 +73,7 @@ public class ServerFragment extends Fragment {
                 ApiClient.setBaseUrl(tbServerIP.getText().toString(), Integer.parseInt(tbServerPORT.getText().toString()));
                 ApiClient.updateServer();
                 Toast.makeText(requireContext(), getResources().getString(R.string.server_cambiato_correttamente), Toast.LENGTH_LONG).show();
-                tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
+                tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length() - 1)));
             }
         });
 

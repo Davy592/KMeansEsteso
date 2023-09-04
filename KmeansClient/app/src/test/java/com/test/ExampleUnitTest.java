@@ -1,4 +1,4 @@
-package com.example.progettomap;
+package com.test;
 
 import static org.junit.Assert.assertEquals;
 

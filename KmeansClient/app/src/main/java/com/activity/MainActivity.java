@@ -1,4 +1,4 @@
-package com.example.progettomap;
+package com.activity;
 
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -8,9 +8,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.progettomap.api.ApiClient;
-import com.example.progettomap.custom.RangeInputFilter;
-import com.example.progettomap.fragment.Dashboard;
+import com.example.progettomap.R;
+import com.api.ApiClient;
+import com.custom.RangeInputFilter;
 
 /**
  * <h2> La classe MainActivity rappresenta il main dell'applicazione</h2>
@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 
     /**
      * <h4>Gestisce il tasto back</h4>

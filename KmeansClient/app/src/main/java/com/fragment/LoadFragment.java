@@ -1,4 +1,4 @@
-package com.example.progettomap.fragment;
+package com.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -18,8 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
-import com.example.progettomap.api.ApiClient;
-import com.example.progettomap.custom.NonClosableDialog;
+import com.api.ApiClient;
+import com.custom.NonClosableDialog;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -77,7 +77,7 @@ public class LoadFragment extends Fragment {
         tvFileNames.setOnClickListener(v -> requestFilesName());
         btFileConnect = view.findViewById(R.id.btFileConnect);
         tvActualServer = view.findViewById(R.id.tvActualServer);
-        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
+        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length() - 1)));
         btFileConnect.setOnClickListener(v -> {
             if (tvFileNames.getText().equals(getResources().getString(R.string.seleziona_file))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -135,7 +135,7 @@ public class LoadFragment extends Fragment {
      */
     private void requestFilesName() {
         dialog = new NonClosableDialog();
-        dialog.show(getParentFragmentManager(), R.string.tentativo_di_connessione+"");
+        dialog.show(getParentFragmentManager(), R.string.tentativo_di_connessione + "");
         Call<List<String>> call = ApiClient.getApiService().requestFilesName();
         List<String> list = new LinkedList<>();
         call.enqueue(new Callback<List<String>>() {

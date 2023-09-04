@@ -1,4 +1,4 @@
-package com.example.progettomap.fragment;
+package com.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -22,10 +22,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.progettomap.R;
-import com.example.progettomap.api.ApiClient;
-import com.example.progettomap.custom.CustomizedExpandableListAdapter;
-import com.example.progettomap.custom.NonClosableDialog;
-import com.example.progettomap.custom.RangeInputFilter;
+import com.api.ApiClient;
+import com.custom.CustomizedExpandableListAdapter;
+import com.custom.NonClosableDialog;
+import com.custom.RangeInputFilter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -140,7 +140,7 @@ public class AddFragment extends Fragment {
         tbUser = view.findViewById(R.id.tbUser);
         tbEditPassword = view.findViewById(R.id.tbEditPassword);
         tvActualServer = view.findViewById(R.id.tvActualServer);
-        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length()-1)));
+        tvActualServer.setText(getResources().getString(R.string.server_attuale, ApiClient.getBaseUrl().substring(7, ApiClient.getBaseUrl().length() - 1)));
         btConnect = view.findViewById(R.id.btConnect);
 
         TextWatcher textWatcher = new TextWatcher() {
@@ -158,7 +158,8 @@ public class AddFragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+            }
         };
 
 
@@ -222,7 +223,7 @@ public class AddFragment extends Fragment {
         });
 
 
-            btConnect.setOnClickListener(v -> {
+        btConnect.setOnClickListener(v -> {
             if (tbServer.getText().toString().equals("") && tbPort.getText().toString().equals("") && tbDatabase.getText().toString().equals("") && tbTable.getText().toString().equals("") && tbUser.getText().toString().equals("") && tbEditPassword.getText().toString().equals("")) {
                 tbServer.setText(R.string.server_hint);
                 tbPort.setText(R.string.porta_hint);
@@ -308,7 +309,7 @@ public class AddFragment extends Fragment {
                                             if (response.isSuccessful()) {
                                                 List<String> responseList = response.body();
                                                 if (responseList.get(0).equals("ERRORE")) {
-                                                    ncd1.setText(getResources().getString(R.string.errore)+": "+responseList.get(1));
+                                                    ncd1.setText(getResources().getString(R.string.errore) + ": " + responseList.get(1));
                                                     ncd1.dismiss();
                                                     return;
                                                 }
@@ -344,7 +345,7 @@ public class AddFragment extends Fragment {
                                     });
                                 });
                             } else {
-                                ncd.setText(getResources().getString(R.string.connessione_non_riuscita)+": " + responseList.get(0));
+                                ncd.setText(getResources().getString(R.string.connessione_non_riuscita) + ": " + responseList.get(0));
                                 ncd.dismiss();
                             }
                         } else {

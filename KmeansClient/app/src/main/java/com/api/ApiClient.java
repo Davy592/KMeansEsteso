@@ -1,13 +1,12 @@
-package com.example.progettomap.api;
+package com.api;
 
-
+import java.net.CookieManager;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.internal.JavaNetCookieJar;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import java.net.CookieManager;
-
 
 /**
  * <h2>ApiClient e' la classe che gestisce la connessione con il server</h2>

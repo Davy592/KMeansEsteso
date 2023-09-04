@@ -1,4 +1,4 @@
-package com.example.progettomap.fragment;
+package com.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.progettomap.R;
+import com.fragment.AddFragment;
+import com.fragment.LoadFragment;
+import com.fragment.ServerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -59,7 +62,8 @@ public class Dashboard extends AppCompatActivity {
             return false;
         });
 
-        bnv.setOnItemReselectedListener(item -> {});
+        bnv.setOnItemReselectedListener(item -> {
+        });
     }
 
 

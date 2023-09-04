@@ -1,4 +1,4 @@
-package com.example.progettomap.api;
+package com.api;
 
 import java.util.List;
 

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.progettomap"},{"l":"com.example.progettomap.api"},{"l":"com.example.progettomap.custom"},{"l":"com.example.progettomap.fragment"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.activity"},{"l":"com.api"},{"l":"com.custom"},{"l":"com.fragment"},{"l":"com.test"}];updateSearchResults();
