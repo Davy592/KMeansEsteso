@@ -78,12 +78,12 @@ public class Controller {
      * <h4>Riceve dal client il numero di cluster da creare.</h4>
      * <p>Restituisce una lista di stringhe che contiene i cluster, altrimenti contiene un messaggio di errore.</p>
      *
-     * @param request contiene le informazioni della richiesta http
+     * @param session contiene le informazioni della sessione
      * @param numCluster il numero di cluster
      * @return la lista dei cluster o un messaggio di errore
      */
     @PostMapping("/newClusterSet")
-    public synchronized List<String> receiveNumberOfClusters(HttpServletRequest request, HttpSession session, @RequestBody List<Integer> numCluster) {
+    public synchronized List<String> receiveNumberOfClusters(HttpSession session, @RequestBody List<Integer> numCluster) {
         CompletableFuture<List<String>> future = CompletableFuture.supplyAsync(() -> {
             int numC = numCluster.get(0);
             Data localData = (Data) session.getAttribute("data");
