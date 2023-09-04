@@ -6,7 +6,6 @@ import com.example.springserver.database.DatabaseConnectionException;
 import com.example.springserver.database.EmptySetException;
 import com.example.springserver.database.NoValueException;
 import com.example.springserver.mining.KMeansMiner;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.PostMapping;
