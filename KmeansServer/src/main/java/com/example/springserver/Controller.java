@@ -29,6 +29,7 @@ import java.util.concurrent.CompletableFuture;
  */
 
 @RestController
+@EnableAsync
 public class Controller {
 
     /**
@@ -54,31 +55,40 @@ public class Controller {
      * @return la lista delle transazioni, o un messaggio di errore
      */
     @PostMapping("/connectionInfo")
-    public List<String> receiveInfoFromClient(HttpServletRequest request, HttpSession session, @RequestBody List<String> info) {
-        List<String> list = new LinkedList<>();
+    public synchronized List<String> receiveInfoFromClient(HttpServletRequest request, HttpSession session, @RequestBody List<String> info) {
+        CompletableFuture<List<String>> future = CompletableFuture.supplyAsync(() -> {
+            List<String> list = new LinkedList<>();
+            try {
+                String client=request.getRemoteAddr();
+                String server = info.get(0);
+                String port = info.get(1);
+                String database = info.get(2);
+                String table = info.get(3);
+                String user = info.get(4);
+                String password = info.get(5);
+                Data data = new Data(server, Integer.parseInt(port), database, user, password, table);
+                session.setAttribute("data",data);
+                session.setAttribute("database",database);
+                session.setAttribute("table",table);
+                System.out.println(session);
+                list.add("OK");
+                list.add(String.valueOf(data.getNumberOfExamples()));
+                return list;
+            } catch (NoValueException | DatabaseConnectionException | EmptySetException | SQLException |
+                     NumberFormatException e) {
+                list.add("SI E' VERIFICATO UN ERRORE DURANTE L'INTERROGAZIONE AL DATABASE -> " + e.getMessage());
+                return list;
+            }
+        });
         try {
-            String client=request.getRemoteAddr();
-            String server = info.get(0);
-            String port = info.get(1);
-            String database = info.get(2);
-            String table = info.get(3);
-            String user = info.get(4);
-            String password = info.get(5);
-            Data data = new Data(server, Integer.parseInt(port), database, user, password, table);
-            //clientDataMap.put(client,data);
-            //clientDatabase.put(client,database);
-            //clientTable.put(client,table);
-            session.setAttribute("data",data);
-            session.setAttribute("database",database);
-            session.setAttribute("table",table);
-            System.out.println(session);
-            list.add("OK");
-            list.add(String.valueOf(data.getNumberOfExamples()));
-        } catch (NoValueException | DatabaseConnectionException | EmptySetException | SQLException |
-                 NumberFormatException e) {
-            list.add("SI E' VERIFICATO UN ERRORE DURANTE L'INTERROGAZIONE AL DATABASE -> " + e.getMessage());
+            return future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            List<String> errorResult = new LinkedList<>();
+            errorResult.add("ERRORE");
+            errorResult.add("ERRORE NEL SERVER");
+            return errorResult;
         }
-        return list;
     }
 
     /**
@@ -91,19 +101,18 @@ public class Controller {
      */
     @PostMapping("/newClusterSet")
     public synchronized List<String> receiveNumberOfClusters(HttpServletRequest request, HttpSession session, @RequestBody List<Integer> numCluster) {
-        System.out.println(session);
-        Data localData = (Data) session.getAttribute("data");
-        String localDatabase=(String) session.getAttribute("database");
-        String localTable=(String) session.getAttribute("table");
-        List<String> result;
+        CompletableFuture<List<String>> future = CompletableFuture.supplyAsync(() -> {
             int numC = numCluster.get(0);
+            Data localData = (Data) session.getAttribute("data");
+            String localDatabase=(String) session.getAttribute("database");
+            String localTable=(String) session.getAttribute("table");
             try {
-                    KMeansMiner kMeansMiner = new KMeansMiner(numC);
-                    int numIter = kMeansMiner.kmeans(localData);
-                    kMeansMiner.salva("Salvataggi//" + localDatabase + localTable + numC + ".dat");
-                    result = kMeansMiner.getC().toString(localData);
-                    ((LinkedList<String>) result).addFirst("Numero di iterazioni:" + numIter);
-                    return result;
+                KMeansMiner kMeansMiner = new KMeansMiner(numC);
+                int numIter = kMeansMiner.kmeans(localData);
+                kMeansMiner.salva("Salvataggi//" + localDatabase + localTable + numC + ".dat");
+                List<String> result = kMeansMiner.getC().toString(localData);
+                ((LinkedList<String>) result).addFirst("Numero di iterazioni:" + numIter);
+                return result;
             } catch (IOException e) {
                 List<String> errorResult = new LinkedList<>();
                 errorResult.add("ERRORE");
@@ -115,7 +124,25 @@ public class Controller {
                 errorResult.add("NUMERO DI CLUSTER NON VALIDO");
                 return errorResult;
             }
+            catch (NullPointerException e)
+            {
+                List<String> errorResult = new LinkedList<>();
+                errorResult.add("ERRORE");
+                errorResult.add("SI E' VERIFICATO UN ERRORE DURANTE IL CLUSTERING, REINSERIRE I DATI");
+                return errorResult;
+            }
+        });
+
+        try {
+            return future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            List<String> errorResult = new LinkedList<>();
+            errorResult.add("ERRORE");
+            errorResult.add("ERRORE NEL SERVER");
+            return errorResult;
         }
+    }
 
 
     /**
