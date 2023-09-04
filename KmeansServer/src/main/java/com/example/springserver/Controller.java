@@ -7,6 +7,7 @@ import com.example.springserver.database.EmptySetException;
 import com.example.springserver.database.NoValueException;
 import com.example.springserver.mining.KMeansMiner;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,22 +27,22 @@ import java.util.concurrent.CompletableFuture;
  * <h2>La classe Controller gestisce le richieste del client.</h2>
  * <p>Il controller riceve le richieste del client e restituisce le risposte.</p>
  */
-@EnableAsync
+
 @RestController
 public class Controller {
 
     /**
      * <h4>Mappa dei dataset richiesti dai client.</h4>
      */
-    private Map<String, Data> clientDataMap = new ConcurrentHashMap<>();
+    //private Map<String, Data> clientDataMap = new ConcurrentHashMap<>();
     /**
      * <h4>Mappa dei nomi della tabella richiesti dai client.</h4>
      */
-    private Map<String, String> clientTable = new ConcurrentHashMap<>();
+    //private Map<String, String> clientTable = new ConcurrentHashMap<>();
     /**
      * <h4>Mappa dei nomi del database richiesti dai client.</h4>
      */
-    private Map<String, String> clientDatabase = new ConcurrentHashMap<>();
+    //private Map<String, String> clientDatabase = new ConcurrentHashMap<>();
 
     /**
      * <h4>Riceve dal client le informazioni per la creazione di un nuovo dataset.</h4>
@@ -53,7 +54,7 @@ public class Controller {
      * @return la lista delle transazioni, o un messaggio di errore
      */
     @PostMapping("/connectionInfo")
-    public List<String> receiveInfoFromClient(HttpServletRequest request, @RequestBody List<String> info) {
+    public List<String> receiveInfoFromClient(HttpServletRequest request, HttpSession session, @RequestBody List<String> info) {
         List<String> list = new LinkedList<>();
         try {
             String client=request.getRemoteAddr();
@@ -64,9 +65,13 @@ public class Controller {
             String user = info.get(4);
             String password = info.get(5);
             Data data = new Data(server, Integer.parseInt(port), database, user, password, table);
-            clientDataMap.put(client,data);
-            clientDatabase.put(client,database);
-            clientTable.put(client,table);
+            //clientDataMap.put(client,data);
+            //clientDatabase.put(client,database);
+            //clientTable.put(client,table);
+            session.setAttribute("data",data);
+            session.setAttribute("database",database);
+            session.setAttribute("table",table);
+            System.out.println(session);
             list.add("OK");
             list.add(String.valueOf(data.getNumberOfExamples()));
         } catch (NoValueException | DatabaseConnectionException | EmptySetException | SQLException |
@@ -85,17 +90,18 @@ public class Controller {
      * @return la lista dei cluster o un messaggio di errore
      */
     @PostMapping("/newClusterSet")
-    public synchronized List<String> receiveNumberOfClusters(HttpServletRequest request,@RequestBody List<Integer> numCluster) {
-        Data localData = clientDataMap.get(request.getRemoteAddr());
-        String localDatabase=clientDatabase.get(request.getRemoteAddr());
-        String localTable=this.clientTable.get(request.getRemoteAddr());
-        CompletableFuture<List<String>> future = CompletableFuture.supplyAsync(() -> {
+    public synchronized List<String> receiveNumberOfClusters(HttpServletRequest request, HttpSession session, @RequestBody List<Integer> numCluster) {
+        System.out.println(session);
+        Data localData = (Data) session.getAttribute("data");
+        String localDatabase=(String) session.getAttribute("database");
+        String localTable=(String) session.getAttribute("table");
+        List<String> result;
             int numC = numCluster.get(0);
             try {
                     KMeansMiner kMeansMiner = new KMeansMiner(numC);
                     int numIter = kMeansMiner.kmeans(localData);
                     kMeansMiner.salva("Salvataggi//" + localDatabase + localTable + numC + ".dat");
-                    List<String> result = kMeansMiner.getC().toString(localData);
+                    result = kMeansMiner.getC().toString(localData);
                     ((LinkedList<String>) result).addFirst("Numero di iterazioni:" + numIter);
                     return result;
             } catch (IOException e) {
@@ -109,26 +115,7 @@ public class Controller {
                 errorResult.add("NUMERO DI CLUSTER NON VALIDO");
                 return errorResult;
             }
-            catch (NullPointerException e)
-            {
-                List<String> errorResult = new LinkedList<>();
-                errorResult.add("ERRORE");
-                errorResult.add("SI E' VERIFICATO UN ERRORE DURANTE IL CLUSTERING, REINSERIRE I DATI");
-                return errorResult;
-            }
-        });
-
-        try {
-            return future.get();
-        } catch (Exception e) {
-            e.printStackTrace();
-            List<String> errorResult = new LinkedList<>();
-            errorResult.add("ERRORE");
-            errorResult.add("ERRORE NEL SERVER");
-            return errorResult;
         }
-    }
-
 
 
     /**

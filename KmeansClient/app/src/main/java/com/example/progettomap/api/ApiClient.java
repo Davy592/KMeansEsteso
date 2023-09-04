@@ -1,10 +1,13 @@
 package com.example.progettomap.api;
 
-import java.util.concurrent.TimeUnit;
 
+import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
+import okhttp3.internal.JavaNetCookieJar;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import java.net.CookieManager;
+
 
 /**
  * <h2>ApiClient e' la classe che gestisce la connessione con il server</h2>
@@ -63,16 +66,20 @@ public class ApiClient {
      */
     public static void updateServer() {
         if (instance.retrofit == null) {
-            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-            httpClient.readTimeout(60, TimeUnit.SECONDS);
+            //create session with cookie
+            OkHttpClient httpClient = new OkHttpClient.Builder()
+                    .cookieJar(new JavaNetCookieJar(new CookieManager()))
+                    .build();
+            //set timeout
+            httpClient.newBuilder()
+                    .readTimeout(90, TimeUnit.SECONDS);
             instance.retrofit = new Retrofit.Builder()
                     .baseUrl(instance.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(httpClient.build())
+                    .client(httpClient)
                     .build();
         }
         instance.apiService = instance.retrofit.create(ApiService.class);
-
     }
 
 
