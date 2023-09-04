@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -33,33 +31,19 @@ import java.util.concurrent.CompletableFuture;
 public class Controller {
 
     /**
-     * <h4>Mappa dei dataset richiesti dai client.</h4>
-     */
-    //private Map<String, Data> clientDataMap = new ConcurrentHashMap<>();
-    /**
-     * <h4>Mappa dei nomi della tabella richiesti dai client.</h4>
-     */
-    //private Map<String, String> clientTable = new ConcurrentHashMap<>();
-    /**
-     * <h4>Mappa dei nomi del database richiesti dai client.</h4>
-     */
-    //private Map<String, String> clientDatabase = new ConcurrentHashMap<>();
-
-    /**
      * <h4>Riceve dal client le informazioni per la creazione di un nuovo dataset.</h4>
      * <p>Le informazioni sono: server, porta, nome del database, nome della tabella, nome utente e password.</p>
      * <p>Restituisce una lista di stringhe che contiene "OK" se non ci sono stati errori, altrimenti contiene un messaggio di errore.</p>
      *
-     * @param request contiene le informazioni della richiesta http
+     * @param session contiene le informazioni della sessione
      * @param info la lista delle informazioni
      * @return la lista delle transazioni, o un messaggio di errore
      */
     @PostMapping("/connectionInfo")
-    public synchronized List<String> receiveInfoFromClient(HttpServletRequest request, HttpSession session, @RequestBody List<String> info) {
+    public synchronized List<String> receiveInfoFromClient(HttpSession session, @RequestBody List<String> info) {
         CompletableFuture<List<String>> future = CompletableFuture.supplyAsync(() -> {
             List<String> list = new LinkedList<>();
             try {
-                String client=request.getRemoteAddr();
                 String server = info.get(0);
                 String port = info.get(1);
                 String database = info.get(2);
@@ -70,7 +54,6 @@ public class Controller {
                 session.setAttribute("data",data);
                 session.setAttribute("database",database);
                 session.setAttribute("table",table);
-                System.out.println(session);
                 list.add("OK");
                 list.add(String.valueOf(data.getNumberOfExamples()));
                 return list;
